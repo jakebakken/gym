@@ -1,4 +1,3 @@
-brotli-python==1.0.9
 brotlipy==0.7.0
 certifi==2021.10.8
 cffi==1.14.6
