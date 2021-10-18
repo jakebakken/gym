@@ -1,0 +1,5 @@
+gym
+*.pyc
+.DS_Store
+.app
+gym/*
