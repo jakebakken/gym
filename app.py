@@ -1,8 +1,10 @@
-# import mysql.connector
+import os
+import mysql.connector
 import dash
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
+from boto.s3.connection import S3Connection
 
 
 # app initialization
@@ -20,21 +22,31 @@ app = dash.Dash(
 )
 server = app.server
 
+# KEEP FALSE FOR DEPLOYMENT
+debug = False
+
+# get heroku config vars if deployment environment
+if not debug:
+    db_user = S3Connection(os.environ['GYM_DB_USERNAME'])
+    db_pass = S3Connection(os.environ['GYM_DB_PASS'])
+    db_ip = S3Connection(os.environ['GYM_DB_IP'])
+    db_name = S3Connection(os.environ['GYM_DB'])
 
 # cardio & exercise datatable columns
 cardio_cols = [
-    'Type', 'Duration (min)', 'Cooldown',
+    'Type', 'Distance', 'Duration (min)', 'Cooldown',
 ]
 exercise_cols = [
-    'Exercise', 'S1 Reps', 'S1 Weight', 'S2 Reps', 'S2 Weight', 'S3 Reps', 'S3 Weight'
+    'Exercise', 'S1 Reps', 'S1 Weight', 'S2 Reps', 'S2 Weight', 'S3 Reps', 'S3 Weight',
 ]
 
 # app layout
-# todo Start Workout button, becomes deactivated on press, saves timestamp,
-#  only way to reactivate is to end workout
 app.layout = html.Div([
-    html.Br(),
-    html.H1("Get Swole", style={'textAlign': 'center'}),
+    html.H2("Get After It", style={'textAlign': 'left', 'fontWeight': 'bold'}),
+    html.Hr(style={
+        'background': 'black', 'height': '0.5px', 'width': '95%',
+        'margin-top': '0em', 'margin-bottom': '1.5em',
+    }),
     html.Div([
         html.Div(html.Button("Start Workout", id='start-workout-button',
                              n_clicks=0,
@@ -52,14 +64,14 @@ app.layout = html.Div([
                                  'height': '50px',
                              }),
                  style={'width': '50%', 'display': 'inline-block', 'textAlign': 'right'}),
-    ]),
-    html.Hr(),
+    ], style={'margin-bottom': '1.5em'}),
     html.H4("Cardio"),  # todo inline dropdown Y/N cardio (table inactive if no)
     dash_table.DataTable(
         id='cardio-datatable',
+        style_table={'padding-bottom': '10px'},
         style_cell={
             'minWidth': '100px', 'width': '100px', 'maxWidth': '150px',
-            'fontSize': '14px',
+            'fontSize': '12px', 'height': '40px'
         },
         style_header={'backgroundColor': '#2b4353', 'color': '#eaf6f6', 'textAlign': 'center'},
         columns=(
@@ -70,19 +82,25 @@ app.layout = html.Div([
         ],
         editable=True,
     ),
-    html.Hr(),
     html.H4("Exercise"),
     html.Div([
-        html.Button("Add Set", id='exercise-add-column-button',
-                    style={'backgroundColor': '#e3e3e3'}),
-    ], style={'textAlign': 'right'}),
+        html.Div([
+            html.Button("Add Exercise", id='add-exercise-button', n_clicks=0,
+                        style={'backgroundColor': '#e3e3e3'}),
+        ], style={'textAlign': 'left', 'display': 'inline-block',
+                  'width': '50%'}),
+        html.Div([
+            html.Button("Add Set", id='add-set-button',
+                        style={'backgroundColor': '#e3e3e3'}),
+        ], style={'textAlign': 'right', 'display': 'inline-block', 'width': '50%'}),
+    ], style={'padding-bottom': '20px'}),
 
     dcc.Store(id='exercise-rows-store', storage_type='session'),
     dcc.Store(id='exercise-columns-store', storage_type='session'),
 
     dash_table.DataTable(
         id='exercise-datatable',
-        style_table={'padding-bottom': '15px', 'padding-left': 'auto', 'padding-right': 'auto', 'minWidth': '100%', 'overflowX': 'auto'},
+        style_table={'padding-left': 'auto', 'padding-right': 'auto', 'minWidth': '100%', 'maxWidth': '100%', 'overflowX': 'auto'},
         style_header={'backgroundColor': '#2b4353', 'color': '#eaf6f6', 'textAlign': 'center'},
         style_cell_conditional=[
             {
@@ -94,7 +112,8 @@ app.layout = html.Div([
         ],
         fixed_columns={'headers': True, 'data': 1},
         style_cell={
-            'minWidth': '80px', 'width': '80px', 'maxWidth': '175px', 'fontSize': '13px',
+            'minWidth': '80px', 'width': '80px', 'maxWidth': '150px',
+            'fontSize': '12px', 'height': '40px'
         },
         columns=(
             [{'id': col, 'name': col} for col in exercise_cols]
@@ -113,30 +132,47 @@ app.layout = html.Div([
         export_format='xlsx',
     ),
     html.Br(),
-    html.Button("Add Exercise", id='exercise-add-row-button', n_clicks=0,
-                style={'backgroundColor': '#e3e3e3'}),
-
     html.P("", id='db-p'),
 ])
-# todo Finish Workout button, on press, aww are you sure you're done?
-#  lol just to make sure
 
 
-# @app.callback(
-#     Output('db-p', 'children'),
-#     Input('finish-workout-button', 'n_clicks'),
-#     Input('exercise-datatable', 'data'))
-# def db(n_clicks, rows):
-#     if n_clicks > 0:
-#         pass
+@app.callback(
+    Output('db-p', 'children'),
+    Input('finish-workout-button', 'n_clicks'),
+    Input('exercise-datatable', 'data'))
+def db(n_clicks, rows):
+    if n_clicks > 0:
+        db = mysql.connector.connect(
+            user=db_user,
+            password=db_pass,
+            host=db_ip,
+            database=db_name,
+        )
+        cursor = db.cursor()
+        query = 'SHOW TABLES'
+        cursor.execute(query)
+
+        items = []
+        for i in cursor:
+            items.append(i)
+
+        cursor.close()
+        db.close()
+
+    return f'{items if len(items) > 0 else None}'
 
 
 @app.callback(
     Output('exercise-datatable', 'data'),
-    Input('exercise-add-row-button', 'n_clicks'),
+    Input('add-exercise-button', 'n_clicks'),
     State('exercise-datatable', 'data'),
     State('exercise-datatable', 'columns'))
 def add_exercise_datatable_row(n_clicks, rows, columns):
+    # max 25 exercises
+    if len(rows) >= 25:
+        raise PreventUpdate
+
+    # add new row to exercise table
     if n_clicks > 0:
         rows.append({c['id']: '' for c in columns})
     return rows
@@ -144,7 +180,7 @@ def add_exercise_datatable_row(n_clicks, rows, columns):
 
 @app.callback(
     Output('exercise-datatable', 'columns'),
-    Input('exercise-add-column-button', 'n_clicks'),
+    Input('add-set-button', 'n_clicks'),
     State('exercise-datatable', 'columns'))
 def add_exercise_datatable_column(n_clicks, existing_columns):
     # todo Max out at 10 columns
@@ -159,6 +195,7 @@ def add_exercise_datatable_column(n_clicks, existing_columns):
     if set_num > 10:
         raise PreventUpdate
 
+    # on add-set click, add reps col & weight col
     if n_clicks > 0:
         existing_columns.append({
             'id': f"S{set_num} Reps",
@@ -172,4 +209,4 @@ def add_exercise_datatable_column(n_clicks, existing_columns):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=debug)
