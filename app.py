@@ -159,8 +159,8 @@ def db(n_clicks, rows):
 
         cursor.close()
         db.close()
-
-        return f'{items if len(items) > 0 else None}'
+        val = str(db_user)
+        return val
 
 
 @app.callback(
