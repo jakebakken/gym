@@ -23,13 +23,15 @@ app = dash.Dash(
 server = app.server
 
 # KEEP FALSE FOR DEPLOYMENT
-debug = False
+debug = True
 
 # get heroku config vars if deployment environment
-db_user = os.getenv('GYM_DB_USERNAME')
-db_pass = os.getenv('GYM_DB_PASS')
-db_ip = os.getenv('GYM_DB_IP')
-db_name = os.getenv('GYM_DB')
+db_user = os.environ.get('GYM_DB_USERNAME')
+db_pass = os.environ.get('GYM_DB_PASS')
+db_ip = os.environ.get('GYM_DB_IP')
+db_name = os.environ.get('GYM_DB')
+
+# print(db_user, db_pass, db_ip, db_name)
 
 # cardio & exercise datatable columns
 cardio_cols = [
@@ -158,7 +160,7 @@ def db(n_clicks, rows):
         cursor.close()
         db.close()
 
-    return f'{items if len(items) > 0 else None}'
+        return f'{items if len(items) > 0 else None}'
 
 
 @app.callback(
