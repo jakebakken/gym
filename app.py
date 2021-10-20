@@ -26,6 +26,10 @@ server = app.server
 debug = False
 
 # get heroku config vars if deployment environment
+db_user = os.getenv('GYM_DB_USERNAME')
+db_pass = os.getenv('GYM_DB_PASS')
+db_ip = os.getenv('GYM_DB_IP')
+db_name = os.getenv('GYM_DB')
 # if not debug:
 #     db_user = S3Connection(os.environ['GYM_DB_USERNAME'])
 #     db_pass = S3Connection(os.environ['GYM_DB_PASS'])
