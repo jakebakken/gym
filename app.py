@@ -23,15 +23,14 @@ app = dash.Dash(
 server = app.server
 
 # KEEP FALSE FOR DEPLOYMENT
-debug = True
+debug = False
 
 # get heroku config vars if deployment environment
-db_user = os.environ.get('GYM_DB_USERNAME')
-db_pass = os.environ.get('GYM_DB_PASS')
-db_ip = os.environ.get('GYM_DB_IP')
-db_name = os.environ.get('GYM_DB')
-
-# print(db_user, db_pass, db_ip, db_name)
+# if not debug:
+#     db_user = S3Connection(os.environ['GYM_DB_USERNAME'])
+#     db_pass = S3Connection(os.environ['GYM_DB_PASS'])
+#     db_ip = S3Connection(os.environ['GYM_DB_IP'])
+#     db_name = S3Connection(os.environ['GYM_DB'])
 
 # cardio & exercise datatable columns
 cardio_cols = [
@@ -137,30 +136,30 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(
-    Output('db-p', 'children'),
-    Input('finish-workout-button', 'n_clicks'),
-    Input('exercise-datatable', 'data'))
-def db(n_clicks, rows):
-    if n_clicks > 0:
-        db = mysql.connector.connect(
-            user=db_user,
-            password=db_pass,
-            host=db_ip,
-            database=db_name,
-        )
-        cursor = db.cursor()
-        query = 'SHOW TABLES'
-        cursor.execute(query)
-
-        items = []
-        for i in cursor:
-            items.append(i)
-
-        cursor.close()
-        db.close()
-        val = str(db_user)
-        return val
+# @app.callback(
+#     Output('db-p', 'children'),
+#     Input('finish-workout-button', 'n_clicks'),
+#     Input('exercise-datatable', 'data'))
+# def db(n_clicks, rows):
+#     if n_clicks > 0:
+#         db = mysql.connector.connect(
+#             user=db_user,
+#             password=db_pass,
+#             host=db_ip,
+#             database=db_name,
+#         )
+#         cursor = db.cursor()
+#         query = 'SHOW TABLES'
+#         cursor.execute(query)
+#
+#         items = []
+#         for i in cursor:
+#             items.append(i)
+#
+#         cursor.close()
+#         db.close()
+#
+#     return f'{items if len(items) > 0 else None}'
 
 
 @app.callback(
