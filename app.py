@@ -4,7 +4,6 @@ import dash
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-from boto.s3.connection import S3Connection
 
 
 # app initialization
@@ -135,30 +134,35 @@ app.layout = html.Div([
 ])
 
 
-# @app.callback(
-#     Output('db-p', 'children'),
-#     Input('finish-workout-button', 'n_clicks'),
-#     Input('exercise-datatable', 'data'))
-# def db(n_clicks, rows):
-#     if n_clicks > 0:
-#         db = mysql.connector.connect(
-#             user=db_user,
-#             password=db_pass,
-#             host=db_ip,
-#             database=db_name,
-#         )
-#         cursor = db.cursor()
-#         query = 'SHOW TABLES'
-#         cursor.execute(query)
-#
-#         items = []
-#         for i in cursor:
-#             items.append(i)
-#
-#         cursor.close()
-#         db.close()
-#
-#     return f'{items if len(items) > 0 else None}'
+@app.callback(
+    Output('db-p', 'children'),
+    Input('finish-workout-button', 'n_clicks'),
+    Input('exercise-datatable', 'data'),
+    prevent_initial_call=True)
+def db(n_clicks, rows):
+    if db_user is None or db_pass is None or db_ip is None or db_name is None:
+        raise PreventUpdate
+    if n_clicks > 0:
+        db = mysql.connector.connect(
+            user=db_user,
+            password=db_pass,
+            host=db_ip,
+            database=db_name,
+        )
+        cursor = db.cursor()
+        query = 'SHOW TABLES'
+        cursor.execute(query)
+
+        items = []
+        for i in cursor:
+            items.append(i)
+
+        cursor.close()
+        db.close()
+        if len(items) == 0:
+            return 'items list emtpy'
+        else:
+            return 'values retrieved'
 
 
 @app.callback(
