@@ -1,10 +1,9 @@
 import os
-import mysql.connector
+import psycopg2
 import dash
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-from boto.s3.connection import S3Connection
 
 
 # app initialization
@@ -25,19 +24,19 @@ server = app.server
 # KEEP FALSE FOR DEPLOYMENT
 debug = False
 
-# get heroku config vars if deployment environment
-# if not debug:
-#     db_user = S3Connection(os.environ['GYM_DB_USERNAME'])
-#     db_pass = S3Connection(os.environ['GYM_DB_PASS'])
-#     db_ip = S3Connection(os.environ['GYM_DB_IP'])
-#     db_name = S3Connection(os.environ['GYM_DB'])
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cur = conn.cursor()
+
+cur.execute('\d')
 
 # cardio & exercise datatable columns
 cardio_cols = [
     'Type', 'Distance', 'Duration (min)', 'Cooldown',
 ]
 exercise_cols = [
-    'Exercise', 'S1 Reps', 'S1 Weight', 'S2 Reps', 'S2 Weight', 'S3 Reps', 'S3 Weight',
+    'Exercise', 'S1 Reps', 'S1 Weight', 'S2 Reps', 'S2 Weight', 'S3 Reps',
+    'S3 Weight',
 ]
 
 # app layout
@@ -55,7 +54,10 @@ app.layout = html.Div([
                                  'minWidth': '50%', 'maxWidth': '99%',
                                  'height': '50px',
                              }),
-                 style={'width': '50%', 'display': 'inline-block', 'textAlign': 'left'}),
+                 style={
+                     'width': '50%', 'display': 'inline-block',
+                     'textAlign': 'left'
+                 }),
         html.Div(html.Button("Finish Workout", id='finish-workout-button',
                              n_clicks=0,
                              style={
@@ -63,7 +65,10 @@ app.layout = html.Div([
                                  'minWidth': '50%', 'maxWidth': '99%',
                                  'height': '50px',
                              }),
-                 style={'width': '50%', 'display': 'inline-block', 'textAlign': 'right'}),
+                 style={
+                     'width': '50%', 'display': 'inline-block',
+                     'textAlign': 'right'
+                 }),
     ], style={'margin-bottom': '1.5em'}),
     html.H4("Cardio"),  # todo inline dropdown Y/N cardio (table inactive if no)
     dash_table.DataTable(
@@ -73,7 +78,10 @@ app.layout = html.Div([
             'minWidth': '100px', 'width': '100px', 'maxWidth': '150px',
             'fontSize': '12px', 'height': '40px'
         },
-        style_header={'backgroundColor': '#2b4353', 'color': '#eaf6f6', 'textAlign': 'center'},
+        style_header={
+            'backgroundColor': '#2b4353', 'color': '#eaf6f6',
+            'textAlign': 'center'
+        },
         columns=(
             [{'id': col, 'name': col} for col in cardio_cols]
         ),
@@ -92,7 +100,9 @@ app.layout = html.Div([
         html.Div([
             html.Button("Add Set", id='add-set-button',
                         style={'backgroundColor': '#e3e3e3'}),
-        ], style={'textAlign': 'right', 'display': 'inline-block', 'width': '50%'}),
+        ], style={
+            'textAlign': 'right', 'display': 'inline-block', 'width': '50%'
+        }),
     ], style={'padding-bottom': '20px'}),
 
     dcc.Store(id='exercise-rows-store', storage_type='session'),
@@ -100,8 +110,14 @@ app.layout = html.Div([
 
     dash_table.DataTable(
         id='exercise-datatable',
-        style_table={'padding-left': 'auto', 'padding-right': 'auto', 'minWidth': '100%', 'maxWidth': '100%', 'overflowX': 'auto'},
-        style_header={'backgroundColor': '#2b4353', 'color': '#eaf6f6', 'textAlign': 'center'},
+        style_table={
+            'padding-left': 'auto', 'padding-right': 'auto', 'minWidth': '100%',
+            'maxWidth': '100%', 'overflowX': 'auto'
+        },
+        style_header={
+            'backgroundColor': '#2b4353', 'color': '#eaf6f6',
+            'textAlign': 'center'
+        },
         style_cell_conditional=[
             {
                 'if': {
@@ -134,32 +150,6 @@ app.layout = html.Div([
     html.Br(),
     html.P("", id='db-p'),
 ])
-
-
-# @app.callback(
-#     Output('db-p', 'children'),
-#     Input('finish-workout-button', 'n_clicks'),
-#     Input('exercise-datatable', 'data'))
-# def db(n_clicks, rows):
-#     if n_clicks > 0:
-#         db = mysql.connector.connect(
-#             user=db_user,
-#             password=db_pass,
-#             host=db_ip,
-#             database=db_name,
-#         )
-#         cursor = db.cursor()
-#         query = 'SHOW TABLES'
-#         cursor.execute(query)
-#
-#         items = []
-#         for i in cursor:
-#             items.append(i)
-#
-#         cursor.close()
-#         db.close()
-#
-#     return f'{items if len(items) > 0 else None}'
 
 
 @app.callback(

@@ -2,4 +2,7 @@ gym
 *.pyc
 .DS_Store
 .app
+.env
+test.py
+/flask-dir
 gym/*
