@@ -175,7 +175,7 @@ def access_db(n_clicks):
 
             # close the communication with the HerokuPostgres
             cur.close()
-            return f"SELECT version(): {db_version}"
+            return "SELECT version(): {}".format(db_version)
         except Exception as error:
             return 'Cause: {}'.format(error)
 
