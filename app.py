@@ -24,33 +24,9 @@ server = app.server
 # KEEP FALSE FOR DEPLOYMENT
 debug = False
 
+# db vars
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = None
-try:
-    # create a new database connection by calling the connect() function
-    conn = psycopg2.connect(DATABASE_URL)
-
-    #  create a new cursor
-    cur = conn.cursor()
-
-    # execute an SQL statement to get the HerokuPostgres database version
-    # print('PostgreSQL database version:')
-    cur.execute('SELECT version()')
-
-    # display the PostgreSQL database server version
-    db_version = cur.fetchone()
-    # print(db_version)
-
-    # close the communication with the HerokuPostgres
-    cur.close()
-except Exception as error:
-    print('Cause: {}'.format(error))
-
-finally:
-    # close the communication with the database server by calling the close()
-    if conn is not None:
-        conn.close()
-        print('Database connection closed.')
 
 
 # cardio & exercise datatable columns
@@ -171,8 +147,43 @@ app.layout = html.Div([
         export_format='xlsx',
     ),
     html.Br(),
-    html.P("", id='db-p'),
+    html.P("text-1", id='db-p'),
+    html.P("text-2", id='db-p2'),
 ])
+
+
+@app.callback(
+    Output('db-p', 'children'),
+    Output('db-p2', 'children'),
+    Input('finish-workout-button', 'n_clicks'))
+def access_db(n_clicks):
+    if n_clicks > 0:
+        try:
+            # create a new database connection by calling the connect() function
+            conn = psycopg2.connect(DATABASE_URL)
+
+            #  create a new cursor
+            cur = conn.cursor()
+
+            # execute an SQL statement to get the HerokuPostgres database version
+            # print('PostgreSQL database version:')
+            cur.execute('SELECT version()')
+
+            # display the PostgreSQL database server version
+            db_version = cur.fetchone()
+
+
+            # close the communication with the HerokuPostgres
+            cur.close()
+            return f"SELECT version(): {db_version}"
+        except Exception as error:
+            return 'Cause: {}'.format(error)
+
+        finally:
+            # close the communication with the database server by calling the close()
+            if conn is not None:
+                conn.close()
+                return 'Database connection closed.'
 
 
 @app.callback(
