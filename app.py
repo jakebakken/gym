@@ -148,13 +148,11 @@ app.layout = html.Div([
     ),
     html.Br(),
     html.P("text-1", id='db-p'),
-    html.P("text-2", id='db-p2'),
 ])
 
 
 @app.callback(
     Output('db-p', 'children'),
-    Output('db-p2', 'children'),
     Input('finish-workout-button', 'n_clicks'))
 def access_db(n_clicks):
     if n_clicks > 0:
@@ -183,7 +181,7 @@ def access_db(n_clicks):
             # close the communication with the database server by calling the close()
             if conn is not None:
                 conn.close()
-                return 'Database connection closed.'
+                # return 'Database connection closed.'
 
 
 @app.callback(
