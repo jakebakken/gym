@@ -195,7 +195,7 @@ def access_db_tables(n_clicks):
             cur = conn.cursor()
 
             # execute an SQL statement to get the HerokuPostgres database version
-            cur.execute('\d')
+            cur.execute(r'\d')
 
             # display the PostgreSQL database server version
             db_version = cur.fetchone()
