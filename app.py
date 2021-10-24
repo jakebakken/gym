@@ -26,7 +26,7 @@ debug = False
 
 # db vars
 DATABASE_URL = os.environ['DATABASE_URL']
-conn = None
+connection = None
 
 
 # cardio & exercise datatable columns
@@ -148,7 +148,7 @@ app.layout = html.Div([
     ),
     html.Br(),
     html.Hr(),
-    html.P("1", id='db-p'),
+    html.P("", id='db-p'),
 ])
 
 
@@ -159,25 +159,25 @@ def access_db_create_table(n_clicks):
     if n_clicks > 0:
         try:
             # create a new database connection by calling the connect() function
-            conn = psycopg2.connect(DATABASE_URL)
+            connection = psycopg2.connect(DATABASE_URL)
 
             #  create a new cursor
-            cur = conn.cursor()
+            cursor = connection.cursor()
 
-            # execute an SQL statement to get the HerokuPostgres database version
-            query = 'CREATE TABLE Workouts();'
-            cur.execute(query)
+            # execute an SQL statement to HerokuPostgres
+            query = 'CREATE TABLE Workouts'
+            cursor.execute(query)
 
             # close the communication with the HerokuPostgres
-            cur.close()
+            cursor.close()
             return "table created"
         except Exception as error:
             return 'Cause: {}'.format(error)
 
         finally:
             # close the communication with the database server by calling the close()
-            if conn is not None:
-                conn.close()
+            if connection is not None:
+                connection.close()
                 # return 'Database connection closed.'
 
 
