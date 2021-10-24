@@ -147,7 +147,10 @@ app.layout = html.Div([
         export_format='xlsx',
     ),
     html.Br(),
-    html.P("text-1", id='db-p'),
+    html.Hr(),
+    html.P("1", id='db-p'),
+    html.Hr(),
+    html.P("2", id='db-p2'),
 ])
 
 
@@ -180,7 +183,7 @@ def access_db_create_table(n_clicks):
 
 
 @app.callback(
-    Output('db-p', 'children'),
+    Output('db-p2', 'children'),
     Input('finish-workout-button', 'n_clicks'))
 def access_db_tables(n_clicks):
     if n_clicks > 0:
