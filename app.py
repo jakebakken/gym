@@ -165,13 +165,13 @@ def access_db_select_users(n_clicks):
             cursor = connection.cursor()
 
             # execute an SQL statement to HerokuPostgres
-            query = 'SELECT * FROM users;'
+            query = 'INSERT INTO users(first_name, last_name, passw, email)' \
+                    'VALUES ("colton", "bakken", "pas2830d.!!", "colton@gmail.com");'
             cursor.execute(query)
-            val = cursor.fetchone()
 
             # close the communication with the HerokuPostgres
             cursor.close()
-            return 'Value: {}'.format(val)
+            return 'User added to users'
         except Exception as error:
             return 'Cause: {}'.format(error)
 
