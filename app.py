@@ -155,7 +155,7 @@ app.layout = html.Div([
 @app.callback(
     Output('db-p', 'children'),
     Input('start-workout-button', 'n_clicks'))
-def access_db_create_table(n_clicks):
+def access_db_select_users(n_clicks):
     if n_clicks > 0:
         try:
             # create a new database connection by calling the connect() function
@@ -165,12 +165,13 @@ def access_db_create_table(n_clicks):
             cursor = connection.cursor()
 
             # execute an SQL statement to HerokuPostgres
-            query = 'CREATE TABLE Workouts();'
+            query = 'SELECT * FROM users;'
             cursor.execute(query)
+            val = cursor.fetchone()
 
             # close the communication with the HerokuPostgres
             cursor.close()
-            return "table created"
+            return 'Value: {}'.format(val)
         except Exception as error:
             return 'Cause: {}'.format(error)
 
