@@ -165,7 +165,7 @@ def access_db_create_table(n_clicks):
             cursor = connection.cursor()
 
             # execute an SQL statement to HerokuPostgres
-            query = 'CREATE TABLE Workouts'
+            query = 'CREATE TABLE Workouts;'
             cursor.execute(query)
 
             # close the communication with the HerokuPostgres
