@@ -149,8 +149,6 @@ app.layout = html.Div([
     html.Br(),
     html.Hr(),
     html.P("1", id='db-p'),
-    html.Hr(),
-    html.P("2", id='db-p2'),
 ])
 
 
@@ -167,42 +165,11 @@ def access_db_create_table(n_clicks):
             cur = conn.cursor()
 
             # execute an SQL statement to get the HerokuPostgres database version
-            cur.execute('CREATE TABLE Workouts()')
+            cur.execute('CREATE TABLE Workouts();')
 
             # close the communication with the HerokuPostgres
             cur.close()
             return "table created"
-        except Exception as error:
-            return 'Cause: {}'.format(error)
-
-        finally:
-            # close the communication with the database server by calling the close()
-            if conn is not None:
-                conn.close()
-                # return 'Database connection closed.'
-
-
-@app.callback(
-    Output('db-p2', 'children'),
-    Input('finish-workout-button', 'n_clicks'))
-def access_db_tables(n_clicks):
-    if n_clicks > 0:
-        try:
-            # create a new database connection by calling the connect() function
-            conn = psycopg2.connect(DATABASE_URL)
-
-            #  create a new cursor
-            cur = conn.cursor()
-
-            # execute an SQL statement to get the HerokuPostgres database version
-            cur.execute(r'\d')
-
-            # display the PostgreSQL database server version
-            db_version = cur.fetchone()
-
-            # close the communication with the HerokuPostgres
-            cur.close()
-            return "slash d execution: {}".format(db_version)
         except Exception as error:
             return 'Cause: {}'.format(error)
 
