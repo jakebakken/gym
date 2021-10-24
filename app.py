@@ -165,7 +165,8 @@ def access_db_create_table(n_clicks):
             cur = conn.cursor()
 
             # execute an SQL statement to get the HerokuPostgres database version
-            cur.execute('CREATE TABLE Workouts();')
+            query = 'CREATE TABLE Workouts();'
+            cur.execute(query)
 
             # close the communication with the HerokuPostgres
             cur.close()
