@@ -165,8 +165,7 @@ def access_db_select_users(n_clicks):
             cursor = connection.cursor()
 
             # execute an SQL statement to HerokuPostgres
-            query = 'INSERT INTO users(first_name, last_name, passw, email)' \
-                    'VALUES ("colton", "bakken", "pas2830d.!!", "colton@gmail.com");'
+            query = "INSERT INTO users(first_name, last_name, passw, email) VALUES ('colton', 'bakken', 'pas2830d.!!', 'colton@gmail.com');"
             cursor.execute(query)
 
             # close the communication with the HerokuPostgres
