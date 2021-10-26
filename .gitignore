@@ -4,5 +4,5 @@ gym
 .app
 .env
 test.py
-/flask-dir
+/flask_dir
 gym/*

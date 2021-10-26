@@ -152,34 +152,34 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(
-    Output('db-p', 'children'),
-    Input('start-workout-button', 'n_clicks'))
-def access_db_select_users(n_clicks):
-    if n_clicks > 0:
-        try:
-            # create a new database connection by calling the connect() function
-            connection = psycopg2.connect(DATABASE_URL)
-
-            #  create a new cursor
-            cursor = connection.cursor()
-
-            # execute an SQL statement to HerokuPostgres
-            query = "INSERT INTO users(first_name, last_name, passw, email) VALUES(%s, %s, %s, %s);"
-            cursor.execute(query, ('colton', 'bakken', 'pas2830d.!!', 'colton@gmail.com'))
-            connection.commit()
-
-            # close the communication with the HerokuPostgres
-            cursor.close()
-            return 'User added to users'
-        except Exception as error:
-            return 'Cause: {}'.format(error)
-
-        finally:
-            # close the communication with the database server by calling the close()
-            if connection is not None:
-                connection.close()
-                # return 'Database connection closed.'
+# @app.callback(
+#     Output('db-p', 'children'),
+#     Input('start-workout-button', 'n_clicks'))
+# def access_db_select_users(n_clicks):
+#     if n_clicks > 0:
+#         try:
+#             # create a new database connection by calling the connect() function
+#             connection = psycopg2.connect(DATABASE_URL)
+#
+#             #  create a new cursor
+#             cursor = connection.cursor()
+#
+#             # execute an SQL statement to HerokuPostgres
+#             query = "INSERT INTO users(first_name, last_name, passw, email) VALUES(%s, %s, %s, %s);"
+#             cursor.execute(query, ('colton', 'bakken', 'pas2830d.!!', 'colton@gmail.com'))
+#             connection.commit()
+#
+#             # close the communication with the HerokuPostgres
+#             cursor.close()
+#             return 'User added to users'
+#         except Exception as error:
+#             return 'Cause: {}'.format(error)
+#
+#         finally:
+#             # close the communication with the database server by calling the close()
+#             if connection is not None:
+#                 connection.close()
+#                 # return 'Database connection closed.'
 
 
 @app.callback(
