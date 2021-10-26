@@ -4,5 +4,7 @@ gym
 .app
 .env
 test.py
-/flask_dir
+app.py
+models.py
+settings.py
 gym/*
