@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash
+import os, psycopg2
 
 
 # blueprint for Flask application
@@ -17,6 +18,8 @@ def logout():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
+    DATABASE_URL = os.environ['DATABASE_URL']
+    connection = None
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
@@ -53,7 +56,29 @@ def sign_up():
         if 50 >= len(first_name) >= 1 and 50 >= len(last_name) >= 1 and \
                 50 >= len(username) >= 1 and 100 >= len(email) >= 5 and \
                 password == password_confirm and 50 >= len(password) >= 8:
-            # todo add inputs to db + commit if user doesn't already exist
+            try:
+                # create a new database connection by calling the connect() function
+                connection = psycopg2.connect(DATABASE_URL)
+
+                #  create a new cursor
+                cursor = connection.cursor()
+
+                # execute an SQL statement to HerokuPostgres
+                query = "INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
+                cursor.execute(query, (first_name, last_name, password, email, username))
+                connection.commit()
+
+                # close the communication with the HerokuPostgres
+                cursor.close()
+                flash('User added!', category='success')
+            except Exception as error:
+                flash(f"Error: {error}", category='error')
+
+            finally:
+                # close the communication with the database server by calling the close()
+                if connection is not None:
+                    connection.close()
+
             flash('Account Created', category='valid')
             return render_template('login.html')
 
