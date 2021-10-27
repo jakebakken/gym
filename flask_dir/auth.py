@@ -70,7 +70,7 @@ def sign_up():
 
                 email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
                 cursor.execute(email_exists_in_db_query)
-                val = cursor.fetchall()
+                val = cursor.fetchone()
                 flash(f"Cursor Value: {val}", category='success')
 
                 # close the communication with the HerokuPostgres
