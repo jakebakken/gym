@@ -67,7 +67,7 @@ def sign_up():
                 cursor = db_connection.cursor()
 
                 # todo if email does not exist in database yet
-                email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1)"
+                email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
                 if cursor.execute(email_exists_in_db_query) == 'f':
                     # execute an SQL statement to HerokuPostgres
                     query = "INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
