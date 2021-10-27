@@ -1,9 +1,10 @@
 from flask import Flask
+import os
 
 
 def create_app():
     app = Flask(__name__)
-    # app.config['SECRET_KEY'] = 'asldi302lnfla1'
+    app.config['SECRET_KEY'] = os.environ['FLASK_SK']
 
     from .views import views
     from .auth import auth
