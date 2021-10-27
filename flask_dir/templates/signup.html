@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% block title %}Sign Up{% endblock %}
+{% extends 'base.html' %}
+<style>
+    .form-group {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+{% block title %}Sign Up{% endblock %}
 {% block navbar %} {% endblock %}
 {% block content %}
 <form method="POST">
@@ -13,7 +20,6 @@
                 placeholder="First Name"
         />
     </div>
-    <br/>
     <div class="form-group">
         <input
                 type="text"
@@ -23,7 +29,6 @@
                 placeholder="Last Name"
         />
     </div>
-    <br/>
     <div class="form-group">
         <input
                 type="text"
@@ -33,7 +38,6 @@
                 placeholder="Username"
         />
     </div>
-    <br/>
     <div class="form-group">
         <input
                 type="email"
@@ -43,7 +47,7 @@
                 placeholder="Email"
         />
     </div>
-    <br/><br/>
+    <br/>
     <div class="form-group">
         <input
                 type="password"
@@ -53,7 +57,6 @@
                 placeholder="Password"
         />
     </div>
-    <br/>
     <div class="form-group">
         <input
                 type="password"
@@ -69,6 +72,9 @@
         letter, 1 number, and 1 special character (!, @, #, $, etc.)
     </p>
     <br/><br/>
-    <button type="submit" class="btn btn-primary" style="margin-bottom: 20px">Submit</button>
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Submit</button>
+    <p>
+        Already have an account? <a style="color: #0095f6;" href="/login"><span>Login</span></a>
+    </p>
 </form>
 {% endblock %}
