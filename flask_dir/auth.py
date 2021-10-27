@@ -66,19 +66,20 @@ def sign_up():
                 #  create a new cursor
                 cursor = db_connection.cursor()
 
-                # todo if email does not exist in database yet
+                email_exists_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
+                cursor.execute(email_exists_query)
+                email_exists_in_users = cursor.fetchone()[0]
 
-                email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
-                cursor.execute(email_exists_in_db_query)
-                val = cursor.fetchone()[0]
-                if val is True:
-                    flash(f"Cursor Value: {val}", category='success')
-                elif val == '(True,)':
-                    flash("Cursor Value equals literally (True,)", category='success')
-                elif val is False:
-                    flash("Cursor Value is false", category='error')
+                if email_exists_in_users:
+                    flash("An account with this email already exists.", category='error')
 
-                # close the communication with the HerokuPostgres
+                elif not email_exists_in_users:
+                    query = f"INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
+                    cursor.execute(query, (first_name, last_name, password, email, username))
+                    db_connection.commit()
+                    flash(f"Account created, welcome {first_name}!", category='success')
+
+                # close the communication with HerokuPostgres
                 cursor.close()
 
             except Exception as error:
