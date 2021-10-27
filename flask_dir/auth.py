@@ -78,7 +78,7 @@ def sign_up():
                     return render_template('login.html')
 
                 else:
-                    flash('A user with this email already exists!', category='error')
+                    flash(f"{cursor.execute(email_exists_in_db_query)}", category='error')
 
                 # close the communication with the HerokuPostgres
                 cursor.close()
