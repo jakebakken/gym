@@ -50,28 +50,34 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav"></ul>
                     </div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="navbar-brand"
-                                   aria-current="page"
-                                   href="/exercise"
-                                >Exercise</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="navbar-brand"
-                                   aria-current="page"
-                                   href="/login"
-                                >Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="navbar-brand"
-                                   aria-current="page"
-                                   href="/logout"
-                                >Logout</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="navbar-brand"
+                               aria-current="page"
+                               href="/exercise"
+                            >Exercise</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand"
+                               aria-current="page"
+                               href="/signup"
+                            >Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand"
+                               aria-current="page"
+                               href="/login"
+                            >Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand"
+                               aria-current="page"
+                               href="/logout"
+                            >Logout</a>
+                        </li>
+                    </ul>
+                </div>
                 <!--
                 <button
                         class="btn"
@@ -82,6 +88,7 @@
                 -->
             </div>
         </nav>
+
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <br/><br/><br/>
@@ -104,7 +111,7 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <div class="container">
+        <div class="container" style="text-align: center">
             {% block content %}
             {% endblock %}
         </div>
