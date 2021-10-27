@@ -69,7 +69,7 @@ def sign_up():
                 # todo if email does not exist in database yet
                 email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
                 cursor.execute(email_exists_in_db_query)
-                if cursor == 'f':
+                if cursor.fetchone() == 'f':
                     # execute an SQL statement to HerokuPostgres
                     query = "INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
                     cursor.execute(query, (first_name, last_name, password, email, username))
@@ -79,7 +79,7 @@ def sign_up():
                     return render_template('login.html')
 
                 else:
-                    flash(f"{cursor}", category='error')
+                    flash(f"{cursor.fetchone()}", category='error')
 
                 # close the communication with the HerokuPostgres
                 cursor.close()
