@@ -5,6 +5,9 @@ import os, psycopg2
 # blueprint for Flask application
 auth = Blueprint('auth', __name__)
 
+# database connection
+DATABASE_URL = os.environ['DATABASE_URL']
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -18,8 +21,8 @@ def logout():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
-    DATABASE_URL = os.environ['DATABASE_URL']
-    connection = None
+    db_connection = None
+
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
@@ -58,28 +61,34 @@ def sign_up():
                 password == password_confirm and 50 >= len(password) >= 8:
             try:
                 # create a new database connection by calling the connect() function
-                connection = psycopg2.connect(DATABASE_URL)
+                db_connection = psycopg2.connect(DATABASE_URL)
 
                 #  create a new cursor
-                cursor = connection.cursor()
+                cursor = db_connection.cursor()
 
-                # execute an SQL statement to HerokuPostgres
-                query = "INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
-                cursor.execute(query, (first_name, last_name, password, email, username))
-                connection.commit()
+                # todo if email does not exist in database yet
+                email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1)"
+                if cursor.execute(email_exists_in_db_query) == 'f':
+                    # execute an SQL statement to HerokuPostgres
+                    query = "INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
+                    cursor.execute(query, (first_name, last_name, password, email, username))
+
+                    db_connection.commit()
+                    flash(f'Account created, welcome {first_name}!', category='success')
+                    return render_template('login.html')
+
+                else:
+                    flash('A user with this email already exists!', category='error')
 
                 # close the communication with the HerokuPostgres
                 cursor.close()
-                flash('User added!', category='success')
+
             except Exception as error:
                 flash(f"Error: {error}", category='error')
 
             finally:
                 # close the communication with the database server by calling the close()
-                if connection is not None:
-                    connection.close()
-
-            flash('Account Created', category='valid')
-            return render_template('login.html')
+                if db_connection is not None:
+                    db_connection.close()
 
     return render_template('signup.html')
