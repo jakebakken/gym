@@ -70,7 +70,7 @@ def sign_up():
 
                 email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
                 cursor.execute(email_exists_in_db_query)
-                val = cursor.fetchone()
+                val = cursor.fetchone()[0]
                 if val is True:
                     flash(f"Cursor Value: {val}", category='success')
                 elif val == '(True,)':
