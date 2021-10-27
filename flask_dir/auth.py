@@ -71,10 +71,12 @@ def sign_up():
                 email_exists_in_db_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
                 cursor.execute(email_exists_in_db_query)
                 val = cursor.fetchone()
-                if val:
+                if val == True:
                     flash(f"Cursor Value: {val}", category='success')
                 elif val == '(True,)':
                     flash("Cursor Value equals literally (True,)", category='success')
+                if val == False:
+                    flash("Cursor Value is false", category='error')
 
                 # close the communication with the HerokuPostgres
                 cursor.close()
