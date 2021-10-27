@@ -33,6 +33,7 @@
 </head>
 <body>
     <div id="content" class="main">
+        {% block navbar %}
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" style="font-size: 1.5em" href="/">Home</a>
@@ -88,7 +89,7 @@
                 -->
             </div>
         </nav>
-
+        {% endblock %}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <br/><br/><br/>
