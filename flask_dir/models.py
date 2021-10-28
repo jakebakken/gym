@@ -14,7 +14,7 @@ class Users(db.Model, UserMixin):
 
 class Workouts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # foreign key reference must be lowercase
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # foreign key reference must be lowercase
     workout_date = db.Column(db.Date)
     workout_start_time = db.Column(db.Time)
     workout_end_time = db.Column(db.Time)
