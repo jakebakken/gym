@@ -1,6 +1,9 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 import os, psycopg2
 from flask_login import login_user
+from .models import Users
+from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # blueprint for Flask application
@@ -105,36 +108,11 @@ def sign_up():
         if 50 >= len(first_name) >= 1 and 50 >= len(last_name) >= 1 and \
                 50 >= len(username) >= 1 and 100 >= len(email) >= 5 and \
                 password == password_confirm and 50 >= len(password) >= 8:
-            try:
-                db_connection = psycopg2.connect(DATABASE_URL)
-                cursor = db_connection.cursor()
+            new_user = Users(first_name=first_name, last_name=last_name, username=username, email=email, password=generate_password_hash(password), method='sha256')
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Account Created", category='success')
+            return redirect(url_for('views.home_page'))
 
-                email_exists_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
-                cursor.execute(email_exists_query)
-                email_exists_in_users = cursor.fetchone()[0]
-
-                if email_exists_in_users:
-                    flash("An account with this email already exists.", category='error')
-
-                elif not email_exists_in_users:
-                    # add user to users table in db
-                    add_user_query = f"INSERT INTO users(first_name, last_name, passw, email, username) VALUES(%s, %s, %s, %s, %s);"
-                    cursor.execute(add_user_query, (first_name, last_name, password, email, username))
-                    db_connection.commit()
-
-                    # positively alert user account was created and welcome them!
-                    flash(f"Account created, welcome {first_name}!", category='success')
-
-                    # close the communication with HerokuPostgres
-                    cursor.close()
-                    return render_template('login.html')
-
-            except Exception as error:
-                flash(f"Error: {error}", category='error')
-
-            finally:
-                # close the communication with the database server
-                if db_connection is not None:
-                    db_connection.close()
 
     return render_template('signup.html')
