@@ -5,14 +5,14 @@ from os import path
 
 
 db = SQLAlchemy()
-DATABASE_URL = os.environ['DATABASE_URL']
+SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ['FLASK_SK']
     # db connection
-    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_URL
     db.init_app(app)
 
     from .views import views
@@ -30,5 +30,5 @@ def create_app():
 
 def create_db(app):
     # check if db exists, if not: create it
-    if not path.exists(DATABASE_URL):
+    if not path.exists(SQLALCHEMY_URL):
         db.create_all(app=app)
