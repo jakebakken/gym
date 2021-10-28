@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from models import Users
+from .models import Users
 
 
 # blueprint for Flask application
