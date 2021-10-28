@@ -11,6 +11,48 @@ DATABASE_URL = os.environ['DATABASE_URL']
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    db_connection = None
+
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        try:
+            db_connection = psycopg2.connect(DATABASE_URL)
+            cursor = db_connection.cursor()
+
+            email_exists_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
+            cursor.execute(email_exists_query)
+            email_exists_in_users = cursor.fetchone()[0]
+
+            if email_exists_in_users:
+                password_query = f"SELECT passw FROM users WHERE email = '{email}';"
+                cursor.execute(password_query)
+                stored_password = cursor.fetchone()[0]
+
+                if password == stored_password:
+                    flash("Login Successful", category='success')
+                    return render_template('home.html')
+                else:
+                    flash("Incorrect password for this email", category='error')
+            else:
+                flash("There is no account registered with this email", category='error')
+                return render_template('login.html')
+
+                # todo see if entered password equals stored user password
+                #  if yes, start user session & redirect to home page
+                #  otherwise, flash error & refresh login page
+
+        except Exception as error:
+            flash(f"Error: {error}", category='error')
+            return render_template('login.html')
+
+        finally:
+            # close the communication with the database server
+            if db_connection is not None:
+                db_connection.close()
+
+
     return render_template('login.html')
 
 
@@ -60,13 +102,9 @@ def sign_up():
                 50 >= len(username) >= 1 and 100 >= len(email) >= 5 and \
                 password == password_confirm and 50 >= len(password) >= 8:
             try:
-                # create a new database connection by calling the connect() function
                 db_connection = psycopg2.connect(DATABASE_URL)
-
-                #  create a new cursor
                 cursor = db_connection.cursor()
 
-                # see if submitted user exists in database (based on email)
                 email_exists_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
                 cursor.execute(email_exists_query)
                 email_exists_in_users = cursor.fetchone()[0]
