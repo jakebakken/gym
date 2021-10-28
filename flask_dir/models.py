@@ -9,7 +9,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(50))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(50))
-    workouts = db.relationship('Workout')  # to access all Workouts a User has created
+    workouts = db.relationship('Workouts')  # to access all Workouts a User has created
 
 
 class Workouts(db.Model):
