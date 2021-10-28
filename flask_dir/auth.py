@@ -15,63 +15,31 @@ DATABASE_URL = os.environ['DATABASE_URL']
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    db_connection = None
-
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
-        if email is not None:
-            try:
-                db_connection = psycopg2.connect(DATABASE_URL)
-                cursor = db_connection.cursor()
-
-                email_exists_query = f"SELECT EXISTS (SELECT 1 FROM users WHERE email = '{email}' LIMIT 1);"
-                cursor.execute(email_exists_query)
-                email_exists_in_users = cursor.fetchone()[0]
-
-                if email_exists_in_users:
-                    password_query = f"SELECT passw FROM users WHERE email = '{email}';"
-                    cursor.execute(password_query)
-                    stored_password = cursor.fetchone()[0]
-
-                    if password == stored_password:
-                        user_id_query = f"SELECT id FROM users WHERE email = '{email}';"
-                        cursor.execute(user_id_query)
-                        user_id = cursor.fetchone()[0]
-
-                        login_user(user_id, remember=True)
-                        flash("Login Successful", category='success')
-                        return render_template('home.html')
-                    else:
-                        flash("Incorrect password for this email", category='error')
-                else:
-                    flash("There is no account registered with this email", category='error')
-                    return render_template('login.html')
-
-            except Exception as error:
-                flash(f"Error: {error}", category='error')
-                return render_template('login.html')
-
-            finally:
-                # close the communication with the database server
-                cursor.close()
-                if db_connection is not None:
-                    db_connection.close()
+        # query database to see if user exists
+        user = Users.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                flash("Login Successful", category='success')
+            else:
+                flash("Incorrect password, try again", category='error')
+        else:
+            flash("Account with this email was not found", category='error')
 
 
-    return render_template('login.html')
+    return redirect(url_for('views.login_page'))
 
 
 @auth.route('/logout')
 def logout():
-    return render_template('login.html')
+    return redirect(url_for('views.login_page'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
-    db_connection = None
-
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
@@ -108,11 +76,22 @@ def sign_up():
         if 50 >= len(first_name) >= 1 and 50 >= len(last_name) >= 1 and \
                 50 >= len(username) >= 1 and 100 >= len(email) >= 5 and \
                 password == password_confirm and 50 >= len(password) >= 8:
-            new_user = Users(first_name=first_name, last_name=last_name, username=username, email=email, password=generate_password_hash(password, method='sha256'))
-            db.session.add(new_user)
-            db.session.commit()
-            flash("Account Created", category='success')
-            return redirect(url_for('views.home_page'))
+            # instantiate new user
+            user = Users.query.filter_by(email=email)
+            # if user doesn't exist in database, add new user
+            if not user:
+                new_user = Users(
+                    first_name=first_name, last_name=last_name, username=username,
+                    email=email, password=generate_password_hash(
+                        password, method='sha256'
+                    )
+                )
+                # add new user to db
+                db.session.add(new_user)
+                db.session.commit()
+                flash("Account Created", category='success')
+                return redirect(url_for('views.home_page'))
+            else:
+                flash("An account with this email already exists", category='error')
 
-
-    return render_template('signup.html')
+    return redirect(url_for('views.signup_page'))

@@ -5,5 +5,4 @@ gym
 .env
 test.py
 app.py
-settings.py
 gym/*
