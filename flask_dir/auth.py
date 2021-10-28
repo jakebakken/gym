@@ -24,10 +24,12 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash("Login Successful", category='success')
+                return redirect(url_for('views.home_page'))
             else:
                 flash("Incorrect password, try again", category='error')
         else:
             flash("Account with this email was not found", category='error')
+            return redirect(url_for('views.login_page'))
 
 
     return redirect(url_for('views.login_page'))
