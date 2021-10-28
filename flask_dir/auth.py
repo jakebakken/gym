@@ -23,8 +23,7 @@ def login():
         user = Users.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash("Login Successful", category='success')
-                return redirect(url_for('views.home_page'))
+                return redirect(url_for('views.home_page', user=Users.first_name))
             else:
                 flash("Incorrect password, try again", category='error')
         else:
