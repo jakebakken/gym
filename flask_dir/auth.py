@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, flash
 import os, psycopg2
+from flask_login import login_user
 
 
 # blueprint for Flask application
@@ -32,6 +33,11 @@ def login():
                     stored_password = cursor.fetchone()[0]
 
                     if password == stored_password:
+                        user_id_query = f"SELECT id FROM users WHERE email = '{email}';"
+                        cursor.execute(user_id_query)
+                        user_id = cursor.fetchone()[0]
+
+                        login_user(user_id, remember=True)
                         flash("Login Successful", category='success')
                         return render_template('home.html')
                     else:
@@ -46,6 +52,7 @@ def login():
 
             finally:
                 # close the communication with the database server
+                cursor.close()
                 if db_connection is not None:
                     db_connection.close()
 

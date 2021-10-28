@@ -28,7 +28,6 @@ debug = False
 DATABASE_URL = os.environ['DATABASE_URL']
 connection = None
 
-
 # cardio & exercise datatable columns
 cardio_cols = [
     'Type', 'Distance', 'Duration (min)', 'Cooldown',
