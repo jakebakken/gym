@@ -108,7 +108,7 @@ def sign_up():
         if 50 >= len(first_name) >= 1 and 50 >= len(last_name) >= 1 and \
                 50 >= len(username) >= 1 and 100 >= len(email) >= 5 and \
                 password == password_confirm and 50 >= len(password) >= 8:
-            new_user = Users(first_name=first_name, last_name=last_name, username=username, email=email, password=generate_password_hash(password), method='sha256')
+            new_user = Users(first_name=first_name, last_name=last_name, username=username, email=email, password=generate_password_hash(password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             flash("Account Created", category='success')
