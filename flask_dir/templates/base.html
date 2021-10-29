@@ -34,47 +34,22 @@
 <body>
     <div id="content" class="main">
         {% block navbar %}
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" style="font-size: 1.5em" href="/">Home</a>
-                    <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav"></ul>
-                    </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand" href="/">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="navbar-brand"
-                               aria-current="page"
-                               href="/exercise"
-                            >Exercise</a>
+                            <a class="nav-link" href="/exercise">Exercise</a>
                         </li>
                         <li class="nav-item">
-                            <a class="navbar-brand"
-                               aria-current="page"
-                               href="/logout"
-                            >Logout</a>
+                           <a class="nav-link" href="/logout">Logout</a>
                         </li>
                     </ul>
                 </div>
-                <!--
-                <button
-                        class="btn"
-                        style="background-color: #00bbf0; color: #ececec; border: #ececec; margin-right: 10px"
-                        type="button"
-                >Logout
-                </button>
-                -->
             </div>
         </nav>
         {% endblock %}
