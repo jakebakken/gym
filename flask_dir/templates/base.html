@@ -8,13 +8,9 @@
             padding-bottom: .5em;
         }
         .alert {
-          margin-bottom: 1px;
-          margin-left: auto;
-          margin-right: auto;
-          height: 40px;
-          line-height: 8px;
-          padding: 0px 15px;
-          width: 90%;
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
         }
         .close {
             line-height: 5px;
@@ -68,16 +64,12 @@
                     {% if category == 'error' %}
                         <div class="alert alert-danger alter-dismissible fade show" role="alert">
                             {{ message }}
-                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% else %}
                         <div class="alert alert-success alter-dismissible fade show" role="alert">
                             {{ message }}
-                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% endif %}
                 {% endfor %}
