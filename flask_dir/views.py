@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from flask_login import login_required
 from .models import Users
 
 
@@ -7,11 +8,13 @@ views = Blueprint('views', __name__)
 
 
 @views.route('/')
+@login_required
 def home_page():
     return render_template('home.html')
 
 
 @views.route('/exercise')
+@login_required
 def exercise_page():
     return render_template('exercise.html')
 
