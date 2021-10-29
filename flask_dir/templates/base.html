@@ -8,9 +8,15 @@
             padding-bottom: .5em;
         }
         .alert {
-            width: 80%;
+            display: flex;
+            width: 90%;
+            height: 3em;
+            line-height: 1em;
             margin-right: auto;
             margin-left: auto;
+        }
+        .btn-close {
+            margin-top: -0.25em;
         }
         .close {
             line-height: 5px;
@@ -62,14 +68,14 @@
                 <br/><br/>
                 {% for category, message in messages %}
                     {% if category == 'error' %}
-                        <div class="alert alert-danger alter-dismissible fade show" role="alert">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ message }}
-                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% else %}
-                        <div class="alert alert-success alter-dismissible fade show" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ message }}
-                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% endif %}
                 {% endfor %}
