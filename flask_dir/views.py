@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template
 from flask_login import login_required
 from .models import Users
 
@@ -15,8 +15,8 @@ def home_page():
 
 @views.route('/exercise')
 @login_required
-def render_dashboard():
-    return redirect('/dash')
+def exercise_page():
+    return render_template('exercise.html')
 
 
 @views.route('/signup')
