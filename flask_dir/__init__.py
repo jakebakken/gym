@@ -12,7 +12,6 @@ SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ['FLASK_SK']
-    # db connection
     app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_URL
     db.init_app(app)
 
