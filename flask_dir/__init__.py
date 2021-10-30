@@ -22,8 +22,6 @@ def create_app():
 
     from .views import views
     from .auth import auth
-    from .plotlydash.dashboard import init_dashboard
-
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
@@ -36,16 +34,41 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    dash_app = init_dashboard(app)
 
     @login_manager.user_loader
     def load_user(id):
         return Users.query.get(int(id))  # reference user by pk
 
-    return app, dash_app
+    return app
 
 
 def create_db(app):
     # check if db exists, if not: create it
     if not path.exists(SQLALCHEMY_URL):
         db.create_all(app=app)
+
+
+def create_dash_app():
+    app = Flask(__name__)
+
+    from .views import views
+    from .auth import auth
+    
+    app.register_blueprint(views, url_prefix='/')
+    app.register_blueprint(auth, url_prefix='/')
+
+    from .models import Users, Workouts
+
+    from .plotlydash.dashboard import init_dashboard
+    dash_app = init_dashboard(app)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(id):
+        return Users.query.get(int(id))  # reference user by pk
+
+
+    return dash_app
