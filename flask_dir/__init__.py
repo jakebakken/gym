@@ -36,6 +36,13 @@ def create_app():
     def load_user(id):
         return Users.query.get(int(id))  # reference user by pk
 
+    def create_dash_app():
+        from .plotlydash.dashboard import init_dashboard
+        dash_app = init_dashboard(app)
+
+        return dash_app
+    create_dash_app()
+
     return app
 
 
@@ -45,10 +52,3 @@ def create_db(app):
         db.create_all(app=app)
 
 
-def create_dash_app():
-    dash_app = Flask(__name__)
-
-    from .plotlydash.dashboard import init_dashboard
-    dash_app = init_dashboard(dash_app)
-
-    return dash_app
