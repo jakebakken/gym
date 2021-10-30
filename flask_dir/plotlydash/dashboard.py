@@ -8,10 +8,9 @@ from dash.exceptions import PreventUpdate
 def init_dashboard(server):
     # app initialization
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-    app_flask = Flask(__name__)
     dash_app = dash.Dash(
         __name__,
-        server=app_flask,
+        server=server,
         url_base_pathname='/exercise/',
         suppress_callback_exceptions=True,
         external_stylesheets=external_stylesheets,
