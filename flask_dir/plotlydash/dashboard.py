@@ -1,8 +1,9 @@
-from flask import Flask
+from flask import Flask, redirect
 import dash
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 
 # app initialization
@@ -11,7 +12,7 @@ app_flask = Flask(__name__)
 app = dash.Dash(
     __name__,
     server=app_flask,
-    url_base_pathname='/exercise_dashboard',
+    url_base_pathname='/exercise_dashboard/',
     suppress_callback_exceptions=True,
     external_stylesheets=external_stylesheets,
     meta_tags=[
@@ -21,6 +22,18 @@ app = dash.Dash(
         }
     ]
 )
+
+
+@app_flask.route('/')
+@app_flask.route('/exercise_dashboard/')
+def render_dashboard():
+    return redirect('/dash1')
+
+
+dash_app = DispatcherMiddleware(
+    app_flask, {'/dash1': app.server}
+)
+
 
 # cardio & exercise datatable columns
 cardio_cols = [
