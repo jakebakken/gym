@@ -141,10 +141,7 @@ def init_dashboard(server):
             export_format='xlsx',
         ),
     ])
-    return dash_app.server
 
-
-def init_callbacks(dash_app):
     @dash_app.callback(
         Output('exercise-datatable', 'data'),
         Input('add-exercise-button', 'n_clicks'),
@@ -160,7 +157,6 @@ def init_callbacks(dash_app):
             rows.append({c['id']: '' for c in columns})
         return rows
 
-
     @dash_app.callback(
         Output('exercise-datatable', 'columns'),
         Input('add-set-button', 'n_clicks'),
@@ -172,7 +168,7 @@ def init_callbacks(dash_app):
 
         # function that sets the set name based on column length, if style of this
         # table changes this will have to be edited
-        set_num = int( (len(existing_columns) / 2) + 0.5 )
+        set_num = int((len(existing_columns) / 2) + 0.5)
 
         # max 10 cols
         if set_num > 10:
@@ -189,3 +185,5 @@ def init_callbacks(dash_app):
                 'name': f"S{set_num} Weight",
             })
         return existing_columns
+
+    return dash_app.server
