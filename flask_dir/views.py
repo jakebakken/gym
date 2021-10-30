@@ -12,7 +12,7 @@ def home_page():
     return render_template('home.html')
 
 
-@views.route('/exercise')
+@views.route('/exercise_dashboard')
 @login_required
 def exercise_page():
     return redirect('/exercise_dashboard')
