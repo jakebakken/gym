@@ -32,7 +32,6 @@ def login():
             flash("Account with this email was not found", category='error')
             return redirect(url_for('views.login_page'))
 
-
     return redirect(url_for('views.login_page'))
 
 
@@ -45,6 +44,12 @@ def logout():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
+    special_chars = [
+        '!', '”', '#', '$', '%', '&', '’', '(', ')', '*', '+', ',', '-', '.',
+        '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`',
+        '{', '|', '}', '~'
+    ]
+
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
@@ -77,10 +82,22 @@ def sign_up():
             flash("Password must be at least 8 characters", category='error')
         if len(password) > 50:
             flash("Password can't be over 50 characters", category='error')
+        if not any(char.isupper() for char in password):
+            flash("Password must contain at least 1 uppercase character", category='error')
+        if not any(char.islower() for char in password):
+            flash("Password must contain at least 1 lowercase character", category='error')
+        if not any(char.isnumeric() for char in password):
+            flash("Password must contain at least 1 number", category='error')
+        if not any(char in special_chars for char in password):
+            flash("Password must contain at least one special character", category='error')
 
         if 50 >= len(first_name) >= 1 and 50 >= len(last_name) >= 1 and \
                 50 >= len(username) >= 1 and 100 >= len(email) >= 5 and \
-                password == password_confirm and 50 >= len(password) >= 8:
+                password == password_confirm and 50 >= len(password) >= 8 and \
+                any(char.isupper() for char in password) and \
+                any(char.islower() for char in password) and \
+                any(char.isnumeric() for char in password) and \
+                any(char in special_chars for char in password):
             # instantiate new user
             user = Users.query.filter_by(email=email)
             # if user doesn't exist in database, add new user
