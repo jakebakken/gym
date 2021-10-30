@@ -25,7 +25,7 @@ def exercise_page():
     return render_template('exercise.html')
 
 
-@app_flask.route('/exercise_dashboard')
+@views.route('/exercise_dashboard')
 def render_dashboard():
     return redirect('/dash1')
 
