@@ -11,9 +11,13 @@ SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 
 def create_app():
     app = Flask(__name__)
+
+    # app key
     app.config['SECRET_KEY'] = os.environ['FLASK_SK']
-    # db connection
+    # db key
     app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_URL
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
     db.init_app(app)
 
     from .views import views
