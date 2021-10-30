@@ -11,7 +11,7 @@ app_flask = Flask(__name__)
 app = dash.Dash(
     __name__,
     server=app_flask,
-    url_base_pathname='/exercise_dashboard/',
+    url_base_pathname='/exercise_dashboard',
     suppress_callback_exceptions=True,
     external_stylesheets=external_stylesheets,
     meta_tags=[
@@ -21,7 +21,6 @@ app = dash.Dash(
         }
     ]
 )
-
 
 # cardio & exercise datatable columns
 cardio_cols = [

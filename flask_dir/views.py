@@ -1,16 +1,10 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template
 from flask_login import login_required
-from .plotlydash.dashboard import app, app_flask
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from .models import Users
 
 
 # blueprint for Flask application
 views = Blueprint('views', __name__)
-
-
-dash_app = DispatcherMiddleware(
-    app_flask, {'/dash1': app.server}
-)
 
 
 @views.route('/')
@@ -23,11 +17,6 @@ def home_page():
 @login_required
 def exercise_page():
     return render_template('exercise.html')
-
-
-@views.route('/exercise_dashboard')
-def render_dashboard():
-    return redirect('/dash1')
 
 
 @views.route('/signup')
