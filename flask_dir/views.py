@@ -14,7 +14,7 @@ def home_page():
 
 
 app_flask = dashboard.app_flask
-@app_flask.route('/exercise')
+@app_flask.route('/exercise_dashboard')
 @login_required
 def exercise_page():
     return redirect('/exercise_dashboard')
