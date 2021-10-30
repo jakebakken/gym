@@ -23,7 +23,7 @@ def create_app():
     from .views import views
     from .auth import auth
     from .plotlydash.dashboard import init_dashboard
-    app = init_dashboard(app)
+
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
@@ -35,6 +35,8 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+
+    app = init_dashboard(app)
 
     @login_manager.user_loader
     def load_user(id):
