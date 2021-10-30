@@ -24,12 +24,6 @@ app = dash.Dash(
 )
 
 
-@app_flask.route('/')
-@app_flask.route('/exercise_dashboard/')
-def render_dashboard():
-    return redirect('/dash1')
-
-
 dash_app = DispatcherMiddleware(
     app_flask, {'/dash1': app.server}
 )

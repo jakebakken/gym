@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from flask_login import login_required
-from .models import Users
+from .plotlydash import dashboard
 
 
 # blueprint for Flask application
@@ -17,6 +17,12 @@ def home_page():
 @login_required
 def exercise_page():
     return render_template('exercise.html')
+
+
+app_flask = dashboard.app_flask
+@app_flask.route('/exercise_dashboard/')
+def render_dashboard():
+    return redirect('/dash1')
 
 
 @views.route('/signup')
