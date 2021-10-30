@@ -1,9 +1,8 @@
-from flask import Flask, redirect
+from flask import Flask
 import dash
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 
 # app initialization
@@ -21,11 +20,6 @@ app = dash.Dash(
             "content": "width=device-width, initial-scale=1"
         }
     ]
-)
-
-
-dash_app = DispatcherMiddleware(
-    app_flask, {'/dash1': app.server}
 )
 
 
