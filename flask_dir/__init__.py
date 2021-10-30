@@ -36,13 +36,13 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    app = init_dashboard(app)
+    dash_app = init_dashboard(app)
 
     @login_manager.user_loader
     def load_user(id):
         return Users.query.get(int(id))  # reference user by pk
 
-    return app
+    return app, dash_app
 
 
 def create_db(app):
