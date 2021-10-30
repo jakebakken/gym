@@ -1,17 +1,18 @@
-from flask import Flask
 import dash
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
 
+# should also try separate func for this app in __init__.py since last time
+# it had that Flask init in this init_dashboard()
 def init_dashboard(server):
     # app initialization
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
     dash_app = dash.Dash(
         __name__,
         server=server,
-        url_base_pathname='/exercise/',
+        url_base_pathname='/exercise_dashboard/',
         suppress_callback_exceptions=True,
         external_stylesheets=external_stylesheets,
         meta_tags=[
@@ -38,6 +39,7 @@ def init_dashboard(server):
             'background': 'black', 'height': '0.5px', 'width': '95%',
             'margin-top': '0em', 'margin-bottom': '1.5em',
         }),
+        html.A("Home Page", href='/home'),
         html.Div([
             html.Div(html.Button("Start Workout", id='start-workout-button',
                                  n_clicks=0,

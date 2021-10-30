@@ -40,7 +40,15 @@ def create_app():
         from .plotlydash.dashboard import init_dashboard
         dash_app = init_dashboard(app)
 
+        # login_manager.login_view = 'auth.login'
+        login_manager.init_app(dash_app)
+
+        # @login_manager.user_loader
+        # def load_user(id):
+        #     return Users.query.get(int(id))
+
         return dash_app
+
     create_dash_app()
 
     return app
