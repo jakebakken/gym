@@ -1,6 +1,6 @@
 from flask import Blueprint, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
-import os, psycopg2
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Users
 from . import db

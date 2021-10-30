@@ -39,7 +39,8 @@ def init_dashboard(server):
             'background': 'black', 'height': '0.5px', 'width': '95%',
             'margin-top': '0em', 'margin-bottom': '1.5em',
         }),
-        html.A("Home Page", href='/home'),
+        html.A("Return to Exercise Home", href='/exercise'),
+        html.Hr(),
         html.Div([
             html.Div(html.Button("Start Workout", id='start-workout-button',
                                  n_clicks=0,
