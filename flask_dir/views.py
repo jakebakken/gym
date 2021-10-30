@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect
 from flask_login import login_required
+from plotlydash.dashboard import app_flask
 
 
 # blueprint for Flask application
@@ -12,10 +13,10 @@ def home_page():
     return render_template('home.html')
 
 
-@views.route('/exercise_dashboard')
+@views.route('/exercise')
 @login_required
 def exercise_page():
-    return redirect('/exercise_dashboard')
+    return app_flask
 
 
 @views.route('/signup')
