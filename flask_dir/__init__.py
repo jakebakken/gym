@@ -50,5 +50,3 @@ def create_db(app):
     # check if db exists, if not: create it
     if not path.exists(SQLALCHEMY_URL):
         db.create_all(app=app)
-
-
