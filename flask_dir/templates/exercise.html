@@ -1,4 +1,11 @@
 {% extends 'base.html' %} {% block title %}Exercise{% endblock %}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+</head>
 <body>
     {% block content %}
     <h1>Exercise</h1>
@@ -19,9 +26,6 @@
             </tr>
         </thead>
     </table>
-    {% endblock %}
-</body>
-<footer>
     <script type="text/javascript">
         $(document).ready( function () {
             $('#test-datatable').DataTable();
@@ -49,4 +53,5 @@
             $('#add-exercise-button').click();
         } );
     </script>
-</footer>
+    {% endblock %}
+</body>
