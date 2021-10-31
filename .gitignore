@@ -5,4 +5,5 @@ gym
 .env
 test.py
 app.py
+jquery.js
 gym/*
