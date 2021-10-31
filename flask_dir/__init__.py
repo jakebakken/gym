@@ -10,9 +10,8 @@ SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 
 
 def create_app():
-    from .plotlydash.dashboard import init_dashboard
     app = Flask(__name__)
-    dash_app = init_dashboard(app)
+    # dash_app = init_dashboard(app)
 
     # app key
     app.config['SECRET_KEY'] = os.environ['FLASK_SK']
@@ -26,8 +25,8 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    dash_app.register_blueprint(views, url_prefix='/')
-    dash_app.register_blueprint(auth, url_prefix='/')
+    # dash_app.register_blueprint(views, url_prefix='/')
+    # dash_app.register_blueprint(auth, url_prefix='/')
 
     from .models import Users, Workouts
 
@@ -36,13 +35,17 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-    login_manager.init_app(dash_app)
+    # login_manager.init_app(dash_app)
 
     @login_manager.user_loader
     def load_user(id):
         return Users.query.get(int(id))  # reference user by pk
 
-    return app
+    with app.app_context():
+        from .plotlydash.dashboard import init_dashboard
+        app = init_dashboard(app)
+
+        return app
 
 
 def create_db(app):
