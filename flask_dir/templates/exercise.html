@@ -1,12 +1,25 @@
 {% extends 'base.html' %} {% block title %}Exercise{% endblock %}
-<head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+<body>
+    {% block content %}
+    <h1>Exercise</h1>
+    <!--
+    <a class="exercise-dashboard-link" href="/exercise_dashboard">Exercise Tracker</a>
+    -->
+    <button id="add-exercise-button">Add Exercise</button>
+    <table id="test-datatable">
+        <thead>
+            <tr>
+                <th>Exercise</th>
+                <th>Set 1 Reps</th>
+                <th>Set 1 Weight</th>
+                <th>Set 2 Reps</th>
+                <th>Set 2 Weight</th>
+                <th>Set 3 Reps</th>
+                <th>Set 3 Weight</th>
+            </tr>
+        </thead>
+    </table>
+    {% endblock %}
     <script type="text/javascript">
         $(document).ready( function () {
             $('#test-datatable').DataTable();
@@ -34,26 +47,4 @@
             $('#add-exercise-button').click();
         } );
     </script>
-</head>
-<body>
-    {% block content %}
-    <h1>Exercise</h1>
-    <!--
-    <a class="exercise-dashboard-link" href="/exercise_dashboard">Exercise Tracker</a>
-    -->
-    <button id="add-exercise-button">Add Exercise</button>
-    <table id="test-datatable">
-        <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Set 1 Reps</th>
-                <th>Set 1 Weight</th>
-                <th>Set 2 Reps</th>
-                <th>Set 2 Weight</th>
-                <th>Set 3 Reps</th>
-                <th>Set 3 Weight</th>
-            </tr>
-        </thead>
-    </table>
-    {% endblock %}
 </body>
