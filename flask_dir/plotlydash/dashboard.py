@@ -4,15 +4,13 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
 
-# should also try separate func for this app in __init__.py since last time
-# it had that Flask init in this init_dashboard()
 def init_dashboard(server):
     # app initialization
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
     dash_app = dash.Dash(
         __name__,
         server=server,
-        url_base_pathname='/exercise_dashboard/',
+        routes_pathname_prefix='/exercise_dashboard/',
         suppress_callback_exceptions=True,
         external_stylesheets=external_stylesheets,
         meta_tags=[
