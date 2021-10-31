@@ -18,6 +18,10 @@ def exercise_page():
     return render_template('exercise.html')
 
 
+@views.route('/exercise_dashboard/')
+@login_required
+
+
 @views.route('/signup')
 def signup_page():
     return render_template('signup.html')
