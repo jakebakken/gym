@@ -6,4 +6,5 @@ gym
 test.py
 app.py
 static
+config.py
 gym/*

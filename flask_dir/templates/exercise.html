@@ -2,10 +2,10 @@
 <body>
     {% block content %}
     <h1>Exercise</h1>
-    <!--
     <a class="exercise-dashboard-link" href="/exercise_dashboard">Exercise Tracker</a>
-    -->
+    <br/><br/>
     <button id="add-exercise-button">Add Exercise</button>
+    <button id="add-set-button">Add Set</button>
     <div id="datatable-div">
         <table id="test-datatable" class="datatable">
             <thead>
@@ -25,7 +25,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/autofill/2.3.9/js/dataTables.autoFill.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function () {
             $('#test-datatable').DataTable();
@@ -51,6 +50,14 @@
 
             // Automatically add a first row of data
             $('#add-exercise-button').click();
+        } );
+
+        $(document).ready( function() {
+
+            $('#add-set-button').on( 'click', function () {
+                $('#test-datatable thead tr').append('<th/>');
+            } );
+
         } );
     </script>
     {% endblock %}
