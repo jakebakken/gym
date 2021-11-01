@@ -39,6 +39,7 @@ def create_app():
     with app.app_context():
         from .plotlydash.dashboard import init_dashboard
         app = init_dashboard(app)
+        login_manager.init_app(app)
 
         return app
 
