@@ -15,13 +15,13 @@ def home_page():
 @views.route('/exercise/')
 @login_required
 def exercise_page():
-    return render_template('exercise.html')
+    return redirect('/exercise_dashboard')
 
 
-@views.route('/exercise_dashboard/')
-@login_required
-def exercise_dashboard_page():
-    return render_template('/exercise_dashboard/')
+# @views.route('/exercise_dashboard/')
+# @login_required
+# def exercise_dashboard_page():
+#     return render_template('/exercise_dashboard/')
 
 
 @views.route('/signup')
