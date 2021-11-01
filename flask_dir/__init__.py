@@ -11,7 +11,6 @@ SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object('config.Config')
 
     # app key
     app.config['SECRET_KEY'] = os.environ['FLASK_SK']
