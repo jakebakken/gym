@@ -10,8 +10,8 @@ SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 
 
 def create_app():
-    app = Flask(__name__)
-    # dash_app = init_dashboard(app)
+    app = Flask(__name__, instance_relative_config=False)
+    app.config.from_object('config.Config')
 
     # app key
     app.config['SECRET_KEY'] = os.environ['FLASK_SK']
@@ -25,9 +25,6 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    # dash_app.register_blueprint(views, url_prefix='/')
-    # dash_app.register_blueprint(auth, url_prefix='/')
-
     from .models import Users, Workouts
 
     create_db(app)
@@ -35,7 +32,6 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-    # login_manager.init_app(dash_app)
 
     @login_manager.user_loader
     def load_user(id):
