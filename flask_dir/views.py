@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from flask_login import login_required
 
 
@@ -21,7 +21,7 @@ def exercise_page():
 @views.route('/exercise_dashboard/')
 @login_required
 def exercise_dashboard_page():
-    return render_template('exercise_dashboard.html')
+    return redirect('exercise_dashboard.html')
 
 
 @views.route('/signup')
