@@ -2,62 +2,9 @@
 <body>
     {% block content %}
     <h1>Exercise</h1>
-    <a class="exercise-dashboard-link" href="/exercise_dashboard">Exercise Tracker</a>
     <br/><br/>
-    <button id="add-exercise-button">Add Exercise</button>
-    <button id="add-set-button">Add Set</button>
-    <div id="datatable-div">
-        <table id="test-datatable" class="datatable">
-            <thead>
-                <tr>
-                    <th>Exercise</th>
-                    <th>S1 Reps</th>
-                    <th>S1 Weight</th>
-                    <th>S2 Reps</th>
-                    <th>S2 Weight</th>
-                    <th>S3 Reps</th>
-                    <th>S3 Weight</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function () {
-            $('#test-datatable').DataTable();
-        } );
-
-        $(document).ready( function() {
-            var t = $('#test-datatable').DataTable();
-            var counter = 0;
-
-            $('#add-exercise-button').on( 'click', function () {
-                t.row.add( [
-                    counter +'1',
-                    counter +'2',
-                    counter +'3',
-                    counter +'4',
-                    counter +'5',
-                    counter +'6',
-                    counter +'7',
-                ] ).draw( false );
-
-                counter++;
-            } );
-
-            // Automatically add a first row of data
-            $('#add-exercise-button').click();
-        } );
-
-        $(document).ready( function() {
-
-            $('#add-set-button').on( 'click', function () {
-                $('#test-datatable thead tr').append('<th/>');
-            } );
-
-        } );
-    </script>
+    <h4>Below is a link to the app for recording workouts</h4>
+    <br/>
+    <a class="exercise-dashboard-link" href="/exercise_dashboard">Exercise Tracker</a>
     {% endblock %}
 </body>
