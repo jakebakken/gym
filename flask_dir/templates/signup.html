@@ -6,6 +6,7 @@
     }
 </style>
 {% block title %}Sign Up{% endblock %}
+{% block navbar %} {% endblock %}
 {% block content %}
 <form method="POST">
     <h3 align="center" style="margin-top: 50px">Sign Up</h3>
@@ -69,7 +70,7 @@
                 placeholder="Confirm Password"
         />
     </div>
-    <p style="font-size: 12px">
+    <p>
         Password must include at least 8 characters, 1 uppercase & 1 lowercase
         letter, 1 number, and 1 special character (!, @, #, $, etc.)
     </p>
