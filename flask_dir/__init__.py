@@ -34,14 +34,10 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return Users.query.get(int(id))  # reference user by pk
+        # reference user by pk (works like FILTER BY id)
+        return Users.query.get(int(id))
 
-    with app.app_context():
-        from .plotlydash.dashboard import init_dashboard
-        app = init_dashboard(app)
-        login_manager.init_app(app)
-
-        return app
+    return app
 
 
 def create_db(app):

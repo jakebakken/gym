@@ -5,6 +5,7 @@ gym
 .env
 test.py
 app.py
+plotlydash
 static
 config.py
 gym/*
