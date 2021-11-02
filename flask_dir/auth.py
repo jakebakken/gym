@@ -1,5 +1,5 @@
 from flask import Blueprint, request, flash, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Users
@@ -32,7 +32,7 @@ def login():
             flash("Account with this email was not found", category='error')
             return redirect(url_for('views.login_page'))
 
-    return redirect(url_for('views.login_page'))
+    return redirect(url_for('views.login_page', user=current_user))
 
 
 @auth.route('/logout')
@@ -117,4 +117,4 @@ def sign_up():
             else:
                 flash("An account with this email already exists", category='error')
 
-    return redirect(url_for('views.signup_page'))
+    return redirect(url_for('views.signup_page', user=current_user))
