@@ -25,7 +25,7 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user, remember=True)
                 flash(f"Hey {user.first_name}!", category='success')
-                return redirect(url_for('views.home_page', user=current_user))
+                return redirect(url_for('views.home_page'))
             else:
                 flash("Incorrect password, try again", category='error')
         else:
@@ -113,7 +113,7 @@ def sign_up():
                 db.session.commit()
                 login_user(user, remember=True)
                 flash("Account Created", category='success')
-                return redirect(url_for('views.home_page', user=current_user))
+                return redirect(url_for('views.home_page'))
             else:
                 flash("An account with this email already exists", category='error')
 
