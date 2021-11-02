@@ -23,9 +23,9 @@ def exercise_page():
         set_1_reps = request.form.get('set-1-reps')
         set_1_weight = request.form.get('set-1-weight')
 
-        if len(workout_name < 1):
+        if len(workout_name) < 1:
             flash("Workout needs a name", category='error')
-        elif len(workout_name > 50):
+        elif len(workout_name) > 50:
             flash("Workout name is too long", category='error')
         else:
             new_workout = Test(
