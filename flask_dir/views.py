@@ -12,10 +12,10 @@ def home_page():
     return render_template('home.html', user=current_user)
 
 
-@views.route('/exercise/')
+@views.route('/exercise')
 @login_required
 def exercise_page():
-    return render_template('exercise.html')
+    return render_template('exercise.html', user=current_user)
 
 
 @views.route('/signup')
