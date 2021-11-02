@@ -1,33 +1,36 @@
-{% extends 'base.html' %} {% block title %}Exercise{% endblock %}
-<style type="text/css">
-    .btn {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    #finish-workout-button {
-        margin-top: 40px;
-    }
-    #set-rep-div {
-        display: flex;
-        justify-content: space-evenly;
-    }
-    .inline-div {
-        display: inline-block;
-        max-width: 45%;
-        text-align: center;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    input {
-        min-width: 20%;
-        max-width: 100%;
-        text-align: center;
-    }
-    h1 {
-        text-align: center;
-        padding-bottom: 20px;
-    }
-</style>
+{% extends 'base.html' %}
+<head>
+    <style type="text/css">
+        .btn {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #finish-workout-button {
+            margin-top: 40px;
+        }
+        #set-rep-div {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .inline-div {
+            display: inline-block;
+            max-width: 45%;
+            text-align: center;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        input {
+            min-width: 20%;
+            max-width: 100%;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+    </style>
+    {% block title %}Exercise{% endblock %}
+</head>
 <body>
     {% block content %}
     <h1>Exercise</h1>
