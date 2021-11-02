@@ -25,14 +25,14 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user, remember=True)
                 flash(f"Hey {user.first_name}!", category='success')
-                return redirect(url_for('views.home_page'))
+                return redirect(url_for('views.home_page', user=current_user))
             else:
                 flash("Incorrect password, try again", category='error')
         else:
             flash("Account with this email was not found", category='error')
             return redirect(url_for('views.login_page'))
 
-    return redirect(url_for('views.login_page', user=current_user))
+    return redirect(url_for('views.login_page'))
 
 
 @auth.route('/logout')
@@ -113,8 +113,8 @@ def sign_up():
                 db.session.commit()
                 login_user(user, remember=True)
                 flash("Account Created", category='success')
-                return redirect(url_for('views.home_page'))
+                return redirect(url_for('views.home_page', user=current_user))
             else:
                 flash("An account with this email already exists", category='error')
 
-    return redirect(url_for('views.signup_page', user=current_user))
+    return redirect(url_for('views.signup_page'))
