@@ -1,7 +1,75 @@
 {% extends 'base.html' %} {% block title %}Exercise{% endblock %}
+<style>
+    .btn {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .inline-div {
+        display:inline-block;
+    }
+</style>
 <body>
     {% block content %}
     <h1>Exercise</h1>
-    <br/><br/>
+    <form method="POST">
+        <div>
+            <input
+                type="text"
+                class="form-exercise"
+                id="workout-name"
+                name="workout-name"
+                placeholder="Workout Name"
+            >
+        </div>
+        <br/><br/>
+        <div>
+            <div>
+                <input
+                    type="text"
+                    class="form-exercise"
+                    id="exercise-1-name"
+                    name="exercise-1-name"
+                    placeholder="Exercise Name"
+                >
+            </div>
+            <br/>
+            <div>
+                <div class="inline-div">
+                    <div>
+                        <label for="set-1-reps">Set 1 Reps</label>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-exercise"
+                        id="set-1-reps"
+                        name="set-1-reps"
+                        placeholder="Reps"
+                    >
+                </div>
+                 <div class="inline-div">
+                     <div>
+                        <label for="set-1-weight">Set 1 Weight</label>
+                     </div>
+                     <input
+                             type="text"
+                             class="form-exercise"
+                             id="set-1-weight"
+                             name="set-1-weight"
+                             placeholder="Weight"
+                     >
+                </div>
+                <!-- Dropdown for LBS / KG -->
+            </div>
+            <!-- Add Set Button -->
+        </div>
+        <div align="right">
+            <button
+                    id="finish-workout-button"
+                    type="submit"
+                    class="btn btn-primary">
+                Finish Workout
+            </button>
+        </div>
+    </form>
     {% endblock %}
 </body>

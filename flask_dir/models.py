@@ -16,6 +16,16 @@ class Workouts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # foreign key reference must be lowercase
     workout_date = db.Column(db.Date)
+    workout_name = db.Column(db.String(50))
     workout_start_time = db.Column(db.Time)
     workout_end_time = db.Column(db.Time)
     rating = db.Column(db.String(50))
+
+
+class Test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    workout_name = db.Column(db.String(50))
+    exercise_name = db.Column(db.String(50))
+    set_1_reps = db.Column(db.String(25))
+    set_1_weight = db.Column(db.Integer)
