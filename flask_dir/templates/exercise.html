@@ -21,9 +21,10 @@
         .form-exercise {
             text-align: center;
         }
-        #finish-workout-button {
+        .finish-workout {
+            text-align: right;
+            padding-right: 15px;
             margin-top: 40px;
-            margin-top: 20px;
             margin-bottom: 20px;
         }
     {% endblock %}
@@ -74,7 +75,9 @@
                 <!-- Dropdown for LBS / KG -->
             <!-- Add Set Button -->
         </div>
-    <button id="finish-workout-button" class="btn btn-primary" type="submit">Finish Workout</button>
+    <div class="finish-workout">
+        <button id="finish-workout-button" class="btn btn-primary" type="submit">Finish Workout</button>
+    </div>
     </form>
     {% endblock %}
 </body>

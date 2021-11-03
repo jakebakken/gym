@@ -35,11 +35,8 @@
             margin-right: auto;
             margin-left: auto;
         }
-        input {
-            display: inline-block;
-            min-width: 20%;
-            max-width: 45%;
-            text-align: center;
+        .container {
+            width: 90%;
         }
     {% endblock %}
     </style>
@@ -87,8 +84,10 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
