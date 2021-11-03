@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 <head>
     <style type="text/css">
-        .btn {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        #finish-workout-button {
-            margin-top: 40px;
-        }
         #set-rep-div {
             display: flex;
             justify-content: space-evenly;
@@ -16,23 +9,12 @@
             display: inline-block;
             justify-content: space-evenly;
         }
-        .inline-div {
-            display: inline-block;
-            max-width: 45%;
-            text-align: center;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        h1 {
-            text-align: center;
-            padding-bottom: 20px;
-        }
     </style>
     {% block title %}Exercise{% endblock %}
 </head>
 <body>
     {% block content %}
-    <h1>Exercise</h1>
+    <h1 align="center">Exercise</h1>
     <form method="POST">
         <div>
             <input
@@ -56,7 +38,7 @@
             </div>
             <br/>
             <div id="set-rep-div">
-                <div class="inline-div">
+                <div class="exercise-div">
                     <div>
                         <label for="set1-reps">Set 1 Reps</label>
                     </div>
@@ -68,7 +50,7 @@
                         placeholder="Reps"
                     >
                 </div>
-                 <div class="inline-div">
+                 <div class="exercise-div">
                      <div>
                         <label for="set1-weight">Set 1 Weight</label>
                      </div>
