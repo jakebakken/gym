@@ -2,6 +2,9 @@
 <head>
     <style type="text/css">
     {% block style %}
+        .workout-name {
+            text-align: center;
+        }
         .exercise-div {
             text-align: center;
             margin-right: auto;
@@ -9,6 +12,7 @@
         }
         .set-label {
             text-align: center;
+            margin-bottom: 0.25rem;
         }
         .set-div {
             display: flex;
@@ -30,7 +34,7 @@
     {% block content %}
     <h1 align="center">Exercise</h1>
     <form method="POST">
-        <div class="workout-name-div">
+        <div class="workout-name">
             <input
                 type="text"
                 class="form-exercise"
@@ -41,7 +45,7 @@
         </div>
         <br/>
         <div class="exercise-div">
-            <div class="exercise-name-div">
+            <div class="exercise-name">
                 <input
                     type="text"
                     class="form-exercise"
@@ -53,14 +57,14 @@
             <p class="set-label">Set 1</p>
             <div class="set-div">
                 <input
-                        type="text"
+                        type="number"
                         class="form-exercise"
                         id="set1-reps"
                         name="set1-reps"
                         placeholder="Reps"
                 >
                 <input
-                        type="text"
+                        type="number"
                         class="form-exercise"
                         id="set1-weight"
                         name="set1-weight"
