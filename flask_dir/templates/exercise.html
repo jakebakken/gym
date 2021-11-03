@@ -12,6 +12,10 @@
             display: flex;
             justify-content: space-evenly;
         }
+        #alt-div, #alt-div-inputs {
+            display: flex;
+            justify-content: space-evenly;
+        }
         .inline-div {
             display: inline-block;
             max-width: 45%;
@@ -59,31 +63,51 @@
             <div id="set-rep-div">
                 <div class="inline-div">
                     <div>
-                        <label for="set-1-reps">Set 1 Reps</label>
+                        <label for="set1-reps">Set 1 Reps</label>
                     </div>
                     <input
                         type="text"
                         class="form-exercise"
-                        id="set-1-reps"
-                        name="set-1-reps"
+                        id="set1-reps"
+                        name="set1-reps"
                         placeholder="Reps"
                     >
                 </div>
                  <div class="inline-div">
                      <div>
-                        <label for="set-1-weight">Set 1 Weight</label>
+                        <label for="set1-weight">Set 1 Weight</label>
                      </div>
                      <input
                              type="text"
                              class="form-exercise"
-                             id="set-1-weight"
-                             name="set-1-weight"
+                             id="set1-weight"
+                             name="set1-weight"
                              placeholder="Weight"
                      >
                 </div>
                 <!-- Dropdown for LBS / KG -->
             </div>
             <!-- Add Set Button -->
+        </div>
+        <div id="alt-div">
+            <label>Set 2 Reps</label>
+            <label>Set 2 Weight</label>
+        </div>
+        <div id="alt-div-inputs">
+            <input
+                    type="text"
+                    class="form-exercise"
+                    id="set2-reps"
+                    name="set2-reps"
+                    placeholder="Reps"
+            >
+            <input
+                    type="text"
+                    class="form-exercise"
+                    id="set2-weight"
+                    name="set2-weight"
+                    placeholder="Weight"
+            >
         </div>
         <div align="right">
             <button
