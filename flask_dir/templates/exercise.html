@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 <head>
     <style type="text/css">
-    {% block style %}
-    {% endblock %}
         .workout-name {
             text-align: center;
         }
@@ -29,6 +27,8 @@
             margin-top: 40px;
             margin-bottom: 20px;
         }
+    {% block style %}
+    {% endblock %}
     </style>
     {% block title %}Exercise{% endblock %}
 </head>
@@ -47,6 +47,7 @@
         </div>
         <br/>
         <div class="exercise-div">
+            <p>Exercise 1</p>
             <div class="exercise-name">
                 <input
                     type="text"
