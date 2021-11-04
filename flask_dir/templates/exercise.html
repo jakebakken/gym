@@ -1,83 +1,117 @@
 {% extends 'base.html' %}
+<style type="text/css">
+    #exercise-table {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .form-exercise {
+        text-align: center;
+    }
+    .set-label {
+        text-align: center;
+    }
+    .exercise-name-input {
+        display: flex;
+        justify-content: space-evenly;
+    }
+</style>
 <body>
     {% block content %}
     <h1 align="center">Exercise</h1>
     <form method="POST">
-        <div class="workout-name">
-            <input
-                type="text"
-                class="form-exercise"
-                id="workout-name"
-                name="workout-name"
-                placeholder="Workout Name"
-            >
-        </div>
-        <br/>
-        <div class="exercise-div">
-            <p>Exercise 1</p>
-            <div class="exercise-name">
-                <input
-                    type="text"
-                    class="form-exercise"
-                    id="exercise1-name"
-                    name="exercise1-name"
-                    placeholder="Exercise Name"
-                >
-            </div>
-            <p class="set-label">Set 1</p>
-            <div class="set-div">
-                <input
-                        type="number"
-                        class="form-exercise"
-                        id="set1-reps"
-                        name="set1-reps"
-                        placeholder="Reps"
-                >
-                <input
-                        type="number"
-                        class="form-exercise"
-                        id="set1-weight"
-                        name="set1-weight"
-                        placeholder="Weight"
-                >
-            </div>
-            <p class="set-label">Set 2</p>
-            <div class="set-div">
-                <input
-                        type="number"
-                        class="form-exercise"
-                        id="set2-reps"
-                        name="set2-reps"
-                        placeholder="Reps"
-                >
-                <input
-                        type="number"
-                        class="form-exercise"
-                        id="set2-weight"
-                        name="set2-weight"
-                        placeholder="Weight"
-                >
-            </div>
-            <p class="set-label">Set 3</p>
-            <div class="set-div">
-                <input
-                        type="number"
-                        class="form-exercise"
-                        id="set3-reps"
-                        name="set3-reps"
-                        placeholder="Reps"
-                >
-                <input
-                        type="number"
-                        class="form-exercise"
-                        id="set3-weight"
-                        name="set3-weight"
-                        placeholder="Weight"
-                >
-            </div>
-                <!-- Dropdown for LBS / KG -->
-            <!-- Add Set Button -->
-        </div>
+        <table id="exercise-table">
+            <thead>
+                <tr class="workout-name-input">
+                    <th colspan="2">
+                        <input
+                                type="text"
+                                class="form-exercise"
+                                id="workout-name"
+                                name="workout-name"
+                                placeholder="Workout Name"
+                        >
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="exercise-name-input">
+                    <td>
+                        <input
+                                type="text"
+                                class="form-exercise"
+                                id="exercise1-name"
+                                name="exercise1-name"
+                                placeholder="Exercise Name"
+                        >
+                    </td>
+                </tr>
+                <tr class="set-label">
+                    <td>Set 1</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input
+                                type="number"
+                                class="form-exercise"
+                                id="set1-reps"
+                                name="set1-reps"
+                                placeholder="Reps"
+                        >
+                    </td>
+                    <td>
+                        <input
+                                type="number"
+                                class="form-exercise"
+                                id="set1-weight"
+                                name="set1-weight"
+                                placeholder="Weight"
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input
+                                type="number"
+                                class="form-exercise"
+                                id="set2-reps"
+                                name="set2-reps"
+                                placeholder="Reps"
+                        >
+                    </td>
+                    <td>
+                        <input
+                                type="number"
+                                class="form-exercise"
+                                id="set2-weight"
+                                name="set2-weight"
+                                placeholder="Weight"
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input
+                                type="number"
+                                class="form-exercise"
+                                id="set3-reps"
+                                name="set3-reps"
+                                placeholder="Reps"
+                        >
+                    </td>
+                    <td>
+                        <input
+                                type="number"
+                                class="form-exercise"
+                                id="set3-weight"
+                                name="set3-weight"
+                                placeholder="Weight"
+                        >
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Dropdown for LBS / KG -->
+        <!-- Add Set Button -->
     <div class="finish-workout">
         <button id="finish-workout-button" class="btn btn-primary" type="submit">Finish Workout</button>
     </div>
