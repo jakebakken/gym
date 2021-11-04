@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 <body>
     {% block content %}
-<h1 id="page-title" align="center">Exercise</h1>
     <form method="POST">
+        <h1 id="page-title" align="center">Exercise</h1>
         <table id="exercise-table">
             <thead>
-                <tr class="workout-name-input">
+                <tr>
                     <th colspan="2">
                         <input
                                 type="text"
@@ -29,6 +29,7 @@
                         >
                     </td>
                 </tr>
+
                 <tr class="set-label">
                     <td>Set 1</td>
                 </tr>
@@ -52,6 +53,10 @@
                         >
                     </td>
                 </tr>
+
+                <tr class="set-label">
+                    <td>Set 2</td>
+                </tr>
                 <tr class="set">
                     <td>
                         <input
@@ -71,6 +76,10 @@
                                 placeholder="Weight"
                         >
                     </td>
+                </tr>
+
+                <tr class="set-label">
+                    <td>Set 3</td>
                 </tr>
                 <tr class="set">
                     <td>
@@ -96,7 +105,15 @@
         </table>
         <!-- Dropdown for LBS / KG -->
         <!-- Add Set Button -->
-    <div class="finish-workout">
+    <div class="add-set-div">
+        <button id="add-set-button" class="btn btn-primary">Add Set</button>
+    </div>
+
+    <div class="add-exercise-div">
+        <button id="add-exercise-button" class="btn btn-primary">Add Exercise</button>
+    </div>
+
+    <div class="finish-workout-div">
         <button id="finish-workout-button" class="btn btn-primary" type="submit">Finish Workout</button>
     </div>
     </form>

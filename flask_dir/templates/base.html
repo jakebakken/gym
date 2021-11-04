@@ -28,6 +28,9 @@
         .close {
             line-height: 5px;
         }
+        #page-title {
+            display: block;
+        }
         #logout-button {
             width: 50%;
             margin-right: auto;
@@ -43,8 +46,8 @@
             text-align: center;
             max-width: calc(var(--contentWidth) * .85)
         }
-        .workout-name {
-            text-align: center;
+        #workout-name {
+            margin-bottom: 1.25em;
         }
         .form-exercise {
             text-align: center;
@@ -61,10 +64,15 @@
             display: flex;
             justify-content: space-evenly;
         }
-        .finish-workout {
+        .add-set-div, .add-exercise-div{
             text-align: right;
-            padding-right: 15px;
-            margin-top: 40px;
+            padding-right: 0.75em;
+            margin-top: 1em;
+        }
+        .finish-workout-div {
+            text-align: right;
+            padding-right: 0.75em;
+            margin-top: 2.25em;
             margin-bottom: 20px;
         }
     </style>
