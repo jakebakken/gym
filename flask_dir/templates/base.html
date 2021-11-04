@@ -4,12 +4,15 @@
     <style type="text/css">
         body {
             --contentWidth: 90%;
-            background-color: #B3C7C5;
         }
         .navbar-brand {
             padding-left: 0.75em;
             padding-top: .7em;
             padding-bottom: .5em;
+        }
+        .nav-link {
+            margin-right: auto;
+            margin-left: auto;
         }
         .alert {
             display: flex;
@@ -22,24 +25,23 @@
         .btn-close {
             margin-top: -0.25em;
         }
+        .close {
+            line-height: 5px;
+        }
         #logout-button {
             width: 50%;
             margin-right: auto;
             margin-left: auto;
         }
-        .close {
-            line-height: 5px;
-        }
         .container {
+            display: flex;
+            justify-content: space-evenly;
             margin-top: 1.75em;
             max-width: var(--contentWidth);
         }
-        .exercise-div {
-            max-width: calc(var(--contentWidth) * .80);
-        }
-        .nav-link {
-            margin-right: auto;
-            margin-left: auto;
+        #exercise-table {
+            text-align: center;
+            max-width: calc(var(--contentWidth) * .85)
         }
         .workout-name {
             text-align: center;
@@ -47,9 +49,6 @@
         .form-exercise {
             text-align: center;
             max-width: 90%;
-        }
-        .form-exercise {
-            text-align: center;
         }
         .exercise-name {
             display: flex;
