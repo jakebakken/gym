@@ -28,9 +28,6 @@
         .close {
             line-height: 5px;
         }
-        #page-title {
-            display: block;
-        }
         #logout-button {
             width: 50%;
             margin-right: auto;
@@ -39,15 +36,17 @@
         .container {
             display: flex;
             justify-content: space-evenly;
-            margin-top: 1.75em;
+            margin-top: 1em;
             max-width: var(--contentWidth);
+        }
+        form {
+            max-width: calc(var(--contentWidth) * 0.85);
         }
         #exercise-table {
             text-align: center;
-            max-width: calc(var(--contentWidth) * .85)
         }
         #workout-name {
-            margin-bottom: 1.25em;
+            margin-bottom: 0.25rem;
         }
         .form-exercise {
             text-align: center;
@@ -56,24 +55,28 @@
         .exercise-name {
             display: flex;
             justify-content: space-evenly;
+            margin-bottom: 0.25rem;
         }
-        .set-label {
+        .exercise-label, .set-label {
             text-align: center;
         }
         .set {
             display: flex;
             justify-content: space-evenly;
         }
-        .add-set-div, .add-exercise-div{
-            text-align: right;
-            padding-right: 0.75em;
-            margin-top: 1em;
+        .add-div {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
         }
         .finish-workout-div {
             text-align: right;
-            padding-right: 0.75em;
-            margin-top: 2.25em;
-            margin-bottom: 20px;
+            padding-right: 0.75rem;
+            margin-top: 2.25rem;
+            margin-bottom: 1rrem;
         }
     </style>
     <meta charset="UTF-8">
