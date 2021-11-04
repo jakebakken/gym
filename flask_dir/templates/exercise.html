@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% block title %}Exercise{% endblock %}
 <body>
     {% block content %}
     <form method="POST">
@@ -66,6 +66,7 @@
                                 placeholder="Reps"
                         >
                     </td>
+
                     <td>
                         <input
                                 type="number"
@@ -111,5 +112,20 @@
             <button id="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
         </div>
     </form>
+    <script>
+        window.onload = function () {
+            var setNumber = 4;
+            var addSetButton = document.getElementById("add-set-button");
+            var exerciseTable = document.getElementById("exercise-table");
+
+            addSetButton.onclick = function () {
+                exerciseTable.innerHTML += '<tr><td><label>Set' + setNumber + '</label></td></tr>';
+
+                // increment set count
+                setNumber += 1;
+            }
+        }
+        // okay so this actually works! just doesn't keep the added table value in dev, will dive into this tomorrow
+    </script>
     {% endblock %}
 </body>
