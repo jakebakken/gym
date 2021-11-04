@@ -20,13 +20,9 @@
                 </tr>
             </thead>
             <tbody id="exercise-table-body">
-                <tr class="exercise-label">
-                    <td>
-                        Exercise 1
-                    </td>
-                </tr>
-                <tr class="exercise-name">
-                    <td>
+                <tr><th colspan="2">Exercise 1</th></tr>
+                <tr>
+                    <td colspan="2">
                         <input
                                 type="text"
                                 class="form-exercise-title"
@@ -37,10 +33,8 @@
                     </td>
                 </tr>
 
-                <tr class="set-label">
-                    <td>Set 1</td>
-                </tr>
-                <tr class="set">
+                <tr><th colspan="2">Set 1</th></tr>
+                <tr>
                     <td>
                         <input
                                 type="number"
@@ -61,10 +55,8 @@
                     </td>
                 </tr>
 
-                <tr class="set-label">
-                    <td>Set 2</td>
-                </tr>
-                <tr class="set">
+                <tr><th colspan="2">Set 2</th></tr>
+                <tr>
                     <td>
                         <input
                                 type="number"
@@ -85,10 +77,8 @@
                     </td>
                 </tr>
 
-                <tr class="set-label">
-                    <td>Set 3</td>
-                </tr>
-                <tr class="set">
+                <tr><th colspan="2">Set 3</th></tr>
+                <tr>
                     <td>
                         <input
                                 type="number"
@@ -112,14 +102,14 @@
         </table>
         <!-- Dropdown for LBS / KG -->
         <!-- Add Set Button -->
-    <div class="add-div">
-        <button id="add-exercise-button" class="btn btn-primary">Add Exercise</button>
-        <button id="add-set-button" class="btn btn-primary">Add Set</button>
-    </div>
+        <div class="add-div">
+            <button id="add-exercise-button" class="btn btn-primary">Add Exercise</button>
+            <button id="add-set-button" class="btn btn-primary">Add Set</button>
+        </div>
 
-    <div class="finish-workout-div">
-        <button id="finish-workout-button" class="btn btn-primary" type="submit">Finish Workout</button>
-    </div>
+        <div class="finish-workout-div">
+            <button id="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
+        </div>
     </form>
     {% endblock %}
 </body>
