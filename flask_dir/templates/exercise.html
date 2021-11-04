@@ -119,13 +119,20 @@
             var exerciseTable = document.getElementById("exercise-table");
 
             addSetButton.onclick = function () {
-                exerciseTable.innerHTML += '<tr><td><label>Set' + setNumber + '</label></td></tr>';
+                if (setNumber <= 10) {
+                    exerciseTable.innerHTML +=
+                    '<tr><th colspan="2">Set' + setNumber + '</th></tr>' +
+                    '<tr>\
+                    <td><input type="number" class="form-exercise" id="set' + setNumber + '-reps" name="set' + setNumber + '-reps" placeholder="Reps"></td>\
+                    <td><input type="number" class="form-exercise" id="set' + setNumber + '-weight" name="set' + setNumber + '-weight" placeholder="Weight"></td>\
+                    </tr>';
+                }
 
                 // increment set count
                 setNumber += 1;
             }
         }
-        // okay so this actually works! just doesn't keep the added table value in dev, will dive into this tomorrow
+        // okay so this actually works! will dive into this tomorrow
     </script>
     {% endblock %}
 </body>
