@@ -114,14 +114,17 @@
     </form>
     <script>
         window.onload = function () {
+            var exerciseNumber = 2;
             var setNumber = 4;
+            var addExerciseButton = document.getElementById("add-exercise-button");
             var addSetButton = document.getElementById("add-set-button");
             var exerciseTable = document.getElementById("exercise-table");
 
-            addSetButton.onclick = function () {
+            addSetButton.onclick = function addSet() {
+            // add new set every click, max 10 sets
                 if (setNumber <= 10) {
                     exerciseTable.innerHTML +=
-                    '<tr><th colspan="2">Set' + setNumber + '</th></tr>' +
+                    '<tr><th colspan="2">Set ' + setNumber + '</th></tr>' +
                     '<tr>\
                     <td><input type="number" class="form-exercise" id="set' + setNumber + '-reps" name="set' + setNumber + '-reps" placeholder="Reps"></td>\
                     <td><input type="number" class="form-exercise" id="set' + setNumber + '-weight" name="set' + setNumber + '-weight" placeholder="Weight"></td>\
@@ -131,8 +134,37 @@
                 // increment set count
                 setNumber += 1;
             }
+
+            addExerciseButton.onclick = function addExercise() {
+            // add new exercise every click, max 15 exercises
+                if (exerciseNumber <= 15) {
+                    exerciseTable.innerHTML +=
+                    '<tr><th colspan="2">Exercise ' + exerciseNumber + '</th></tr>' +
+                    '<tr>\
+                    <td colspan="2"><input type="text" class="form-exercise-title" id="exercise' + exerciseNumber + '-name" name="exercise' + exerciseNumber + '-name" placeholder="Exercise Name"></td>\
+                    </tr>' +
+                    '<tr><th colspan="2">Set 1</th></tr>' +
+                    '<tr>\
+                    <td><input type="number" class="form-exercise" id="set1-reps" name="set1-reps" placeholder="Reps"></td>\
+                    <td><input type="number" class="form-exercise" id="set1-weight" name="set1-weight" placeholder="Weight"></td>\
+                    </tr>' +
+                    '<tr><th colspan="2">Set 2</th></tr>' +
+                    '<tr>\
+                    <td><input type="number" class="form-exercise" id="set2-reps" name="set2-reps" placeholder="Reps"></td>\
+                    <td><input type="number" class="form-exercise" id="set2-weight" name="set2-weight" placeholder="Weight"></td>\
+                    </tr>' +
+                    '<tr><th colspan="2">Set 3</th></tr>' +
+                    '<tr>\
+                    <td><input type="number" class="form-exercise" id="set3-reps" name="set3-reps" placeholder="Reps"></td>\
+                    <td><input type="number" class="form-exercise" id="set3-weight" name="set3-weight" placeholder="Weight"></td>\
+                    </tr>';
+                }
+                exerciseNumber += 1;
+
+                // reset set count whenever new exercise added
+                setNumber = 4;
+            }
         }
-        // okay so this actually works! will dive into this tomorrow
     </script>
     {% endblock %}
 </body>
