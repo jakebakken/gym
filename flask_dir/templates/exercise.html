@@ -19,8 +19,8 @@
                     </th>
                 </tr>
             </thead>
-            <tbody id="exercise-table-body">
-                <tr><th colspan="2">Exercise 1</th></tr>
+            <tbody>
+                <tr><th colspan="2" class="exercise-header">Exercise 1</th></tr>
                 <tr>
                     <td colspan="2">
                         <input
@@ -39,8 +39,8 @@
                         <input
                                 type="number"
                                 class="form-exercise"
-                                id="set1-reps"
-                                name="set1-reps"
+                                id="exercise1-set1-reps"
+                                name="exercise1-set1-reps"
                                 placeholder="Reps"
                         >
                     </td>
@@ -48,8 +48,8 @@
                         <input
                                 type="number"
                                 class="form-exercise"
-                                id="set1-weight"
-                                name="set1-weight"
+                                id="exercise1-set1-weight"
+                                name="exercise1-set1-weight"
                                 placeholder="Weight"
                         >
                     </td>
@@ -61,8 +61,8 @@
                         <input
                                 type="number"
                                 class="form-exercise"
-                                id="set2-reps"
-                                name="set2-reps"
+                                id="exercise1-set2-reps"
+                                name="exercise1-set2-reps"
                                 placeholder="Reps"
                         >
                     </td>
@@ -71,8 +71,8 @@
                         <input
                                 type="number"
                                 class="form-exercise"
-                                id="set2-weight"
-                                name="set2-weight"
+                                id="exercise1-set2-weight"
+                                name="exercise1-set2-weight"
                                 placeholder="Weight"
                         >
                     </td>
@@ -84,8 +84,8 @@
                         <input
                                 type="number"
                                 class="form-exercise"
-                                id="set3-reps"
-                                name="set3-reps"
+                                id="exercise1-set3-reps"
+                                name="exercise1-set3-reps"
                                 placeholder="Reps"
                         >
                     </td>
@@ -93,8 +93,8 @@
                         <input
                                 type="number"
                                 class="form-exercise"
-                                id="set3-weight"
-                                name="set3-weight"
+                                id="exercise1-set3-weight"
+                                name="exercise1-set3-weight"
                                 placeholder="Weight"
                         >
                     </td>
@@ -102,12 +102,10 @@
             </tbody>
         </table>
         <!-- Dropdown for LBS / KG -->
-        <!-- Add Set Button -->
         <div class="add-div">
             <button id="add-exercise-button" class="btn btn-primary" type="button">Add Exercise</button>
             <button id="add-set-button" class="btn btn-primary" type="button">Add Set</button>
         </div>
-
         <div class="finish-workout-div">
             <button id="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
         </div>
@@ -139,7 +137,7 @@
             // add new exercise every click, max 15 exercises
                 if (exerciseNumber <= 15) {
                     exerciseTable.innerHTML +=
-                    '<tr><th colspan="2">Exercise ' + exerciseNumber + '</th></tr>' +
+                    '<tr><th colspan="2" class="exercise-header">Exercise ' + exerciseNumber + '</th></tr>' +
                     '<tr>\
                     <td colspan="2"><input type="text" class="form-exercise-title" id="exercise' + exerciseNumber + '-name" name="exercise' + exerciseNumber + '-name" placeholder="Exercise Name"></td>\
                     </tr>' +
