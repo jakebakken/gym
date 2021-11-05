@@ -2,7 +2,7 @@
 <body>
     {% block content %}
     <form method="POST">
-        <h1 id="page-title" align="center">Exercise</h1>
+        <h1 class="page-title" align="center">Exercise</h1>
 
         <table id="exercise-table">
             <thead>
@@ -10,7 +10,7 @@
                     <th colspan="2">
                         <input
                                 type="text"
-                                class="form-exercise-title"
+                                class="form-exercise-title-input"
                                 id="workout-name"
                                 name="workout-name"
                                 placeholder="Workout Name"
@@ -25,7 +25,7 @@
                     <td colspan="2">
                         <input
                                 type="text"
-                                class="form-exercise-title"
+                                class="form-exercise-title-input"
                                 id="exercise1-name"
                                 name="exercise1-name"
                                 placeholder="Exercise Name"
@@ -139,7 +139,7 @@
                     exerciseTable.innerHTML +=
                     '<tr><th colspan="2" class="exercise-header">Exercise ' + exerciseNumber + '</th></tr>' +
                     '<tr>\
-                    <td colspan="2"><input type="text" class="form-exercise-title" id="exercise' + exerciseNumber + '-name" name="exercise' + exerciseNumber + '-name" placeholder="Exercise Name"></td>\
+                    <td colspan="2"><input type="text" class="form-exercise-title-input" id="exercise' + exerciseNumber + '-name" name="exercise' + exerciseNumber + '-name" placeholder="Exercise Name"></td>\
                     </tr>' +
                     '<tr><th colspan="2">Set 1</th></tr>' +
                     '<tr>\

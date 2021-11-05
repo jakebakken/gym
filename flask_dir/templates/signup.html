@@ -1,20 +1,11 @@
 {% extends 'base.html' %}
-<style>
-    .form-group {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .btn {
-        text-align: center;
-    }
-</style>
 {% block title %}Sign Up{% endblock %}
 {% block navbar %} {% endblock %}
 {% block content %}
-<form method="POST">
+<form id="signup-form" method="POST">
     <h3 align="center" style="margin-top: 50px">Sign Up</h3>
     <br/>
-    <div class="form-group">
+    <div class="signup-form-group">
         <input
                 type="text"
                 class="form-control"
@@ -24,7 +15,7 @@
         />
     </div>
     <br/>
-    <div class="form-group">
+    <div class="signup-form-group">
         <input
                 type="text"
                 class="form-control"
@@ -34,7 +25,7 @@
         />
     </div>
     <br/>
-    <div class="form-group">
+    <div class="signup-form-group">
         <input
                 type="text"
                 class="form-control"
@@ -44,7 +35,7 @@
         />
     </div>
     <br/>
-    <div class="form-group">
+    <div class="signup-form-group">
         <input
                 type="email"
                 class="form-control"
@@ -54,7 +45,7 @@
         />
     </div>
     <br/><br/>
-    <div class="form-group">
+    <div class="signup-form-group">
         <input
                 type="password"
                 class="form-control"
@@ -64,7 +55,7 @@
         />
     </div>
     <br/>
-    <div class="form-group">
+    <div class="signup-form-group">
         <input
                 type="password"
                 class="form-control"
