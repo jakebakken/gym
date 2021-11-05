@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
     <style type="text/css">
-        body {
-            --contentWidth: 100%;
-        }
         .navbar-brand {
             padding-left: 0.5rem;
             padding-top: .7rem;
@@ -34,32 +31,34 @@
             margin-left: auto;
         }
         .container {
-            display: flex;
-            justify-content: space-evenly;
-            margin-top: 1.25rem;
+            --containerWidth: 100%;
+            margin-top: 1rem;
+        }
+        #page-title {
+            text-align: center;
         }
         #exercise-table {
             text-align: center;
+            max-width: 100%;
+            margin: 0 auto;
         }
         .form-exercise-title {
             text-align: center;
-            max-width: 85%;
+            width: calc(var(--containerWidth) * .85);
         }
         .form-exercise {
             text-align: center;
-            max-width: 60%;
+            width: calc(var(--containerWidth) * .75)
         }
         .add-div {
             display: flex;
-            justify-content: space-around;
-            margin-top: 2rem;
+            justify-content: space-evenly;
+            margin-top: 2.5rem;
             margin-bottom: 2rem;
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
         }
         .finish-workout-div {
-            text-align: right;
-            margin-top: 3rem;
+            text-align: center;
+            margin-top: 4rem;
             margin-bottom: 0.75rem;
         }
     </style>
