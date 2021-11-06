@@ -110,7 +110,7 @@
             <button id="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
         </div>
     </form>
-    <script>
+    <script type="text/javascript">
         window.onload = function () {
             var exerciseNumber = 2;
             var setNumber = 4;
@@ -163,15 +163,6 @@
 
                 // increment set count
                 setNumber += 1;
-            };
-
-            addExerciseButton.onclick = function addExercise() {
-            // add new exercise every click, max 15 exercises
-                if (exerciseNumber <= 15) {};
-                exerciseNumber += 1;
-
-                // reset set count whenever new exercise added
-                setNumber = 4;
             };
         }
     </script>
