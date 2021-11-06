@@ -54,51 +54,6 @@
                         >
                     </td>
                 </tr>
-
-                <tr><th colspan="2">Set 2</th></tr>
-                <tr>
-                    <td>
-                        <input
-                                type="number"
-                                class="form-exercise"
-                                id="exercise1-set2-reps"
-                                name="exercise1-set2-reps"
-                                placeholder="Reps"
-                        >
-                    </td>
-
-                    <td>
-                        <input
-                                type="number"
-                                class="form-exercise"
-                                id="exercise1-set2-weight"
-                                name="exercise1-set2-weight"
-                                placeholder="Weight"
-                        >
-                    </td>
-                </tr>
-
-                <tr><th colspan="2">Set 3</th></tr>
-                <tr>
-                    <td>
-                        <input
-                                type="number"
-                                class="form-exercise"
-                                id="exercise1-set3-reps"
-                                name="exercise1-set3-reps"
-                                placeholder="Reps"
-                        >
-                    </td>
-                    <td>
-                        <input
-                                type="number"
-                                class="form-exercise"
-                                id="exercise1-set3-weight"
-                                name="exercise1-set3-weight"
-                                placeholder="Weight"
-                        >
-                    </td>
-                </tr>
             </tbody>
         </table>
         <!-- Dropdown for LBS / KG -->
@@ -112,14 +67,17 @@
     </form>
     <script type="text/javascript">
         window.onload = function () {
-            var exerciseNumber = 2;
-            var setNumber = 4;
+            var exerciseNumber = 1;
+            var setNumber = 1;
+
             const addExerciseButton = document.getElementById("add-exercise-button");
             const addSetButton = document.getElementById("add-set-button");
             const exerciseTableBody = document.getElementById("exercise-table-body");
 
             addSetButton.onclick = function addSet() {
             // add new set every click, max 10 sets
+                // increment set count
+                setNumber += 1;
 
                 const header_row = document.createElement("tr");
                 const header = document.createElement("th");
@@ -160,13 +118,12 @@
                     exerciseTableBody.append(header_row);
                     exerciseTableBody.append(data_row);
                 };
-
-                // increment set count
-                setNumber += 1;
             };
 
             addExerciseButton.onclick = function addExercise() {
             // add new exercise every click, max 15 exercises
+                // increment exercise count
+                exerciseNumber += 1;
 
                 const header_row = document.createElement("tr");
                 const header = document.createElement("th");
@@ -175,27 +132,13 @@
                 const exercise_input = document.createElement("input");
 
                 const set1_header_row = document.createElement("tr");
-                const set2_header_row = document.createElement("tr");
-                const set3_header_row = document.createElement("tr");
                 const set1_header = document.createElement("th");
-                const set2_header = document.createElement("th");
-                const set3_header = document.createElement("th");
 
                 const set1_data_row = document.createElement("tr");
-                const set2_data_row = document.createElement("tr");
-                const set3_data_row = document.createElement("tr");
                 const set1_reps_data = document.createElement("td");
-                const set2_reps_data = document.createElement("td");
-                const set3_reps_data = document.createElement("td");
                 const set1_weight_data = document.createElement("td");
-                const set2_weight_data = document.createElement("td");
-                const set3_weight_data = document.createElement("td");
                 const set1_reps_input = document.createElement("input");
-                const set2_reps_input = document.createElement("input");
-                const set3_reps_input = document.createElement("input");
                 const set1_weight_input = document.createElement("input");
-                const set2_weight_input = document.createElement("input");
-                const set3_weight_input = document.createElement("input");
 
                 header.innerText = "Exercise " + exerciseNumber;
                 header.setAttribute("colspan", 2);
@@ -209,10 +152,6 @@
 
                 set1_header.innerText = "Set 1";
                 set1_header.setAttribute("colspan", 2);
-                set2_header.innerText = "Set 2";
-                set2_header.setAttribute("colspan", 2);
-                set3_header.innerText = "Set 3";
-                set3_header.setAttribute("colspan", 2);
 
                 set1_reps_input.type = "number";
                 set1_reps_input.id = "exercise" + exerciseNumber + "-set1-reps";
@@ -226,72 +165,30 @@
                 set1_weight_input.setAttribute("class", "form-exercise");
                 set1_weight_input.placeholder = "Weight";
 
-                set2_reps_input.type = "number";
-                set2_reps_input.id = "exercise" + exerciseNumber + "-set2-reps";
-                set2_reps_input.name = "exercise" + exerciseNumber + "-set2-reps";
-                set2_reps_input.setAttribute("class", "form-exercise");
-                set2_reps_input.placeholder = "Reps";
-
-                set2_weight_input.type = "number";
-                set2_weight_input.id = "exercise" + exerciseNumber + "-set2-weight";
-                set2_weight_input.name = "exercise" + exerciseNumber + "-set2-weight";
-                set2_weight_input.setAttribute("class", "form-exercise");
-                set2_weight_input.placeholder = "Weight";
-
-                set3_reps_input.type = "number";
-                set3_reps_input.id = "exercise" + exerciseNumber + "-set3-reps";
-                set3_reps_input.name = "exercise" + exerciseNumber + "-set3-reps";
-                set3_reps_input.setAttribute("class", "form-exercise");
-                set3_reps_input.placeholder = "Reps";
-
-                set3_weight_input.type = "number";
-                set3_weight_input.id = "exercise" + exerciseNumber + "-set3-weight";
-                set3_weight_input.name = "exercise" + exerciseNumber + "-set3-weight";
-                set3_weight_input.setAttribute("class", "form-exercise");
-                set3_weight_input.placeholder = "Weight";
-
-
                 if (exerciseNumber <= 15) {
                     // add headers
                     header_row.append(header);
                     set1_header_row.append(set1_header);
-                    set2_header_row.append(set2_header);
-                    set3_header_row.append(set3_header);
 
                     // add static 3 sets to respective data tags
                     exercise_input_data.append(exercise_input);
                     set1_reps_data.append(set1_reps_input);
                     set1_weight_data.append(set1_weight_input);
-                    set2_reps_data.append(set2_reps_input);
-                    set2_weight_data.append(set2_weight_input);
-                    set3_reps_data.append(set3_reps_input);
-                    set3_weight_data.append(set3_weight_input);
 
                     // add data tags to each row
                     exercise_input_row.append(exercise_input_data);
                     set1_data_row.append(set1_reps_data);
                     set1_data_row.append(set1_weight_data);
-                    set2_data_row.append(set2_reps_data);
-                    set2_data_row.append(set2_weight_data);
-                    set3_data_row.append(set3_reps_data);
-                    set3_data_row.append(set3_weight_data);
 
                     // add header row & data rows to exercise table
                     exerciseTableBody.append(header_row);
                     exerciseTableBody.append(exercise_input_row);
                     exerciseTableBody.append(set1_header_row);
                     exerciseTableBody.append(set1_data_row);
-                    exerciseTableBody.append(set2_header_row);
-                    exerciseTableBody.append(set2_data_row);
-                    exerciseTableBody.append(set3_header_row);
-                    exerciseTableBody.append(set3_data_row);
                 };
 
-                // increment exercise count
-                exerciseNumber += 1;
-
                 // reset set count whenever new exercise added
-                setNumber = 4;
+                setNumber = 1;
             };
         }
     </script>
