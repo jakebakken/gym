@@ -2,7 +2,7 @@
 <body>
     {% block content %}
     <form method="POST">
-        <h1 class="page-title" align="center">Exercise</h1>
+        <h1 id="page-title" align="center">Exercise</h1>
 
         <table id="exercise-table">
             <thead>
@@ -19,7 +19,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="exercise-table-body">
                 <tr><th colspan="2" class="exercise-header">Exercise 1</th></tr>
                 <tr>
                     <td colspan="2">
@@ -103,8 +103,8 @@
         </table>
         <!-- Dropdown for LBS / KG -->
         <div class="add-div">
-            <button id="add-exercise-button" class="btn btn-primary" type="button">Add Exercise</button>
-            <button id="add-set-button" class="btn btn-primary" type="button">Add Set</button>
+            <button id="add-exercise-button" class="btn btn-primary" type="button" onclick="addExercise">Add Exercise</button>
+            <button id="add-set-button" class="btn btn-primary" type="button" onclick="addSet">Add Set</button>
         </div>
         <div class="finish-workout-div">
             <button id="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
