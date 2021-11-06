@@ -112,57 +112,67 @@
     </form>
     <script>
         window.onload = function () {
-            var exerciseNumber = 1;
+            var exerciseNumber = 2;
             var setNumber = 4;
-            var addExerciseButton = document.getElementById("add-exercise-button");
-            var addSetButton = document.getElementById("add-set-button");
-            var exerciseTable = document.getElementById("exercise-table");
+            const addExerciseButton = document.getElementById("add-exercise-button");
+            const addSetButton = document.getElementById("add-set-button");
+            let exerciseTableBody = document.getElementById("exercise-table-body");
 
             addSetButton.onclick = function addSet() {
             // add new set every click, max 10 sets
+
+                const header_row = document.createElement("tr");
+                const data_row = document.createElement("tr");
+                const header = document.createElement("th");
+                const reps_data = document.createElement("td");
+                const weight_data = document.createElement("td");
+                const reps_input = document.createElement("input");
+                const weight_input = document.createElement("input");
+
+                header.innerText = "Set " + setNumber;
+                header.setAttribute("colspan", 2);
+
+                reps_input.type = "number";
+                reps_input.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+                reps_input.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+                reps_input.setAttribute("class", "form-exercise");
+                reps_input.placeholder = "Reps";
+
+                weight_input.type = "number";
+                weight_input.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+                weight_input.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+                weight_input.setAttribute("class", "form-exercise");
+                weight_input.placeholder = "Weight";
+
                 if (setNumber <= 10) {
-                    exerciseTable.innerHTML +=
-                    '<tr><th colspan="2">Set ' + setNumber + '</th></tr>' +
-                    '<tr>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set' + setNumber + '-reps" name="exercise' + exerciseNumber + '-set' + setNumber + '-reps" placeholder="Reps"></td>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set' + setNumber + '-weight" name="exercise' + exerciseNumber + '-set' + setNumber + '-weight" placeholder="Weight"></td>\
-                    </tr>';
-                }
+                    // add set header
+                    header_row.append(header);
+
+                    // add input areas to respective table data tags
+                    reps_data.append(reps_input);
+                    weight_data.append(weight_input);
+
+                    // add data tags to single table row
+                    data_row.append(reps_data);
+                    data_row.append(weight_data);
+
+                    // add header row & data row to exercise table
+                    exerciseTableBody.append(header_row);
+                    exerciseTableBody.append(data_row);
+                };
 
                 // increment set count
                 setNumber += 1;
-            }
+            };
 
             addExerciseButton.onclick = function addExercise() {
             // add new exercise every click, max 15 exercises
-                if (exerciseNumber <= 15) {
-                    exerciseNumber += 1;
-
-                    exerciseTable.innerHTML +=
-                    '<tr><th colspan="2" class="exercise-header">Exercise ' + exerciseNumber + '</th></tr>' +
-                    '<tr>\
-                    <td colspan="2"><input type="text" class="form-exercise-title-input" id="exercise' + exerciseNumber + '-name" name="exercise' + exerciseNumber + '-name" placeholder="Exercise Name"></td>\
-                    </tr>' +
-                    '<tr><th colspan="2">Set 1</th></tr>' +
-                    '<tr>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set1-reps" name="exercise' + exerciseNumber + '-set1-reps" placeholder="Reps"></td>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set1-weight" name="exercise' + exerciseNumber + '-set1-weight" placeholder="Weight"></td>\
-                    </tr>' +
-                    '<tr><th colspan="2">Set 2</th></tr>' +
-                    '<tr>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set2-reps" name="exercise' + exerciseNumber + '-set2-reps" placeholder="Reps"></td>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set2-weight" name="exercise' + exerciseNumber + '-set2-weight" placeholder="Weight"></td>\
-                    </tr>' +
-                    '<tr><th colspan="2">Set 3</th></tr>' +
-                    '<tr>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set3-reps" name="exercise' + exerciseNumber + '-set3-reps" placeholder="Reps"></td>\
-                    <td><input type="number" class="form-exercise" id="exercise' + exerciseNumber + '-set3-weight" name="exercise' + exerciseNumber + '-set3-weight" placeholder="Weight"></td>\
-                    </tr>';
-                }
+                if (exerciseNumber <= 15) {};
+                exerciseNumber += 1;
 
                 // reset set count whenever new exercise added
                 setNumber = 4;
-            }
+            };
         }
     </script>
     {% endblock %}
