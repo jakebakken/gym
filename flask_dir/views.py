@@ -19,36 +19,21 @@ def home_page():
 @login_required
 def exercise_page():
     if request.method == 'POST':
-        if request.form.action == 'finish-workout-button':
-            workout_date = dt.datetime.now().date()
-            workout_name = request.form.get('workout-name')
-            workout_start_time = dt.datetime.now()
-            workout_end_time = dt.datetime.now()
-            rating = request.form.get('workout-rating')
+        workout_date = dt.datetime.now().date()
+        workout_name = request.form.get('workout-name')
+        workout_start_time = dt.datetime.now()
+        workout_end_time = dt.datetime.now()
+        rating = request.form.get('workout-rating')
 
-            new_workout = Workouts(
-                user_id=current_user.id, workout_date=workout_date,
-                workout_name=workout_name, workout_start_time=workout_start_time,
-                workout_end_time=workout_end_time, rating=rating,
-            )
-            db.session.add(new_workout)
-            db.session.commit()
+        new_workout = Workouts(
+            user_id=current_user.id, workout_date=workout_date,
+            workout_name=workout_name, workout_start_time=workout_start_time,
+            workout_end_time=workout_end_time, rating=rating,
+        )
+        db.session.add(new_workout)
+        db.session.commit()
 
-        pass
-        # workout_name = request.form.get('workout-name')
-        # exercise_name = request.form.get('exercise-1-name')
-        # set_1_reps = request.form.get('set-1-reps')
-        # set_1_weight = request.form.get('set-1-weight')
-
-        # if len(workout_name) < 1:
-        #     flash("Workout needs a name", category='error')
-        # elif len(workout_name) > 50:
-        #     flash("Workout name is too long", category='error')
-        # else:
-            # todo workout saved on finishWorkout.click
-        #     db.session.add(#new_workout)
-        #     db.session.commit()
-        #     flash("Workout Saved", category='success')
+        flash("Workout Saved", category='success')
 
     return render_template('exercise.html', user=current_user)
 
