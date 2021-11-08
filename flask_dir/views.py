@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, flash
 from flask_login import login_required, current_user
-from .models import Test
+from .models import Workouts, Exercises, Sets
 from . import db
+import datetime as dt
 
 
 # blueprint for Flask application
@@ -18,26 +19,43 @@ def home_page():
 @login_required
 def exercise_page():
     if request.method == 'POST':
-        workout_name = request.form.get('workout-name')
-        exercise_name = request.form.get('exercise-1-name')
-        set_1_reps = request.form.get('set-1-reps')
-        set_1_weight = request.form.get('set-1-weight')
+        if request.form.get('start-workout-button'):
+            workout_date = dt.datetime.now().date()
+            workout_start_time = dt.datetime.now()
 
-        if len(workout_name) < 1:
-            flash("Workout needs a name", category='error')
-        elif len(workout_name) > 50:
-            flash("Workout name is too long", category='error')
-        else:
-            new_workout = Test(
-                user_id=current_user.id,
-                workout_name=workout_name,
-                exercise_name=exercise_name,
-                set_1_reps=set_1_reps,
-                set_1_weight=set_1_weight,
+            new_workout = Workouts(
+                user_id=current_user.id, workout_date=workout_date,
+                workout_start_time=workout_start_time,
+            )
+            db.session.add(new_workout)
+
+        elif request.form.get('finish-workout-button'):
+            workout_name = request.form.get('workout-name')
+            workout_end_time = dt.datetime.now()
+            rating = request.form.get('workout-rating')
+
+            new_workout = Workouts(
+                user_id=current_user.id, workout_name=workout_name,
+                workout_end_time=workout_end_time, rating=rating,
             )
             db.session.add(new_workout)
             db.session.commit()
-            flash("Workout Saved", category='success')
+
+        pass
+        # workout_name = request.form.get('workout-name')
+        # exercise_name = request.form.get('exercise-1-name')
+        # set_1_reps = request.form.get('set-1-reps')
+        # set_1_weight = request.form.get('set-1-weight')
+
+        # if len(workout_name) < 1:
+        #     flash("Workout needs a name", category='error')
+        # elif len(workout_name) > 50:
+        #     flash("Workout name is too long", category='error')
+        # else:
+            # todo workout saved on finishWorkout.click
+        #     db.session.add(#new_workout)
+        #     db.session.commit()
+        #     flash("Workout Saved", category='success')
 
     return render_template('exercise.html', user=current_user)
 

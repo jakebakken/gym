@@ -19,13 +19,25 @@ class Workouts(db.Model):
     workout_name = db.Column(db.String(50))
     workout_start_time = db.Column(db.Time)
     workout_end_time = db.Column(db.Time)
-    rating = db.Column(db.String(50))
+    rating = db.Column(db.Integer)
+    exercises = db.relationship('Exercises', backref='workouts')
 
 
-class Test(db.Model):
+class Exercises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    workout_name = db.Column(db.String(50))
+    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
     exercise_name = db.Column(db.String(50))
-    set_1_reps = db.Column(db.String(25))
-    set_1_weight = db.Column(db.Integer)
+    exercise_start_time = db.Column(db.Time)
+    exercise_end_time = db.Column(db.Time)
+    sets = db.relationship('Sets', backref='exercises')
+
+
+class Sets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'))
+    set_start_time = db.Column(db.Time)
+    set_end_time = db.Column(db.Time)
+    reps = db.Column(db.Integer)
+    weight = db.Column(db.Integer)
