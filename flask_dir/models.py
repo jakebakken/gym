@@ -12,7 +12,7 @@ class Users(db.Model, UserMixin):
     workouts = db.relationship('Workouts')  # to access all Workouts a User has created
 
 
-class Workouts(db.Model):
+class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # foreign key reference must be lowercase
     workout_date = db.Column(db.Date)
@@ -20,23 +20,23 @@ class Workouts(db.Model):
     workout_start_time = db.Column(db.Time)
     workout_end_time = db.Column(db.Time)
     rating = db.Column(db.Integer)
-    exercises = db.relationship('Exercises', backref='workouts')
+    exercises = db.relationship('Exercise', backref='workout')
 
 
-class Exercises(db.Model):
+class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
+    workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'))
     exercise_name = db.Column(db.String(50))
     exercise_start_time = db.Column(db.Time)
     exercise_end_time = db.Column(db.Time)
-    sets = db.relationship('Sets', backref='exercises')
+    sets = db.relationship('Set', backref='exercise')
 
 
-class Sets(db.Model):
+class Set(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'))
+    exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
     set_start_time = db.Column(db.Time)
     set_end_time = db.Column(db.Time)
     reps = db.Column(db.Integer)
