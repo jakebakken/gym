@@ -19,8 +19,7 @@ def home_page():
 @login_required
 def exercise_page():
     if request.method == 'POST':
-
-        if request.form.get('finish-workout-button'):
+        if request.form.action == 'finish-workout-button':
             workout_date = dt.datetime.now().date()
             workout_name = request.form.get('workout-name')
             workout_start_time = dt.datetime.now()
