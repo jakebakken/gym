@@ -9,7 +9,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(50))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(255))
-    workouts = db.relationship('Workouts')  # to access all Workouts a User has created
+    workout = db.relationship('Workout')  # to access all Workouts a User has created
 
 
 class Workout(db.Model):
@@ -20,7 +20,7 @@ class Workout(db.Model):
     workout_start_time = db.Column(db.Time)
     workout_end_time = db.Column(db.Time)
     rating = db.Column(db.Integer)
-    exercises = db.relationship('Exercise', backref='workout')
+    exercise = db.relationship('Exercise', backref='workout')
 
 
 class Exercise(db.Model):
@@ -30,7 +30,7 @@ class Exercise(db.Model):
     exercise_name = db.Column(db.String(50))
     exercise_start_time = db.Column(db.Time)
     exercise_end_time = db.Column(db.Time)
-    sets = db.relationship('Set', backref='exercise')
+    set = db.relationship('Set', backref='exercise')
 
 
 class Set(db.Model):
