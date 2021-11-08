@@ -28,6 +28,7 @@ def exercise_page():
                 workout_start_time=workout_start_time,
             )
             db.session.add(new_workout)
+            db.session.commit()
 
         elif request.form.get('finish-workout-button'):
             workout_name = request.form.get('workout-name')
