@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash
 from flask_login import login_required, current_user
-from .models import Workouts, Exercises, Sets
+from .models import Workout, Exercise, Set
 from . import db
 import datetime as dt
 
@@ -25,7 +25,7 @@ def exercise_page():
         workout_end_time = dt.datetime.now()
         rating = request.form.get('workout-rating')
 
-        new_workout = Workouts(
+        new_workout = Workout(
             user_id=current_user.id, workout_date=workout_date,
             workout_name=workout_name, workout_start_time=workout_start_time,
             workout_end_time=workout_end_time, rating=rating,
