@@ -42,7 +42,7 @@ def exercise_page():
 
             # get the latest created workout from current user
             #  (aka the incomplete entry of this current workout)
-            current_workout = Workout.query.filter_by(user_id=current_user.id).order_by(Workout.workout_start_time.desc()).first()
+            current_workout = Workout.query.filter_by(user_id=current_user.id).order_by(Workout.id.desc()).first()
             # fill in missing values
             current_workout.workout_name = workout_name
             current_workout.workout_end_time = workout_end_time
