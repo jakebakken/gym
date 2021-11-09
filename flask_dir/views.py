@@ -37,12 +37,24 @@ def exercise_page():
             workout_end_time = dt.datetime.now()
             rating = request.form.get('workout-rating')
 
-            end_of_workout = Workout(
-                user_id=current_user.id, workout_name=workout_name,
-                workout_end_time=workout_end_time, rating=rating,
-            )
-            db.session.add(end_of_workout)
+            # todo add these values to the latest Workout instance created by
+            #  current_user on start-workout-button click
+
+            # get the latest created workout from current user
+            #  (aka the incomplete entry of this current workout)
+            current_workout = Workout.query.filter_by(user_id=current_user.id).order_by(Workout.workout_start_time.desc()).first()
+            # fill in missing values
+            current_workout.workout_name = workout_name
+            current_workout.workout_end_time = workout_end_time
+            current_workout.rating = rating
             db.session.commit()
+
+            # end_of_workout = Workout(
+            #     user_id=current_user.id, workout_name=workout_name,
+            #     workout_end_time=workout_end_time, rating=rating,
+            # )
+            # db.session.add(end_of_workout)
+            # db.session.commit()
 
             flash("Workout Finished", category='success')
 
