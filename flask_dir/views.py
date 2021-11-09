@@ -18,12 +18,6 @@ def home_page():
 @views.route('/exercise/', methods=['GET', 'POST'])
 @login_required
 def exercise_page():
-    return render_template('exercise.html', user=current_user)
-
-
-@views.route('/start-workout/', methods=['POST'])
-@login_required
-def submit_start_workout_data():
     if request.method == 'POST':
         if 'start-workout-button' in request.form:
             workout_date = dt.datetime.now().date()
@@ -42,8 +36,7 @@ def submit_start_workout_data():
 
             return flash("Workout Saved", category='success')
 
-        else:
-            return render_template('exercise.html', user=current_user)
+    return render_template('exercise.html', user=current_user)
 
 
 @views.route('/signup')

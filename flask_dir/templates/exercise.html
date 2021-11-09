@@ -1,16 +1,15 @@
 {% extends 'base.html' %}{% block title %}Exercise{% endblock %}
 <body>
     {% block content %}
-    <form action="/start-workout/" method="POST">
-         <button
-                id="start-workout-button"
-                name="start-workout-button"
-                value="start-workout-button"
-                class="btn btn-success"
-                type="submit"
-        >Start Workout</button>
-    </form>
     <form method="POST">
+        <button
+            id="start-workout-button"
+            name="start-workout-button"
+            value="start-workout-button"
+            class="btn btn-success"
+            type="submit"
+        >Start Workout</button>
+
         <h1 id="page-title" align="center">Exercise</h1>
 
         <table id="exercise-table">
