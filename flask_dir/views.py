@@ -22,6 +22,7 @@ def exercise_page():
 
 
 @views.route('/start-workout', methods=['POST'])
+@login_required
 def submit_start_workout_data():
     if request.method == 'POST':
         workout_date = dt.datetime.now().date()
