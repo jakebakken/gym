@@ -32,17 +32,19 @@ def exercise_page():
 
             flash("Workout Started", category='success')
 
-        elif 'end-workout-button' in request.form:
+        elif 'finish-workout-button' in request.form:
             workout_name = request.form.get('workout-name')
             workout_end_time = dt.datetime.now()
             rating = request.form.get('workout-rating')
 
             end_of_workout = Workout(
-                workout_name=workout_name, workout_end_time=workout_end_time,
-                rating=rating,
+                user_id=current_user.id, workout_name=workout_name,
+                workout_end_time=workout_end_time, rating=rating,
             )
             db.session.add(end_of_workout)
             db.session.commit()
+
+            flash("Workout Finished", category='success')
 
     return render_template('exercise.html', user=current_user)
 
