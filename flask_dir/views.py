@@ -41,6 +41,8 @@ def submit_start_workout_data():
 
         return flash("Workout Saved", category='success')
 
+    return render_template('exercise.html', user=current_user)
+
 
 @views.route('/signup')
 def signup_page():
