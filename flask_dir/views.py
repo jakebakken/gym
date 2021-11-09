@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Workout, Exercise, Set
 from . import db
@@ -41,7 +41,7 @@ def submit_start_workout_data():
 
         return flash("Workout Saved", category='success')
 
-    return render_template('exercise.html', user=current_user)
+    return redirect(url_for('exercise.html', user=current_user))
 
 
 @views.route('/signup')
