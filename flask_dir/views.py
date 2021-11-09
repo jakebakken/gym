@@ -34,7 +34,7 @@ def exercise_page():
             db.session.add(new_workout)
             db.session.commit()
 
-            return flash("Workout Saved", category='success')
+            flash("Workout Saved", category='success')
 
     return render_template('exercise.html', user=current_user)
 
