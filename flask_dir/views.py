@@ -21,7 +21,7 @@ def exercise_page():
     return render_template('exercise.html', user=current_user)
 
 
-@views.route('/start-workout', methods=['POST'])
+@views.route('/start-workout/', methods=['POST'])
 @login_required
 def submit_start_workout_data():
     if request.method == 'POST':
