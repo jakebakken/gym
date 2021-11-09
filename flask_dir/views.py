@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Workout, Exercise, Set
 from . import db
@@ -21,10 +21,10 @@ def exercise_page():
     return render_template('exercise.html', user=current_user)
 
 
-@views.route('/start-workout/', methods=['POST'])
+@views.route('/start_workout', methods=['POST'])
 @login_required
 def submit_start_workout_data():
-    if request.method == 'POST':
+    if request.form['start-workout-button']:
         workout_date = dt.datetime.now().date()
         workout_name = request.form.get('workout-name')
         workout_start_time = dt.datetime.now()
@@ -41,7 +41,7 @@ def submit_start_workout_data():
 
         return flash("Workout Saved", category='success')
 
-    return render_template('exercise.html', user=current_user)
+    return redirect(url_for('exercise.html', user=current_user))
 
 
 @views.route('/signup')
