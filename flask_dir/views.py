@@ -18,25 +18,27 @@ def home_page():
 @views.route('/exercise/', methods=['GET', 'POST'])
 @login_required
 def exercise_page():
-    if request.method == 'POST':
-        if 'start-workout-button' in request.form:
-            workout_date = dt.datetime.now().date()
-            workout_name = request.form.get('workout-name')
-            workout_start_time = dt.datetime.now()
-            workout_end_time = dt.datetime.now()
-            rating = request.form.get('workout-rating')
-
-            new_workout = Workout(
-                user_id=current_user.id, workout_date=workout_date,
-                workout_name=workout_name, workout_start_time=workout_start_time,
-                workout_end_time=workout_end_time, rating=rating,
-            )
-            db.session.add(new_workout)
-            db.session.commit()
-
-            flash("Workout Saved", category='success')
-
     return render_template('exercise.html', user=current_user)
+
+
+@views.route('/start-workout', methods=['POST'])
+def submit_start_workout_data():
+    if request.method == 'POST':
+        workout_date = dt.datetime.now().date()
+        workout_name = request.form.get('workout-name')
+        workout_start_time = dt.datetime.now()
+        workout_end_time = dt.datetime.now()
+        rating = request.form.get('workout-rating')
+
+        new_workout = Workout(
+            user_id=current_user.id, workout_date=workout_date,
+            workout_name=workout_name, workout_start_time=workout_start_time,
+            workout_end_time=workout_end_time, rating=rating,
+        )
+        db.session.add(new_workout)
+        db.session.commit()
+
+        return flash("Workout Saved", category='success')
 
 
 @views.route('/signup')

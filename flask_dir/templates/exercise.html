@@ -1,14 +1,16 @@
 {% extends 'base.html' %}{% block title %}Exercise{% endblock %}
 <body>
     {% block content %}
-    <form method="POST">
-        <button
+    <form action="{{ url_for('start-workout') }}" method="POST">
+         <button
                 id="start-workout-button"
-                name="exercise-button"
+                name="start-workout-button"
                 value="start-workout-button"
                 class="btn btn-success"
                 type="submit"
         >Start Workout</button>
+    </form>
+    <form method="POST">
         <h1 id="page-title" align="center">Exercise</h1>
 
         <table id="exercise-table">
@@ -65,15 +67,15 @@
         </table>
         <!-- Dropdown for LBS / KG -->
         <div class="add-div">
-            <button id="add-exercise-button" name="exercise-button" value="add-exercise-button" class="btn btn-primary" type="button" onclick="addExercise">Add Exercise</button>
-            <button id="add-set-button" name="exercise-button" value="add-set-button" class="btn btn-primary" type="button" onclick="addSet">Add Set</button>
+            <button id="add-exercise-button" name="action" value="add-exercise-button" class="btn btn-primary" type="button" onclick="addExercise">Add Exercise</button>
+            <button id="add-set-button" name="action" value="add-set-button" class="btn btn-primary" type="button" onclick="addSet">Add Set</button>
         </div>
         <div class="slider-container">
             <p>Workout Rating: <span id="workout-rating-value"></span></p>
             <input type="range" min="1" max="10" value="5" class="slider" id="workout-rating" name="workout-rating">
         </div>
         <div class="finish-workout-div">
-            <button id="finish-workout-button" name="exercise-button" value="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
+            <button id="finish-workout-button" name="action" value="finish-workout-button" class="btn btn-danger" type="submit">Finish Workout</button>
         </div>
     </form>
     <script type="text/javascript">
