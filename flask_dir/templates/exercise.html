@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% block title %}Exercise{% endblock %}
 <body>
     {% block content %}
-    <form method="POST">
+    <form method="post" id="exercise-form">
         <button
             id="start-workout-button"
             name="start-workout-button"
@@ -97,7 +97,9 @@
             >Finish Workout</button>
         </div>
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
+        // dynamic exercise table
         window.onload = function () {
             var exerciseNumber = 1;
             var setNumber = 1;
@@ -223,6 +225,8 @@
                 setNumber = 1;
             };
         };
+
+        // populate the slider value
         var slider = document.getElementById("workout-rating");
         var output = document.getElementById("workout-rating-value");
         output.innerHTML = slider.value;
@@ -230,6 +234,21 @@
         slider.oninput = function () {
             output.innerHTML = this.value;
         };
+
+        // prevent page reload on finish-workout-button click
+        $(document).on('submit', #exercise-form, function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/exercise/',
+                data: {
+                    finish-workout-button: $("#finish-workout-button").val()
+                },
+                success: function() {
+                    alert('saved');
+                },
+            });
+        });
     </script>
     {% endblock %}
 </body>
