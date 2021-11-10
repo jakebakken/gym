@@ -97,7 +97,6 @@
             >Finish Workout</button>
         </div>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         // dynamic exercise table
         window.onload = function () {
@@ -235,20 +234,23 @@
             output.innerHTML = this.value;
         };
 
-        // prevent page reload on finish-workout-button click
-        // $(document).on('submit', '#exercise-form', function(e) {
-        //     e.preventDefault();
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '/exercise/',
-        //         data: {
-        //             finish-workout-button: $("#finish-workout-button").val()
-        //         },
-        //         success: function() {
-        //             alert('saved');
-        //         },
-        //     });
-        // });
+        // AJAX func to submit on finish-workout-button
+        $("#exercise-form").submit(function(e) {
+            e.preventDefault();  // avoid actual form submission
+
+            var form = $(this);  // this refers to form
+            var url = '/exercise/';
+
+            $.ajax({
+               type: "POST",
+               url: url,
+               data: form.serialize(),
+               success: function(data)
+               {
+                    alert(data);
+               }
+            });
+        };
     </script>
     {% endblock %}
 </body>
