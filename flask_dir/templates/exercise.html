@@ -236,7 +236,7 @@
         };
 
         // prevent page reload on finish-workout-button click
-        $(document).on('submit', #exercise-form, function(e) {
+        $(document).on('submit', '#exercise-form', function(e) {
             e.preventDefault();
             $.ajax({
                 type: 'POST',
