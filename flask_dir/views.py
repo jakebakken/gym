@@ -21,7 +21,7 @@ def exercise_page():
     return render_template('exercise.html', user=current_user)
 
 
-@views.route('/exercise-submit/', method=['POST'])
+@views.route('/exercise-submit/', methods=['POST'])
 @login_required
 def update_db():
     if request.method == 'POST':
