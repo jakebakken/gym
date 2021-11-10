@@ -236,19 +236,19 @@
         };
 
         // prevent page reload on finish-workout-button click
-        $(document).on('submit', '#exercise-form', function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '/exercise/',
-                data: {
-                    finish-workout-button: $("#finish-workout-button").val()
-                },
-                success: function() {
-                    alert('saved');
-                },
-            });
-        });
+        // $(document).on('submit', '#exercise-form', function(e) {
+        //     e.preventDefault();
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/exercise/',
+        //         data: {
+        //             finish-workout-button: $("#finish-workout-button").val()
+        //         },
+        //         success: function() {
+        //             alert('saved');
+        //         },
+        //     });
+        // });
     </script>
     {% endblock %}
 </body>
