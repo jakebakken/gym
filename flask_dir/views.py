@@ -18,27 +18,21 @@ def home_page():
 @views.route('/exercise/', methods=['GET', 'POST'])
 @login_required
 def exercise_page():
-    if 'start-workout-button' in request.form:
-        workout_date = dt.datetime.now().date()
-        workout_start_time = dt.datetime.now()
-
-        start_of_workout = Workout(
-            user_id=current_user.id, workout_date=workout_date,
-            workout_start_time=workout_start_time,
-        )
-        db.session.add(start_of_workout)
-        db.session.commit()
-
-        flash("Workout Started", category='success')
-        
-    return render_template('exercise.html', user=current_user)
-
-
-@views.route('/exercise-submit/', methods=['POST'])
-@login_required
-def update_db():
     if request.method == 'POST':
-        if 'finish-workout-button' in request.form:
+        if 'start-workout-button' in request.form:
+            workout_date = dt.datetime.now().date()
+            workout_start_time = dt.datetime.now()
+
+            start_of_workout = Workout(
+                user_id=current_user.id, workout_date=workout_date,
+                workout_start_time=workout_start_time,
+            )
+            db.session.add(start_of_workout)
+            db.session.commit()
+
+            flash("Workout Started", category='success')
+
+        elif 'finish-workout-button' in request.form:
             workout_name = request.form.get('workout-name')
             workout_end_time = dt.datetime.now()
             rating = request.form.get('workout-rating')
@@ -58,6 +52,11 @@ def update_db():
                 db.session.commit()
 
                 flash("Workout Finished", category='success')
+
+        # todo page cannot refresh every submission, because a whole workout
+        #  would be erased just because a user tried to submit with no name lol
+
+    return render_template('exercise.html', user=current_user)
 
 
 @views.route('/signup')
