@@ -235,21 +235,22 @@
         };
 
         // AJAX func to submit on finish-workout-button
-        $(function() {
-            $('#finish-workout-button').click(function () {
-                $.ajax ({
-                    url: '/exercise/',
-                    data: $('#exercise-form').serialize(),
-                    type: 'POST',
-                    success: function(response) {
-                        console.log(response);
-                    };
-                    error: function(error) {
-                        console.log(error);
-                    };
-                });
-            });
+        $('#finish-workout-button').click(function(event) {
+            // Prevent redirection with AJAX for exercise form
+            var form = $('#exercise-form');
+            var form_id = 'exercise-form';
+            var url = '/exercise/';
+            var type = form.prop('method');
+            var formData = getExerciseFormData(form_id);
+
+            // submit data with AJAX
+            send_form(form, form_id, url, type, modular_ajax, formData);
         });
+
+        function getExerciseFormData(form) {
+            var formData = new FormData(document.getElementById(form));
+            return formData;
+        };
     </script>
     {% endblock %}
 </body>
