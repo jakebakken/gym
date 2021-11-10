@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from .models import Workout, Exercise, Set
 from . import db
 import datetime as dt
+import json
 
 
 # blueprint for Flask application
@@ -53,8 +54,12 @@ def exercise_page():
 
                 flash("Workout Finished", category='success')
 
-        # todo page cannot refresh every submission, because a whole workout
-        #  would be erased just because a user tried to submit with no name lol
+                return json.dumps({
+                    'status': 'OK',
+                    'workout-name': workout_name,
+                    'rating': rating,
+                })
+
 
     elif request.method == 'GET':
         return render_template('exercise.html', user=current_user)
