@@ -18,6 +18,12 @@ def home_page():
 @views.route('/exercise/', methods=['GET', 'POST'])
 @login_required
 def exercise_page():
+    return render_template('exercise.html', user=current_user)
+
+
+@views.route('/exercise-submit/', method=['POST'])
+@login_required
+def update_db():
     if request.method == 'POST':
         if 'start-workout-button' in request.form:
             workout_date = dt.datetime.now().date()
@@ -52,11 +58,6 @@ def exercise_page():
                 db.session.commit()
 
                 flash("Workout Finished", category='success')
-
-        # todo page cannot refresh every submission, because a whole workout
-        #  would be erased just because a user tried to submit with no name lol
-
-    return render_template('exercise.html', user=current_user)
 
 
 @views.route('/signup')

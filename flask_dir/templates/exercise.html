@@ -239,12 +239,12 @@
             // Prevent redirection with AJAX for exercise form
             var form = $('#exercise-form');
             var form_id = 'exercise-form';
-            var url = '/exercise/';
+            var url = '/exercise-submit/';
             var type = form.prop('method');
             var formData = getExerciseFormData(form_id);
 
             // submit data with AJAX
-            send_form(form, form_id, url, type, modular_ajax, formData);
+            send_form(form, form_id, url, type, formData);
         });
 
         function getExerciseFormData(form) {
