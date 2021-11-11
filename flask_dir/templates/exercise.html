@@ -94,6 +94,7 @@
                     value="finish-workout-button"
                     class="btn btn-danger"
                     type="submit"
+                    onclick="finishWorkout();"
             >Finish Workout</button>
         </div>
     </form>
@@ -233,16 +234,18 @@
             output.innerHTML = this.value;
         };
 
-        var workoutNameInput = document.getElementById("workout-name");
+        function finishWorkout() {
+            var workoutNameInput = document.getElementById("workout-name");
 
-        $.ajax({
-            type: 'POST';
-            url: '/exercise/',
-            data: JSON.stringify(workoutNameInput),
-            success: function(result) {
-                workoutNameInput.innerHTML = result;
-            };
-        });
+            $.ajax({
+                type: 'POST';
+                url: '/finish',
+                data: JSON.stringify(workoutNameInput),
+                success: function(workout_name) {
+                    workoutNameInput.innerHTML = workout_name;
+                };
+            });
+        }
     </script>
     {% endblock %}
 </body>
