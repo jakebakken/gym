@@ -38,7 +38,7 @@ def exercise_page():
             rating = request.form.get('workout-rating')
 
             if not workout_name:
-                flash("Workout needs a name to be saved", category='error')
+                return flash("Workout needs a name to be saved", category='error')
 
             else:
                 # get the latest created workout from current user
@@ -51,7 +51,7 @@ def exercise_page():
                 current_workout.rating = rating
                 db.session.commit()
 
-                flash("Workout Finished", category='success')
+                return flash("Workout Finished", category='success')
 
         else:
             return render_template('exercise.html', user=current_user)
