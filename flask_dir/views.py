@@ -53,10 +53,14 @@ def exercise_page():
 
                 flash("Workout Finished", category='success')
 
+        else:
+            return render_template('exercise.html', user=current_user)
+
         # todo page cannot refresh every submission, because a whole workout
         #  would be erased just because a user tried to submit with no name lol
 
-    return render_template('exercise.html', user=current_user)
+    else:
+        return render_template('exercise.html', user=current_user)
 
 
 @views.route('/signup')
