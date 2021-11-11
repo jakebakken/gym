@@ -238,7 +238,7 @@
             var workoutNameInput = document.getElementById("workout-name");
 
             $.ajax({
-                type: 'POST';
+                type: 'POST',
                 url: '/finish',
                 data: JSON.stringify(workoutNameInput),
                 success: function(workout_name) {
