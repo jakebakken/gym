@@ -23,11 +23,11 @@ def exercise_page():
             workout_date = dt.datetime.now().date()
             workout_start_time = dt.datetime.now()
 
-            start_of_workout = Workout(
+            workout = Workout(
                 user_id=current_user.id, workout_date=workout_date,
                 workout_start_time=workout_start_time,
             )
-            db.session.add(start_of_workout)
+            db.session.add(workout)
 
             flash("Workout Started", category='success')
 
@@ -40,14 +40,12 @@ def exercise_page():
                 flash("Workout needs a name to be saved", category='error')
 
             else:
-                # get the latest created workout from current user
-                #  (aka the incomplete entry of this current workout)
-                current_workout = Workout.query.filter_by(user_id=current_user.id).order_by(Workout.id.desc()).first()
-
                 # fill in missing values
-                current_workout.workout_name = workout_name
-                current_workout.workout_end_time = workout_end_time
-                current_workout.rating = rating
+                workout = Workout(
+                    user_id=current_user.id, workout_name=workout_name,
+                    workout_end_time=workout_end_time, rating=rating,
+                )
+                db.session.add(workout)
                 db.session.commit()
 
                 flash("Workout Finished", category='success')
