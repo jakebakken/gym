@@ -235,14 +235,14 @@
         };
 
         function finishWorkout() {
-            var workoutNameInput = document.getElementById("workout-name");
+            var workoutNameInput = document.getElementById("workout-name").value;
 
             $.ajax({
                 type: 'POST',
                 url: '/finish',
                 data: JSON.stringify(workoutNameInput),
                 success: function(workout_name) {
-                    workoutNameInput.innerHTML = workout_name;
+                    workoutNameInput = workout_name;
                 }
             });
         }
