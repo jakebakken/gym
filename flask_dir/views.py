@@ -35,7 +35,7 @@ def exercise_page():
     return render_template('exercise.html', user=current_user)
 
 
-@views.route('/finish')
+@views.route('/finish', methods=['POST'])
 @login_required
 def finish():
     if request.method == 'POST':
@@ -55,7 +55,7 @@ def finish():
         db.session.commit()
 
         flash("Workout Finished", category='success')
-        return workout_name  # value return back to exercise name input
+        return jsonify(workout_name)  # value return back to exercise name input
 
 
 @views.route('/signup')

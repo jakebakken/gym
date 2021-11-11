@@ -241,6 +241,7 @@
                 type: 'POST',
                 url: '/finish',
                 data: JSON.stringify(workoutNameInput),
+                contentType: "application/json",
                 success: function(workout_name) {
                     workoutNameInput = workout_name;
                 }
