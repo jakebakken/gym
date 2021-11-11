@@ -240,10 +240,12 @@
             $.ajax({
                 type: 'POST',
                 url: '/finish',
-                data: JSON.stringify(workoutNameInput),
-                contentType: "application/json",
-                success: function(workout_name) {
-                    workoutNameInput = workout_name;
+                data: workoutNameInput,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(result) {
+                    workoutNameInput = result;
+                    console.log(result);
                 }
             });
         }
