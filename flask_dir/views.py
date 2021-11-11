@@ -28,10 +28,8 @@ def exercise_page():
                 workout_start_time=workout_start_time,
             )
             db.session.add(start_of_workout)
-            db.session.commit()
 
             flash("Workout Started", category='success')
-            return 'Success'
 
         elif 'finish-workout-button' in request.form:
             workout_name = request.form.get('workout-name')
@@ -40,7 +38,6 @@ def exercise_page():
 
             if not workout_name:
                 flash("Workout needs a name to be saved", category='error')
-                return 'Failure'
 
             else:
                 # get the latest created workout from current user
@@ -54,16 +51,11 @@ def exercise_page():
                 db.session.commit()
 
                 flash("Workout Finished", category='success')
-                return 'Success'
-
-        else:
-            return render_template('exercise.html', user=current_user)
 
         # todo page cannot refresh every submission, because a whole workout
         #  would be erased just because a user tried to submit with no name lol
 
-    else:
-        return render_template('exercise.html', user=current_user)
+    return render_template('exercise.html', user=current_user)
 
 
 @views.route('/signup')
