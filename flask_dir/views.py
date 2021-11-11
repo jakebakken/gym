@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Workout, Exercise, Set
 from . import db
@@ -28,6 +28,7 @@ def exercise_page():
                 workout_start_time=workout_start_time,
             )
             db.session.add(start_of_workout)
+            db.session.commit()
 
             flash("Workout Started", category='success')
 
@@ -51,9 +52,7 @@ def exercise_page():
                 db.session.commit()
 
                 flash("Workout Finished", category='success')
-
-        # todo page cannot refresh every submission, because a whole workout
-        #  would be erased just because a user tried to submit with no name lol
+                return jsonify(workout_name)  # value return back to exercise name input
 
     return render_template('exercise.html', user=current_user)
 

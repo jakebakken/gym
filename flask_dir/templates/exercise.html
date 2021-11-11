@@ -230,6 +230,17 @@
         slider.oninput = function () {
             output.innerHTML = this.value;
         };
+
+        var workoutNameInput = document.getElementById("workout-name");
+
+        $.ajax({
+            type: 'POST';
+            url: '/exercise/',
+            data: JSON.stringify(workoutNameInput),
+            success: function(result) {
+                workoutNameInput.innerHTML = result;
+            };
+        });
     </script>
     {% endblock %}
 </body>
