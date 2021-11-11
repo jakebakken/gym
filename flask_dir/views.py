@@ -43,24 +43,19 @@ def finish():
         workout_end_time = dt.datetime.now()
         rating = request.form.get('workout-rating')
 
-        if not workout_name:
-            flash("Workout needs a name to be saved", category='error')
-            return ''
+        # get the latest created workout from current user
+        #  (aka the incomplete entry of this current workout)
+        current_workout = Workout.query.filter_by(
+            user_id=current_user.id).order_by(Workout.id.desc()).first()
 
-        else:
-            # get the latest created workout from current user
-            #  (aka the incomplete entry of this current workout)
-            current_workout = Workout.query.filter_by(
-                user_id=current_user.id).order_by(Workout.id.desc()).first()
+        # fill in missing values
+        current_workout.workout_name = workout_name
+        current_workout.workout_end_time = workout_end_time
+        current_workout.rating = rating
+        db.session.commit()
 
-            # fill in missing values
-            current_workout.workout_name = workout_name
-            current_workout.workout_end_time = workout_end_time
-            current_workout.rating = rating
-            db.session.commit()
-
-            flash("Workout Finished", category='success')
-            return workout_name  # value return back to exercise name input
+        flash("Workout Finished", category='success')
+        return workout_name  # value return back to exercise name input
 
 
 @views.route('/signup')
