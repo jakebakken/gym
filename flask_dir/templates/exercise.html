@@ -22,6 +22,7 @@
                                 id="workout-name"
                                 name="workout-name"
                                 placeholder="Workout Name"
+                                value="{{ workout_name }}"
                         >
                         <hr/>
                     </th>
@@ -235,16 +236,14 @@
         };
 
         function finishWorkout() {
-            var workoutNameInput = document.getElementById("workout-name");
-            var workoutName = workoutNameInput.value;
+            var workoutName = document.getElementById("workout-name").value;
 
             $.ajax({
-                type: 'POST',
-                url: '/finish',
-                data: workoutName,
-                success: function(workoutName) {
-                    workoutNameInput.innerHTML = workoutName;
-                    console.log(workoutName);
+                url: "/finish",
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $(workoutName).replaceWith(data);
                 }
             });
         }
