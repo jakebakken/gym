@@ -55,7 +55,7 @@ def finish():
         db.session.commit()
 
         flash("Workout Finished", category='success')
-        return jsonify('', render_template('exercise.html'), workout_name=workout_name)  # value return back to exercise name input
+        return jsonify(workout_name=workout_name)  # value return back to exercise name input
 
 
 @views.route('/signup')
