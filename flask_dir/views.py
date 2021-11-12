@@ -39,7 +39,7 @@ def exercise_page():
 @login_required
 def finish():
     if request.method == 'POST':
-        workout_name = request.form.get('workout-name')
+        workout_name = request.form['workout-name']
         workout_end_time = dt.datetime.now()
         rating = request.form.get('workout-rating')
 
