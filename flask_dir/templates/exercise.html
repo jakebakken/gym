@@ -236,14 +236,14 @@
 
         function finishWorkout() {
             var workoutNameInput = document.getElementById("workout-name");
-            output.innerHTML = workoutNameInput.value;
+            workoutName = workoutNameInput.value;
 
             $.ajax({
                 type: 'POST',
                 url: '/finish',
-                data: output.innerHTML,
-                success: function(output.innerHTML) {
-                    console.log(output.innerHTML);
+                data: workoutName,
+                success: function(workoutName) {
+                    console.log(workoutName);
                 }
             });
         }

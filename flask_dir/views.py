@@ -55,7 +55,7 @@ def finish():
         db.session.commit()
 
         flash("Workout Finished", category='success')
-        return workout_name  # value return back to exercise name input
+        return str(workout_name)  # value return back to exercise name input
 
 
 @views.route('/signup')
