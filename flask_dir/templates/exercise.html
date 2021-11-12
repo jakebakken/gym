@@ -236,7 +236,7 @@
 
         function finishWorkout() {
             var workoutNameInput = document.getElementById("workout-name");
-            workoutName = workoutNameInput.val();
+            workoutName = workoutNameInput.value;
 
             $.ajax({
                 type: 'POST',
