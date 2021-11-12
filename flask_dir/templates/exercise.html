@@ -235,8 +235,7 @@
         };
 
         function finishWorkout() {
-            var workoutNameInput = document.getElementById("workout-name");
-            var workoutName = workoutNameInput.value;
+            var workoutName = $("#workout-name").val();
 
             $.ajax({
                 type: 'POST',
@@ -244,8 +243,8 @@
                 data: {
                     workoutName: workoutName,  // info to send to backend
                 },
-                success: function(result) {
-                    console.log(result);
+                success: function(workoutName) {
+                    console.log(workoutName);
                 }
             });
         }
