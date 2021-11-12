@@ -237,16 +237,21 @@
         function finishWorkout() {
             var workoutName = $("#workout-name").val();
 
-            $.ajax({
+            req = $.ajax({
                 type: 'POST',
                 url: '/finish',
                 data: {
                     workoutName: workoutName,  // info to send to backend
                 },
-                success: function(workoutName) {
-                    console.log(workoutName);
+                success: function(result) {
+                    console.log(result);
                 }
             });
+
+            // json object that gets passed back to frontend after ajax done
+            req.done(function(data) {
+                $('#workout-name').val(data.result)'
+            };
         }
     </script>
     {% endblock %}
