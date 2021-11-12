@@ -94,6 +94,7 @@
                     value="finish-workout-button"
                     class="btn btn-danger"
                     type="submit"
+                    onclick="finishWorkout();"
             >Finish Workout</button>
         </div>
     </form>
@@ -151,6 +152,8 @@
                     exerciseTableBody.append(data_row);
                 };
             };
+
+            // lol all these vars need to be in js syntax not python
 
             addExerciseButton.onclick = function addExercise() {
             // add new exercise every click, max 15 exercises
@@ -230,6 +233,19 @@
         slider.oninput = function () {
             output.innerHTML = this.value;
         };
+
+        function finishWorkout() {
+            var workoutNameInput = document.getElementById("workout-name");
+
+            $.ajax({
+                type: 'POST',
+                url: '/finish',
+                data: JSON.stringify(workoutNameInput),
+                success: function(workout_name) {
+                    workoutNameInput.innerHTML = workout_name;
+                }
+            });
+        }
     </script>
     {% endblock %}
 </body>
