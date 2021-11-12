@@ -35,7 +35,7 @@ def exercise_page():
     return render_template('exercise.html', user=current_user)
 
 
-@views.route('/finish')
+@views.route('/finish', methods=['POST'])
 @login_required
 def finish():
     if request.method == 'POST':
