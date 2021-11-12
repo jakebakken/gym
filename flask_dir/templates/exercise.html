@@ -235,14 +235,12 @@
         };
 
         function finishWorkout() {
-            var workoutNameInput = document.getElementById("workout-name");
-            workoutName = workoutNameInput.value;
+            var workoutNameInput = document.getElementById("workout-name").value;
 
             $.ajax({
                 type: 'POST',
                 url: '/finish',
-                data: JSON.stringify(workoutName),
-                dataType: 'json',
+                data: workoutName,
                 success: function(workoutName) {
                     workoutNameInput.innerHTML = workoutName;
                     console.log(workoutName);
