@@ -234,21 +234,25 @@
             output.innerHTML = this.value;
         };
 
-        function finishWorkout() {
-            var workoutNameInput = document.getElementById("workout-name");
+        $(document).ready(function() {
 
-            $.ajax({
-                type: 'POST',
-                url: '/finish',
-                data: {
-                    workout_name: $(workoutNameInput).val(),
-                },
-                success: function(result) {
-                    workoutNameInput = result;
-                    console.log(result);
-                }
-            });
-        }
+            function finishWorkout() {
+                var workoutNameInput = document.getElementById("workout-name");
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/finish',
+                    data: {
+                        workout_name: $(workoutNameInput).val(),
+                    },
+                    success: function(result) {
+                        workoutNameInput = result;
+                        console.log(result);
+                    }
+                });
+            }
+
+        });
     </script>
     {% endblock %}
 </body>
