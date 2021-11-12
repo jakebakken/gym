@@ -39,7 +39,8 @@ def exercise_page():
 @login_required
 def finish():
     if request.method == 'POST':
-        workout_name = request.form['workout-name']
+        workout_name = request.form.get('workout-name')
+        workoutName = str(workout_name)
         workout_end_time = dt.datetime.now()
         rating = request.form.get('workout-rating')
 
@@ -55,7 +56,7 @@ def finish():
         db.session.commit()
 
         flash("Workout Finished", category='success')
-        return jsonify({'result': str(workout_name)})  # value return back to exercise name input
+        return jsonify({'result': str(workoutName)})  # value return back to exercise name input
 
 
 @views.route('/signup')
