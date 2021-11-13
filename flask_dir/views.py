@@ -37,29 +37,30 @@ def exercise_page():
 @views.route('/finish', methods=['POST'])
 @login_required
 def finish():
-    workout_name = request.form['workoutName']
-    workout_end_time = dt.datetime.now()
-    rating = request.form['rating']
+    if 'finish-workout-button' in request.form:
+        workout_name = request.form['workoutName']
+        workout_end_time = dt.datetime.now()
+        rating = request.form['rating']
 
-    # get the latest created workout from current user
-    #  (aka the incomplete entry of this current workout)
-    current_workout = Workout.query.filter_by(
-        user_id=current_user.id).order_by(Workout.id.desc()).first()
+        # get the latest created workout from current user
+        #  (aka the incomplete entry of this current workout)
+        current_workout = Workout.query.filter_by(
+            user_id=current_user.id).order_by(Workout.id.desc()).first()
 
-    # fill in missing values
-    current_workout.workout_name = workout_name
-    current_workout.workout_end_time = workout_end_time
-    current_workout.rating = rating
-    db.session.commit()
+        # fill in missing values
+        current_workout.workout_name = workout_name
+        current_workout.workout_end_time = workout_end_time
+        current_workout.rating = rating
+        db.session.commit()
 
-    flash("Workout Finished", category='success')
+        flash("Workout Finished", category='success')
 
-    # value return back to exercise name input
-    return jsonify({
-        'result': 'success',
-        'workout_name': workout_name,
-        'rating': rating,
-    })
+        # value return back to exercise name input
+        return jsonify({
+            'result': 'success',
+            'workout_name': workout_name,
+            'rating': rating,
+        })
 
 
 @views.route('/signup')
