@@ -110,7 +110,7 @@
             const addSetButton = document.getElementById("add-set-button");
             const exerciseTableBody = document.getElementById("exercise-table-body");
 
-            function addSet() {
+            addSetButton.onclick = function addSet() {
             // initialize AJAX function
             // add new set every click, max 10 sets
 
@@ -184,7 +184,7 @@
 
             // lol all these vars need to be in js syntax not python
 
-            function addExercise() {
+            addExerciseButton.onclick = function addExercise() {
             // add new exercise every click, max 15 exercises
                 // increment exercise count
                 exerciseNumber += 1;
