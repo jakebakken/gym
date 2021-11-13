@@ -121,9 +121,9 @@
                 var repsValue = $(repsInputElem).val();
                 var weightValue = $(weightInputElem).val();
 
-                end_set = $.ajax ({
+                finishSet = $.ajax ({
                     type: 'POST',
-                    url: '/end_set',
+                    url: '/finish-set',
                     data: {
                         repsValue: repsValue,
                         weightValue: weightValue,
@@ -133,7 +133,7 @@
                     }
                 });
 
-                end_set.done(function() {
+                finishSet.done(function() {
                     $(repsInputElem).attr('disabled', true);
                     $(weightInputElem).attr('disabled', true);
                 });

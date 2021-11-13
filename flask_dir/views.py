@@ -64,19 +64,28 @@ def start_workout():
     })
 
 
-@views.route('/end_set', methods=['POST'])
+@views.route('/finish-set', methods=['POST'])
 @login_required
-def end_set():
-    set_end_time = dt.datetime.now()
+def finish_set():
+    # finish current Set
+    set_finish_time = dt.datetime.now()
     reps_value = request.form['repsValue']
     weight_value = request.form['weightValue']
 
     current_set = Set.query.filter_by(
         user_id=current_user.id).order_by(Set.id.desc()).first()
 
-    current_set.set_end_time = set_end_time
+    current_set.set_finish_time = set_finish_time
     current_set.reps = reps_value
     current_set.weight = weight_value
+    db.session.commit()
+
+    # start new Set
+    start_of_set = Set(
+        user_id=current_user.id, workout_id=current_set.workout_id,
+        exercise_id=current_set.exercise_id, set_start_time=set_finish_time,
+    )
+    db.session.add(start_of_set)
     db.session.commit()
 
     return jsonify({'result': 'success'})
