@@ -243,14 +243,14 @@
                 data: {
                     workoutName: workoutName,  // info to send to backend
                 },
-                success: function(result) {
-                    console.log(result);
+                success: function(workoutName) {
+                    console.log(workoutName);
                 }
             });
 
             // json object that gets passed back to frontend after ajax done
             req.done(function(data) {
-                $('#workout-name').val(data.result);
+                $('#workout-name').text(data.workout_name);
             });
         }
     </script>
