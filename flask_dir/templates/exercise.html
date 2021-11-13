@@ -257,6 +257,8 @@
             finish.done(function(data) {
                 $('#workout-name').text(data.workout_name);
                 $('#finish-workout-button').attr('disabled', true);
+                $('#add-exercise-button').attr('disabled', true);
+                $('#add-set-button').attr('disabled', true);
                 $('#finish-workout-button').html('Workout Finished');
             });
         };
