@@ -75,7 +75,7 @@ def finish_set():
     current_set = Set.query.filter_by(
         user_id=current_user.id).order_by(Set.id.desc()).first()
 
-    current_set.set_finish_time = set_finish_time
+    current_set.set_end_time = set_finish_time
     current_set.reps = reps_value
     current_set.weight = weight_value
     db.session.commit()
