@@ -93,6 +93,7 @@
                     name="finish-workout-button"
                     value="finish-workout-button"
                     class="btn btn-danger"
+                    type="button"
                     onclick="finishWorkout();"
             >Finish Workout</button>
         </div>
@@ -235,12 +236,14 @@
 
         function finishWorkout() {
             var workoutName = $("#workout-name").val();
+            var rating = $("#workout-rating-value").val();
 
             req = $.ajax({
                 type: 'POST',
                 url: '/finish',
                 data: {
                     workoutName: workoutName,  // info to send to backend
+                    rating: rating,
                 },
                 success: function(workoutName) {
                     console.log(workoutName);
