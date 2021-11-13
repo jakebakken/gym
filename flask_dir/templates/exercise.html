@@ -7,7 +7,8 @@
             name="start-workout-button"
             value="start-workout-button"
             class="btn btn-success"
-            type="submit"
+            onclick="startWorkout();"
+            type="button"
         >Start Workout</button>
 
         <h1 id="page-title" align="center">Exercise</h1>
@@ -72,7 +73,7 @@
                     value="add-exercise-button"
                     class="btn btn-primary"
                     type="button"
-                    onclick="addExercise"
+                    onclick="addExercise();"
             >Add Exercise</button>
             <button
                     id="add-set-button"
@@ -80,7 +81,7 @@
                     value="add-set-button"
                     class="btn btn-primary"
                     type="button"
-                    onclick="addSet"
+                    onclick="addSet();"
             >Add Set</button>
         </div>
         <div class="slider-container">
@@ -238,9 +239,9 @@
             var workoutName = $("#workout-name").val();
             var rating = $("#workout-rating").val();
 
-            req = $.ajax({
+            finish = $.ajax({
                 type: 'POST',
-                url: '/finish',
+                url: '/finish-workout',
                 data: {
                     workoutName: workoutName,  // info to send to backend
                     rating: rating,
@@ -251,10 +252,24 @@
             });
 
             // json object that gets passed back to frontend after ajax done
-            req.done(function(data) {
+            finish.done(function(data) {
                 $('#workout-name').text(data.workout_name);
             });
-        }
+        };
+
+        function startWorkout() {
+            $.ajax({
+                type: 'POST',
+                url: '/start-workout',
+                success: function() {
+                    console.log("workout started");
+                };
+            });
+
+            start.done(function() {
+                $('#start-workout-button').hide();
+            });
+        };
     </script>
     {% endblock %}
 </body>
