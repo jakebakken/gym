@@ -27,11 +27,36 @@ def start_workout():
     workout_date = dt.datetime.now().date()
     workout_start_time = dt.datetime.now()
 
+    # initialize new workout instance
     start_of_workout = Workout(
         user_id=current_user.id, workout_date=workout_date,
         workout_start_time=workout_start_time,
     )
     db.session.add(start_of_workout)
+    db.session.commit()
+
+    # query workout that was just committed to db
+    started_workout = Workout.query.filter_by(
+        user_id=current_user.id).order_by(Workout.id.desc()).first()
+
+    # initialize first Exercise
+    start_of_exercise = Exercise(
+        user_id=current_user.id, workout_id=started_workout.id,
+        exercise_start_time=workout_start_time,
+    )
+    db.session.add(start_of_exercise)
+    db.session.commit()
+
+    # query exercise that was just committed to db
+    started_exercise = Exercise.query.filter_by(
+        user_id=current_user.id).order_by(Exercise.id.desc()).first()
+
+    # initialize first Set
+    start_of_set = Set(
+        user_id=current_user.id, workout_id=started_workout.id,
+        exercise_id=started_exercise.id, set_start_time=workout_start_time,
+    )
+    db.session.add(start_of_set)
     db.session.commit()
 
     return jsonify({

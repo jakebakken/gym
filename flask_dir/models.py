@@ -36,6 +36,7 @@ class Exercise(db.Model):
 class Set(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'))
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
     set_start_time = db.Column(db.Time)
     set_end_time = db.Column(db.Time)
