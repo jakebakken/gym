@@ -110,8 +110,34 @@
             const addSetButton = document.getElementById("add-set-button");
             const exerciseTableBody = document.getElementById("exercise-table-body");
 
-            addSetButton.onclick = function addSet() {
+            function addSet() {
+            // initialize AJAX function
             // add new set every click, max 10 sets
+
+                // AJAX call
+                //  changing elements is necessary for disabling input fields incrementally
+                var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+                var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+                var repsValue = $(repsInputElem).val();
+                var weightValue = $(weightInputElem).val();
+
+                end_set = $.ajax ({
+                    type: 'POST',
+                    url: '/end_set',
+                    data: {
+                        repsValue: repsValue,
+                        weightValue: weightValue,
+                    },
+                    success: function () {
+                        console.log("set saved");
+                    }
+                });
+
+                end_set.done(function() {
+                    $(repsInputElem).attr('disabled', true);
+                    $(weightInputElem).attr('disabled', true);
+                };
+
                 // increment set count
                 setNumber += 1;
 
@@ -158,7 +184,7 @@
 
             // lol all these vars need to be in js syntax not python
 
-            addExerciseButton.onclick = function addExercise() {
+            function addExercise() {
             // add new exercise every click, max 15 exercises
                 // increment exercise count
                 exerciseNumber += 1;
@@ -229,6 +255,8 @@
                 setNumber = 1;
             };
         };
+
+        // slider functionality
         var slider = document.getElementById("workout-rating");
         var output = document.getElementById("workout-rating-value");
         output.innerHTML = slider.value;
@@ -237,6 +265,23 @@
             output.innerHTML = this.value;
         };
 
+        // AJAX start workout
+        function startWorkout() {
+            start = $.ajax({
+                type: 'POST',
+                url: '/start-workout',
+                success: function() {
+                    console.log("workout started");
+                }
+            });
+
+            start.done(function() {
+                $('#start-workout-button').hide();
+                $('#exercise-form').show();
+            });
+        };
+
+        // AJAX finish workout
         function finishWorkout() {
             var workoutName = $("#workout-name").val();
             var rating = $("#workout-rating").val();
@@ -260,21 +305,6 @@
                 $('#add-exercise-button').attr('disabled', true);
                 $('#add-set-button').attr('disabled', true);
                 $('#finish-workout-button').html('Workout Finished');
-            });
-        };
-
-        function startWorkout() {
-            start = $.ajax({
-                type: 'POST',
-                url: '/start-workout',
-                success: function() {
-                    console.log("workout started");
-                }
-            });
-
-            start.done(function() {
-                $('#start-workout-button').hide();
-                $('#exercise-form').show();
             });
         };
     </script>
