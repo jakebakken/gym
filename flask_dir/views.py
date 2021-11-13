@@ -39,9 +39,9 @@ def exercise_page():
 @login_required
 def finish():
     if request.method == 'POST':
-        workout_name = request.form.get('workout-name')
-        workout_end_time = dt.datetime.now()
-        rating = request.form.get('workout-rating')
+        workout_name = request.form['workoutName']
+        # workout_end_time = dt.datetime.now()
+        # rating = request.form.get('workout-rating')
 
         # get the latest created workout from current user
         #  (aka the incomplete entry of this current workout)
@@ -50,8 +50,8 @@ def finish():
 
         # fill in missing values
         current_workout.workout_name = workout_name
-        current_workout.workout_end_time = workout_end_time
-        current_workout.rating = rating
+        # current_workout.workout_end_time = workout_end_time
+        # current_workout.rating = rating
         db.session.commit()
 
         flash("Workout Finished", category='success')
