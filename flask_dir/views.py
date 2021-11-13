@@ -34,7 +34,6 @@ def start_workout():
     db.session.add(start_of_workout)
     db.session.commit()
 
-    flash("Workout Started", category='success')
     return jsonify({
         'result': 'success',
     })
@@ -57,8 +56,6 @@ def finish_workout():
     current_workout.workout_end_time = workout_end_time
     current_workout.rating = rating
     db.session.commit()
-
-    flash("Workout Finished", category='success')
 
     # value return back to exercise name input
     return jsonify({
