@@ -258,12 +258,12 @@
         };
 
         function startWorkout() {
-            $.ajax({
+            start = $.ajax({
                 type: 'POST',
                 url: '/start-workout',
                 success: function() {
                     console.log("workout started");
-                };
+                }
             });
 
             start.done(function() {
