@@ -256,6 +256,7 @@
             // json object that gets passed back to frontend after ajax done
             finish.done(function(data) {
                 $('#workout-name').text(data.workout_name);
+                $('#finish-workout-button').attr('disabled', false);
             });
         };
 
