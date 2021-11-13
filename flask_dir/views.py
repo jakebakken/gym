@@ -91,6 +91,33 @@ def finish_set():
     return jsonify({'result': 'success'})
 
 
+
+# todo finish this func
+@views.route('/finish-exercise', methods=['POST'])
+@login_required
+def finish_exercise():
+    # finish current Set
+    exercise_finish_time = dt.datetime.now()
+    exercise_name = request.form['exerciseName']
+
+    current_exercise = Set.query.filter_by(
+        user_id=current_user.id).order_by(Exercise.id.desc()).first()
+
+    current_exercise.exercise_end_time = exercise_finish_time
+    current_exercise.exercise_name = exercise_name
+    db.session.commit()
+
+    # start new Set
+    start_of_exercise = Exercise(
+        user_id=current_user.id, workout_id=current_exercise.workout_id,
+        exercise_start_time=exercise_finish_time,
+    )
+    db.session.add(start_of_exercise)
+    db.session.commit()
+
+    return jsonify({'result': 'success'})
+
+
 @views.route('/finish-workout', methods=['POST'])
 @login_required
 def finish_workout():

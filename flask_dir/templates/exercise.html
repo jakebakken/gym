@@ -114,12 +114,15 @@
             // initialize AJAX function
             // add new set every click, max 10 sets
 
-                // AJAX call
+                // AJAX calls
                 //  changing elements is necessary for disabling input fields incrementally
                 var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
                 var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+                var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
                 var repsValue = $(repsInputElem).val();
                 var weightValue = $(weightInputElem).val();
+                var exerciseName = $(exerciseNameInput).val();
+
 
                 finishSet = $.ajax ({
                     type: 'POST',
@@ -136,6 +139,21 @@
                 finishSet.done(function() {
                     $(repsInputElem).attr('disabled', true);
                     $(weightInputElem).attr('disabled', true);
+                });
+
+                finishExercise = $.ajax ({
+                    type: 'POST',
+                    url: '/finish-exercise',
+                    data: {
+                        exerciseName: exerciseName,
+                    },
+                    success: function () {
+                        console.log("exercise saved");
+                    }
+                });
+
+                finishExercise.done(function() {
+                    $(exerciseNameInput).attr('disabled', true);
                 });
 
                 // increment set count
