@@ -1,15 +1,17 @@
 {% extends 'base.html' %}{% block title %}Exercise{% endblock %}
 <body>
     {% block content %}
-    <form method="POST">
+    <div id="start-workout-div">
         <button
-            id="start-workout-button"
-            name="start-workout-button"
-            value="start-workout-button"
-            class="btn btn-success"
-            onclick="startWorkout();"
-            type="button"
+                id="start-workout-button"
+                name="start-workout-button"
+                value="start-workout-button"
+                class="btn btn-success"
+                onclick="startWorkout();"
+                type="button"
         >Start Workout</button>
+    </div>
+    <form id="exercise-form" method="POST" style="display: none">
 
         <h1 id="page-title" align="center">Exercise</h1>
 
@@ -88,7 +90,7 @@
             <p>Workout Rating: <span id="workout-rating-value"></span></p>
             <input type="range" min="1" max="10" value="5" class="slider" id="workout-rating" name="workout-rating">
         </div>
-        <div class="finish-workout-div">
+        <div id="finish-workout-div">
             <button
                     id="finish-workout-button"
                     name="finish-workout-button"
@@ -268,6 +270,7 @@
 
             start.done(function() {
                 $('#start-workout-button').hide();
+                $('#exercise-form').show();
             });
         };
     </script>
