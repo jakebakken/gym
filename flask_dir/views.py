@@ -107,7 +107,7 @@ def finish_exercise():
     current_exercise.exercise_name = exercise_name
     db.session.commit()
 
-    # start new Set
+    # start new Exercise
     start_of_exercise = Exercise(
         user_id=current_user.id, workout_id=current_exercise.workout_id,
         exercise_start_time=exercise_finish_time,
