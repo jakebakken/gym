@@ -130,6 +130,18 @@ def finish_exercise():
         exercise_start_time=exercise_finish_time,
     )
     db.session.add(start_of_exercise)
+    db.commit()
+
+    # get Exercise created above to increment value for new Set below
+    new_exercise = Exercise.query.filter_by(
+        user_id=current_user.id).order_by(Exercise.id.desc()).first()
+
+    # start new Set
+    start_of_set = Set(
+        user_id=current_user.id, workout_id=current_set.workout_id,
+        exercise_id=new_exercise.id, set_start_time=exercise_finish_time,
+    )
+    db.session.add(start_of_set)
     db.session.commit()
 
     return jsonify({'result': 'success'})
