@@ -29,7 +29,8 @@ def start_workout():
 
     # initialize new workout instance
     start_of_workout = Workout(
-        user_id=current_user.id, workout_date=workout_date,
+        user_id=current_user.id,
+        workout_date=workout_date,
         workout_start_time=workout_start_time,
     )
     db.session.add(start_of_workout)
@@ -41,7 +42,8 @@ def start_workout():
 
     # initialize first Exercise
     start_of_exercise = Exercise(
-        user_id=current_user.id, workout_id=started_workout.id,
+        user_id=current_user.id,
+        workout_id=started_workout.id,
         exercise_start_time=workout_start_time,
     )
     db.session.add(start_of_exercise)
@@ -53,8 +55,10 @@ def start_workout():
 
     # initialize first Set
     start_of_set = Set(
-        user_id=current_user.id, workout_id=started_workout.id,
-        exercise_id=started_exercise.id, set_start_time=workout_start_time,
+        user_id=current_user.id,
+        workout_id=started_workout.id,
+        exercise_id=started_exercise.id,
+        set_start_time=workout_start_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -86,8 +90,10 @@ def finish_set():
 
     # start new Set
     start_of_set = Set(
-        user_id=current_user.id, workout_id=current_set.workout_id,
-        exercise_id=current_exercise.id, set_start_time=set_finish_time,
+        user_id=current_user.id,
+        workout_id=current_set.workout_id,
+        exercise_id=current_exercise.id,
+        set_start_time=set_finish_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -107,39 +113,40 @@ def finish_exercise():
     reps_value = request.form['repsValue']
     weight_value = request.form['weightValue']
 
-    # finish current Set
+    # query current Set
     current_set = Set.query.filter_by(
         user_id=current_user.id).order_by(Set.id.desc()).first()
-
-    current_set.set_end_time = exercise_finish_time
-    current_set.reps = reps_value
-    current_set.weight = weight_value
-    db.session.commit()
-
-    # finish current Exercise
+    # query current Exercise
     current_exercise = Exercise.query.filter_by(
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
+    # add missing values
+    current_set.set_end_time = exercise_finish_time
+    current_set.reps = reps_value
+    current_set.weight = weight_value
     current_exercise.exercise_end_time = exercise_finish_time
     current_exercise.exercise_name = exercise_name
     db.session.commit()
 
     # start new Exercise
     start_of_exercise = Exercise(
-        user_id=current_user.id, workout_id=current_exercise.workout_id,
+        user_id=current_user.id,
+        workout_id=current_exercise.workout_id,
         exercise_start_time=exercise_finish_time,
     )
     db.session.add(start_of_exercise)
     db.session.commit()
 
-    # get Exercise created above to increment value for new Set below
+    # query new Exercise for below Set exercise_id
     new_exercise = Exercise.query.filter_by(
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
     # start new Set
     start_of_set = Set(
-        user_id=current_user.id, workout_id=current_set.workout_id,
-        exercise_id=new_exercise.id, set_start_time=exercise_finish_time,
+        user_id=current_user.id,
+        workout_id=current_set.workout_id,
+        exercise_id=new_exercise.id,
+        set_start_time=exercise_finish_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -150,29 +157,43 @@ def finish_exercise():
 @views.route('/finish-workout', methods=['POST'])
 @login_required
 def finish_workout():
+    # finish last Set in current Exercise, finish current Exercise,
+    #  finish Workout
     workout_name = request.form['workoutName']
     workout_end_time = dt.datetime.now()
     rating = request.form['rating']
+    workout_finish_time = dt.datetime.now()
+    exercise_name = request.form['exerciseName']
+    reps_value = request.form['repsValue']
+    weight_value = request.form['weightValue']
 
-    # get the latest created workout from current user
-    #  (aka the incomplete entry of this current workout)
+    # query current Set, Exercise, Workout
+
+    # query current Set
+    current_set = Set.query.filter_by(
+        user_id=current_user.id).order_by(Set.id.desc()).first()
+    # query current Exercise
+    current_exercise = Exercise.query.filter_by(
+        user_id=current_user.id).order_by(Exercise.id.desc()).first()
+    # query current Workout
     current_workout = Workout.query.filter_by(
         user_id=current_user.id).order_by(Workout.id.desc()).first()
 
-    # fill in missing values
+    # add all missing values
+    current_set.set_end_time = workout_finish_time
+    current_set.reps = reps_value
+    current_set.weight = weight_value
+    current_exercise.exercise_end_time = workout_finish_time
+    current_exercise.exercise_name = exercise_name
     current_workout.workout_name = workout_name
     current_workout.workout_end_time = workout_end_time
     current_workout.rating = rating
+
+    # commit all to finish Workout
     db.session.commit()
 
-    # todo this will also need to submit the final exercise, exercise_name, set
-
     # value return back to exercise name input
-    return jsonify({
-        'result': 'success',
-        'workout_name': workout_name,
-        'rating': rating,
-    })
+    return jsonify({'result': 'success'})
 
 
 @views.route('/signup')

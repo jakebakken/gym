@@ -319,6 +319,12 @@
         function finishWorkout() {
             var workoutName = $("#workout-name").val();
             var rating = $("#workout-rating").val();
+            var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+            var exerciseName = $(exerciseNameInput).val();
+            var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+            var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+            var repsValue = $(repsInputElem).val();
+            var weightValue = $(weightInputElem).val();
 
             finish = $.ajax({
                 type: 'POST',
@@ -326,6 +332,9 @@
                 data: {
                     workoutName: workoutName,  // info to send to backend
                     rating: rating,
+                    exerciseName: exerciseName,
+                    repsValue: repsValue,
+                    weightValue: weightValue,
                 },
                 success: function(workoutName) {
                     console.log(workoutName);
@@ -335,6 +344,9 @@
             // json object that gets passed back to frontend after ajax done
             finish.done(function(data) {
                 $('#workout-name').text(data.workout_name);
+                $(exerciseNameInput).attr('disabled', true);
+                $(repsInputElem).attr('disabled', true);
+                $(weightInputElem).attr('disabled', true);
                 $('#finish-workout-button').attr('disabled', true);
                 $('#add-exercise-button').attr('disabled', true);
                 $('#add-set-button').attr('disabled', true);
