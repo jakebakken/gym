@@ -75,6 +75,10 @@ def finish_set():
     current_set = Set.query.filter_by(
         user_id=current_user.id).order_by(Set.id.desc()).first()
 
+    # for setting exercise_id in Set()
+    current_exercise = Exercise.query.filter_by(
+        user_id=current_user.id).order_by(Exercise.id.desc()).first()
+
     current_set.set_end_time = set_finish_time
     current_set.reps = reps_value
     current_set.weight = weight_value
@@ -83,7 +87,7 @@ def finish_set():
     # start new Set
     start_of_set = Set(
         user_id=current_user.id, workout_id=current_set.workout_id,
-        exercise_id=current_set.exercise_id, set_start_time=set_finish_time,
+        exercise_id=current_exercise.id, set_start_time=set_finish_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
