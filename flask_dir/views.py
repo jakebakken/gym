@@ -100,7 +100,7 @@ def finish_exercise():
     exercise_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
 
-    current_exercise = Set.query.filter_by(
+    current_exercise = Exercise.query.filter_by(
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
     current_exercise.exercise_end_time = exercise_finish_time
