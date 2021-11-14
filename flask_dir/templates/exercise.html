@@ -343,6 +343,7 @@
             // json object that gets passed back to frontend after ajax done
             finish.done(function(data) {
                 $('#workout-name').text(data.workout_name);
+                $('#workout-name').attr('disabled', true);
                 $(exerciseNameInput).attr('disabled', true);
                 $(repsInputElem).attr('disabled', true);
                 $(weightInputElem).attr('disabled', true);
