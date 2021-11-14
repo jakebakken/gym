@@ -130,7 +130,7 @@ def finish_exercise():
         exercise_start_time=exercise_finish_time,
     )
     db.session.add(start_of_exercise)
-    db.commit()
+    db.session.commit()
 
     # get Exercise created above to increment value for new Set below
     new_exercise = Exercise.query.filter_by(
