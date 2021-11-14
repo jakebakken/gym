@@ -96,10 +96,23 @@ def finish_set():
 @views.route('/finish-exercise', methods=['POST'])
 @login_required
 def finish_exercise():
-    # finish current Set
+    # finish last Set in current Exercise, finish current Exercise, and start
+    #  a new Exercise
     exercise_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
+    reps_value = request.form['repsValue']
+    weight_value = request.form['weightValue']
 
+    # finish current Set
+    current_set = Set.query.filter_by(
+        user_id=current_user.id).order_by(Set.id.desc()).first()
+
+    current_set.set_end_time = exercise_finish_time
+    current_set.reps = reps_value
+    current_set.weight = weight_value
+    db.session.commit()
+
+    # finish current Exercise
     current_exercise = Exercise.query.filter_by(
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 

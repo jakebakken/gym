@@ -114,7 +114,7 @@
             // initialize AJAX function
             // add new set every click, max 10 sets
 
-                // AJAX call
+                // AJAX finish set
                 //  changing elements is necessary for disabling input fields incrementally
                 var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
                 var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
@@ -190,9 +190,13 @@
             addExerciseButton.onclick = function addExercise() {
             // add new exercise every click, max 15 exercises
 
-                // AJAX call
+                // AJAX finish exercise
                 var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
                 var exerciseName = $(exerciseNameInput).val();
+                var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+                var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+                var repsValue = $(repsInputElem).val();
+                var weightValue = $(weightInputElem).val();
 
 
                 finishExercise = $.ajax ({
@@ -200,6 +204,8 @@
                     url: '/finish-exercise',
                     data: {
                         exerciseName: exerciseName,
+                        repsValue: repsValue,
+                        weightValue: weightValue,
                     },
                     success: function () {
                         console.log("exercise saved");
@@ -207,6 +213,8 @@
                 });
 
                 finishExercise.done(function() {
+                    $(repsInputElem).attr('disabled', true);
+                    $(weightInputElem).attr('disabled', true);
                     $(exerciseNameInput).attr('disabled', true);
                 });
 
