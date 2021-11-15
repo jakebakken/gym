@@ -1,4 +1,25 @@
 {% extends 'base.html' %} {% block title %}Home{% endblock %}
 {% block content %}
 <h1 class="page-title">Hey {{ user.first_name }}</h1>
+
+<button type="button" class="collapsible">Workout Name<span> - 14-Nov-2021</span></button>
+<div class="workout-contents">
+    <div style="inline-block">
+        <p>-- exercise 1 - 3 sets --</p>
+        <p><span>10 reps</span><span> </span><span>135 lbs</span></p>
+        <p><span>10 reps</span><span> </span><span>135 lbs</span></p>
+        <p><span>10 reps</span><span> </span><span>135 lbs</span></p>
+    </div>
+    <div style="inline-block">
+        <p>-- exercise 2 - 3 sets --</p>
+        <p><span>10 reps</span><span> </span><span>150 lbs</span></p>
+        <p><span>10 reps</span><span> </span><span>150 lbs</span></p>
+        <p><span>10 reps</span><span> </span><span>175 lbs</span></p>
+    </div>
+</div>
+<button type="button" class="collapsible">Exercise Name</button>
+<div class="workout-contents">
+    <p>-- exercise details --</p>
+</div>
+<script src="{{url_for('static', filename='home.js')}}"></script>
 {% endblock %}
