@@ -39,48 +39,47 @@ addSetButton.onclick = function addSet() {
     setNumber += 1;
 
 
-    const header_row = document.createElement("tr");
+    const headerRow = document.createElement("tr");
     const header = document.createElement("th");
-    const data_row = document.createElement("tr");
-    const reps_data = document.createElement("td");
-    const weight_data = document.createElement("td");
-    const reps_input = document.createElement("input");
-    const weight_input = document.createElement("input");
+    const dataRow = document.createElement("tr");
+    const repsData = document.createElement("td");
+    const weightData = document.createElement("td");
+    const repsInput = document.createElement("input");
+    const weightInput = document.createElement("input");
 
     header.innerText = "Set " + setNumber;
     header.setAttribute("colspan", 2);
 
-    reps_input.type = "number";
-    reps_input.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-    reps_input.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-    reps_input.setAttribute("class", "form-exercise");
-    reps_input.placeholder = "Reps";
+    repsInput.type = "number";
+    repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+    repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+    repsInput.setAttribute("class", "form-exercise");
+    repsInput.placeholder = "Reps";
 
-    weight_input.type = "number";
-    weight_input.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-    weight_input.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-    weight_input.setAttribute("class", "form-exercise");
-    weight_input.placeholder = "Weight";
+    weightInput.type = "number";
+    weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+    weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+    weightInput.setAttribute("class", "form-exercise");
+    weightInput.placeholder = "Weight";
 
     if (setNumber <= 10) {
         // add set header
-        header_row.append(header);
+        headerRow.append(header);
 
         // add input areas to respective table data tags
-        reps_data.append(reps_input);
-        weight_data.append(weight_input);
+        repsData.append(repsInput);
+        weightData.append(weightInput);
 
         // add data tags to single table row
-        data_row.append(reps_data);
-        data_row.append(weight_data);
+        dataRow.append(repsData);
+        dataRow.append(weightData);
 
         // add header row & data row to exercise table
-        exerciseTableBody.append(header_row);
-        exerciseTableBody.append(data_row);
+        exerciseTableBody.append(headerRow);
+        exerciseTableBody.append(dataRow);
     };
 };
 
-// lol all these vars need to be in js syntax not python
 
 addExerciseButton.onclick = function addExercise() {
 // add new exercise every click, max 15 exercises
@@ -118,66 +117,66 @@ addExerciseButton.onclick = function addExercise() {
     exerciseNumber += 1;
 
 
-    const header_row = document.createElement("tr");
+    const headerRow = document.createElement("tr");
     const header = document.createElement("th");
-    const exercise_input_row = document.createElement("tr");
-    const exercise_input_data = document.createElement("td");
-    const exercise_input = document.createElement("input");
+    const exerciseInputRow = document.createElement("tr");
+    const exerciseInputData = document.createElement("td");
+    const exerciseInput = document.createElement("input");
 
-    const set1_header_row = document.createElement("tr");
-    const set1_header = document.createElement("th");
+    const set1HeaderRow = document.createElement("tr");
+    const set1Header = document.createElement("th");
 
-    const set1_data_row = document.createElement("tr");
-    const set1_reps_data = document.createElement("td");
-    const set1_weight_data = document.createElement("td");
-    const set1_reps_input = document.createElement("input");
-    const set1_weight_input = document.createElement("input");
+    const set1DataRow = document.createElement("tr");
+    const set1RepsData = document.createElement("td");
+    const set1WeightData = document.createElement("td");
+    const set1RepsInput = document.createElement("input");
+    const set1WeightInput = document.createElement("input");
 
     header.innerText = "Exercise " + exerciseNumber;
     header.setAttribute("colspan", 2);
 
-    exercise_input_data.setAttribute("colspan", 2);
-    exercise_input.type = "text";
-    exercise_input.setAttribute("class", "form-exercise-title-input");
-    exercise_input.id = "exercise" + exerciseNumber + "-name";
-    exercise_input.name = "exercise" + exerciseNumber + "-name";
-    exercise_input.placeholder = "Exercise Name";
+    exerciseInputData.setAttribute("colspan", 2);
+    exerciseInput.type = "text";
+    exerciseInput.setAttribute("class", "form-exercise-title-input");
+    exerciseInput.id = "exercise" + exerciseNumber + "-name";
+    exerciseInput.name = "exercise" + exerciseNumber + "-name";
+    exerciseInput.placeholder = "Exercise Name";
 
-    set1_header.innerText = "Set 1";
-    set1_header.setAttribute("colspan", 2);
+    set1Header.innerText = "Set 1";
+    set1Header.setAttribute("colspan", 2);
 
-    set1_reps_input.type = "number";
-    set1_reps_input.id = "exercise" + exerciseNumber + "-set1-reps";
-    set1_reps_input.name = "exercise" + exerciseNumber + "-set1-reps";
-    set1_reps_input.setAttribute("class", "form-exercise");
-    set1_reps_input.placeholder = "Reps";
+    set1RepsInput.type = "number";
+    set1RepsInput.id = "exercise" + exerciseNumber + "-set1-reps";
+    set1RepsInput.name = "exercise" + exerciseNumber + "-set1-reps";
+    set1RepsInput.setAttribute("class", "form-exercise");
+    set1RepsInput.placeholder = "Reps";
 
-    set1_weight_input.type = "number";
-    set1_weight_input.id = "exercise" + exerciseNumber + "-set1-weight";
-    set1_weight_input.name = "exercise" + exerciseNumber + "-set1-weight";
-    set1_weight_input.setAttribute("class", "form-exercise");
-    set1_weight_input.placeholder = "Weight";
+    set1WeightInput.type = "number";
+    set1WeightInput.id = "exercise" + exerciseNumber + "-set1-weight";
+    set1WeightInput.name = "exercise" + exerciseNumber + "-set1-weight";
+    set1WeightInput.setAttribute("class", "form-exercise");
+    set1WeightInput.placeholder = "Weight";
 
     if (exerciseNumber <= 15) {
         // add headers
-        header_row.append(header);
-        set1_header_row.append(set1_header);
+        headerRow.append(header);
+        set1HeaderRow.append(set1Header);
 
         // add static 3 sets to respective data tags
-        exercise_input_data.append(exercise_input);
-        set1_reps_data.append(set1_reps_input);
-        set1_weight_data.append(set1_weight_input);
+        exerciseInputData.append(exerciseInput);
+        set1RepsData.append(set1RepsInput);
+        set1WeightData.append(set1WeightInput);
 
         // add data tags to each row
-        exercise_input_row.append(exercise_input_data);
-        set1_data_row.append(set1_reps_data);
-        set1_data_row.append(set1_weight_data);
+        exerciseInputRow.append(exerciseInputData);
+        set1DataRow.append(set1RepsData);
+        set1DataRow.append(set1WeightData);
 
         // add header row & data rows to exercise table
-        exerciseTableBody.append(header_row);
-        exerciseTableBody.append(exercise_input_row);
-        exerciseTableBody.append(set1_header_row);
-        exerciseTableBody.append(set1_data_row);
+        exerciseTableBody.append(headerRow);
+        exerciseTableBody.append(exerciseInputRow);
+        exerciseTableBody.append(set1HeaderRow);
+        exerciseTableBody.append(set1DataRow);
     };
 
     // reset set count whenever new exercise added
@@ -194,6 +193,7 @@ slider.oninput = function () {
     output.innerHTML = this.value;
 };
 
+
 // AJAX start workout
 function startWorkout() {
     start = $.ajax({
@@ -209,6 +209,7 @@ function startWorkout() {
         $('#exercise-form').show();
     });
 };
+
 
 // AJAX finish workout
 function finishWorkout() {
@@ -236,7 +237,7 @@ function finishWorkout() {
         }
     });
 
-    // json object that gets passed back to frontend after ajax done
+    // disable elements when finished
     finish.done(function(data) {
         $('#workout-name').text(data.workout_name);
         $('#workout-name').attr('disabled', true);
