@@ -6,15 +6,14 @@ const addSetButton = document.getElementById("add-set-button");
 const exerciseTableBody = document.getElementById("exercise-table-body");
 
 addSetButton.onclick = function addSet() {
-// initialize AJAX function
-// add new set every click, max 10 sets
+// initialize AJAX function & add new set every click, max 10 sets
 
     // AJAX finish set
     //  changing elements is necessary for disabling input fields incrementally
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
-    var weightValue = $(weightInputElem).val();
+    var repsElem = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightElem = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsValue = $(repsElem).val();
+    var weightValue = $(weightElem).val();
 
 
     finishSet = $.ajax ({
@@ -30,8 +29,8 @@ addSetButton.onclick = function addSet() {
     });
 
     finishSet.done(function() {
-        $(repsInputElem).attr('disabled', true);
-        $(weightInputElem).attr('disabled', true);
+        $(#repsElem).attr('disabled', true);
+        $(#weightElem).attr('disabled', true);
     });
 
 
@@ -51,14 +50,14 @@ addSetButton.onclick = function addSet() {
     header.setAttribute("colspan", 2);
 
     repsInput.type = "number";
-    repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-    repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+    repsInput.id = repsElem;
+    repsInput.name = repsElem;
     repsInput.setAttribute("class", "form-exercise");
     repsInput.placeholder = "Reps";
 
     weightInput.type = "number";
-    weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-    weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+    weightInput.id = weightElem;
+    weightInput.name = weightElem;
     weightInput.setAttribute("class", "form-exercise");
     weightInput.placeholder = "Weight";
 
@@ -85,12 +84,13 @@ addExerciseButton.onclick = function addExercise() {
 // add new exercise every click, max 15 exercises
 
     // AJAX finish exercise
-    var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+    var exerciseNameInput = 'exercise' + exerciseNumber + '-name';
     var exerciseName = $(exerciseNameInput).val();
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
-    var weightValue = $(weightInputElem).val();
+
+    var repsElem = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightElem = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsValue = $(repsElem).val();
+    var weightValue = $(weightElem).val();
 
 
     finishExercise = $.ajax ({
@@ -107,53 +107,60 @@ addExerciseButton.onclick = function addExercise() {
     });
 
     finishExercise.done(function() {
-        $(repsInputElem).attr('disabled', true);
-        $(weightInputElem).attr('disabled', true);
-        $(exerciseNameInput).attr('disabled', true);
+        $(#repsElem).attr('disabled', true);
+        $(#weightElem).attr('disabled', true);
+        $(#exerciseNameInput).attr('disabled', true);
     });
 
 
     // increment exercise count
     exerciseNumber += 1;
 
-
+    // exercise header & input fields
     const headerRow = document.createElement("tr");
     const header = document.createElement("th");
     const exerciseInputRow = document.createElement("tr");
     const exerciseInputData = document.createElement("td");
     const exerciseInput = document.createElement("input");
 
+    // set header items
     const set1HeaderRow = document.createElement("tr");
     const set1Header = document.createElement("th");
 
+    // set input fields
     const set1DataRow = document.createElement("tr");
     const set1RepsData = document.createElement("td");
     const set1WeightData = document.createElement("td");
     const set1RepsInput = document.createElement("input");
     const set1WeightInput = document.createElement("input");
 
+    // exercise header text
     header.innerText = "Exercise " + exerciseNumber;
     header.setAttribute("colspan", 2);
 
+    // exercise input field
     exerciseInputData.setAttribute("colspan", 2);
     exerciseInput.type = "text";
     exerciseInput.setAttribute("class", "form-exercise-title-input");
-    exerciseInput.id = "exercise" + exerciseNumber + "-name";
-    exerciseInput.name = "exercise" + exerciseNumber + "-name";
+    exerciseInput.id = exerciseNameInput;
+    exerciseInput.name = exerciseNameInput;
     exerciseInput.placeholder = "Exercise Name";
 
+    // set header text
     set1Header.innerText = "Set 1";
     set1Header.setAttribute("colspan", 2);
 
+    // set input field
     set1RepsInput.type = "number";
-    set1RepsInput.id = "exercise" + exerciseNumber + "-set1-reps";
-    set1RepsInput.name = "exercise" + exerciseNumber + "-set1-reps";
+    set1RepsInput.id = repsElem;
+    set1RepsInput.name = repsElem;
     set1RepsInput.setAttribute("class", "form-exercise");
     set1RepsInput.placeholder = "Reps";
 
+    // weight input field
     set1WeightInput.type = "number";
-    set1WeightInput.id = "exercise" + exerciseNumber + "-set1-weight";
-    set1WeightInput.name = "exercise" + exerciseNumber + "-set1-weight";
+    set1WeightInput.id = weightElem;
+    set1WeightInput.name = weightElem;
     set1WeightInput.setAttribute("class", "form-exercise");
     set1WeightInput.placeholder = "Weight";
 
@@ -215,12 +222,12 @@ function startWorkout() {
 function finishWorkout() {
     var workoutName = $("#workout-name").val();
     var rating = $("#workout-rating").val();
-    var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+    var exerciseNameInput = 'exercise' + exerciseNumber + '-name';
     var exerciseName = $(exerciseNameInput).val();
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
-    var weightValue = $(weightInputElem).val();
+    var repsElem = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightElem = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsValue = $(repsElem).val();
+    var weightValue = $(weightElem).val();
 
     finish = $.ajax({
         type: 'POST',
@@ -241,9 +248,11 @@ function finishWorkout() {
     finish.done(function(data) {
         $('#workout-name').text(data.workout_name);
         $('#workout-name').attr('disabled', true);
-        $(exerciseNameInput).attr('disabled', true);
-        $(repsInputElem).attr('disabled', true);
-        $(weightInputElem).attr('disabled', true);
+
+        $(#exerciseNameInput).attr('disabled', true);
+        $(#repsElem).attr('disabled', true);
+        $(#weightElem).attr('disabled', true);
+
         $('#finish-workout-button').attr('disabled', true);
         $('#add-exercise-button').attr('disabled', true);
         $('#add-set-button').attr('disabled', true);
