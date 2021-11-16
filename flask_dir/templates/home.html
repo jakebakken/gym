@@ -7,7 +7,12 @@
 <button type="button" class="collapsible">
     <span>{{ workout.workout_name }}</span><span> - </span>
     <span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span><span> - </span>
-    <span>duration: {{ dt.datetime.combine(dt.date(1, 1, 1), workout.workout_end_time) - dt.datetime.combine(dt.date(1, 1, 1), workout.workout_start_time) }}</span>
+    <span>
+        duration: {{ (
+        dt.datetime.combine(dt.date(1, 1, 1), workout.workout_end_time)
+        - dt.datetime.combine(dt.date(1, 1, 1), workout.workout_start_time)
+        ).strftime("%-H-%M-%S") }}
+    </span>
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
