@@ -2,9 +2,9 @@
 {% block content %}
 <h1 class="page-title">Hey {{ user.first_name }}</h1>
 <hr/>
-<p>{{ workouts }}</p>
+<p>Raw Workouts query: {{ workouts }}</p>
 <hr/>
-<p>{{ workout_names }}</p>
+<p>List Comprehended vals: {{ workout_names }}</p>
 <hr/>
 {% for workout_name in workout_names %}
     <button type="button" class="collapsible">{{ workout_name }}</button>
