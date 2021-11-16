@@ -8,7 +8,7 @@
 <button type="button" class="collapsible">{{ workout.workout_name }}</button>
 <div class="workout-contents">
     {% for exercise in workout.exercise.all() %}
-    <p>{{ exercise.name }}</p>
+    <p>{{ exercise.exercise_name }}</p>
     {% endfor %}
 </div>
 {% endfor %}
