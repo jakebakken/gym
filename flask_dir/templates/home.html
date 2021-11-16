@@ -4,7 +4,7 @@
 <br/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date }}</span>
+    <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date.strftime("%Y-%m-%d") }}</span>
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise.all() %}
