@@ -12,7 +12,10 @@ views = Blueprint('views', __name__)
 @views.route('/')
 @login_required
 def home_page():
-    return render_template('home.html', user=current_user)
+    workouts = Workout.query.filter_by(
+        user_id=current_user.id).order_by(Workout.id.desc()).all()
+
+    return render_template('home.html', user=current_user, workouts=workouts)
 
 
 @views.route('/exercise/', methods=['GET', 'POST'])
@@ -99,7 +102,6 @@ def finish_set():
     db.session.commit()
 
     return jsonify({'result': 'success'})
-
 
 
 # todo finish this func
