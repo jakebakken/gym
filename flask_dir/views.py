@@ -15,18 +15,13 @@ def home_page():
     workouts = Workout.query.filter_by(
         user_id=current_user.id).order_by(Workout.id.desc()).all()
 
-    workout_names = []
-    workout_dates = []
-    for workout in workouts:
-        workout_names.append(workout.workout_name)
-        workout_dates.append(workout.workout_date)
+    workout_names = [workout.workout_name for workout in workouts]
 
     return render_template(
         'home.html',
         user=current_user,
         workouts=workouts,
         workout_names=workout_names,
-        workout_dates=workout_dates,
     )
 
 
