@@ -7,9 +7,6 @@
 <div class="workout-contents">
     {% for exercise in workout.exercise.order_by(workout.exercise.id.asc()).all() %}
     <p>{{ exercise.exercise_name }}</p>
-        {% for set in exercise.set.order_by(exercise.set.id.asc()).all() %}
-        <p><span>{{ set.reps }}</span><span> | </span><span>{{ set.weight }}</span></p>
-        {% endfor %}
     {% endfor %}
 </div>
 {% endfor %}
