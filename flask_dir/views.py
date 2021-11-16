@@ -15,7 +15,7 @@ def home_page():
     workouts = Workout.query.filter_by(
         user_id=current_user.id).order_by(Workout.id.desc()).all()
 
-    return render_template('home.html', user=current_user, workouts=workouts, dt=dt)
+    return render_template('home.html', user=current_user, workouts=workouts)
 
 
 @views.route('/exercise/', methods=['GET', 'POST'])
