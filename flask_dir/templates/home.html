@@ -5,7 +5,7 @@
 {% for workout in workouts %}
 <button type="button" class="collapsible">{{ workout.workout_name }}</button>
 <div class="workout-contents">
-    {% for exercise in workout.exercise.all().order_by(id) %}
+    {% for exercise in workout.exercise.order_by(desc(exercise.id)).all() %}
     <p>{{ exercise.exercise_name }}</p>
     {% endfor %}
 </div>
