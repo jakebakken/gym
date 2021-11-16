@@ -8,7 +8,7 @@
     <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span>
 </button>
 <div class="workout-contents">
-    {% for exercise in workout.exercise.all() %}
+    {% for exercise in workout.exercise|sort(attribute='id') %}
     <p>{{ exercise.exercise_name }}</p>
         {% for set in exercise.set.all() %}
         <p><span>{{ set.reps }} reps</span><span> | </span><span>{{ set.weight }} lbs</span></p>
