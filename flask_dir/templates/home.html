@@ -10,7 +10,7 @@
     {% for exercise in workout.exercise.all() %}
     <p>{{ exercise.exercise_name }}</p>
         {% for set in exercise.set.all() %}
-        <p><span>{{ set.reps }}</span><span> | </span><span>{{ set.weight }}</span></p>
+        <p><span>{{ set.reps }} reps</span><span> | </span><span>{{ set.weight }} lbs</span></p>
         {% endfor %}
     {% endfor %}
 </div>

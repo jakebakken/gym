@@ -124,8 +124,8 @@ def finish_exercise():
 
     # add missing values
     current_set.set_end_time = exercise_finish_time
-    current_set.reps = reps_value
-    current_set.weight = weight_value
+    current_set.reps = reps_value if not None else 0
+    current_set.weight = weight_value if not None else 0
     current_exercise.exercise_end_time = exercise_finish_time
     current_exercise.exercise_name = exercise_name
     db.session.commit()
@@ -183,8 +183,8 @@ def finish_workout():
 
     # add all missing values
     current_set.set_end_time = workout_finish_time
-    current_set.reps = reps_value
-    current_set.weight = weight_value
+    current_set.reps = reps_value if not None else 0
+    current_set.weight = weight_value if not None else 0
     current_exercise.exercise_end_time = workout_finish_time
     current_exercise.exercise_name = exercise_name
     current_workout.workout_name = workout_name
