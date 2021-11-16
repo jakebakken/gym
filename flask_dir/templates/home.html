@@ -9,10 +9,20 @@
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
-    <p>{{ exercise.exercise_name }}</p>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">
+            {{ exercise.exercise_name }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
         {% for set in exercise.set|sort(attribute='id') %}
-        <p><span>{{ set.reps }} reps</span><span> | </span><span>{{ set.weight }} lbs</span></p>
+        <tr><td>{{ set.reps }} reps</td><td>{{ set.weight }} lbs</td></tr>
         {% endfor %}
+      </tbody>
+    </table>
     {% endfor %}
 </div>
 {% endfor %}
