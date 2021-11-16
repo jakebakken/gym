@@ -20,7 +20,7 @@
       <tbody>
         <tr><td>reps</td></tr>
         {% for set in exercise.set|sort(attribute='id') %}
-        <tr><td>{{ set.reps }}</td><td><span> | </span></td><td>{{ set.weight }} lbs</td></tr>
+        <tr><td class="reps-val">{{ set.reps }}</td><td><span> | </span></td><td>{{ set.weight }} lbs</td></tr>
         {% endfor %}
       </tbody>
     </table>
