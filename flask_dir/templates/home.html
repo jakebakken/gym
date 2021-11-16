@@ -6,8 +6,10 @@
 <hr/>
 <p>List Comprehended vals: {{ workout_names }}</p>
 <hr/>
-{% for workout_name in workout_names %}
-    <button type="button" class="collapsible">{{ workout_name }}</button>
+<p>Date Comprehended list vals: {{ workout_dates }}</p>
+<hr/>
+{% for workout_name, workout_date in workout_names, workout_dates %}
+    <button type="button" class="collapsible">{{ workout_name }}<span> | </span><span>{{ workout_date }}</span></button>
     <div class="workout-contents">
         <div>
             <p>Exercise 1</p>
