@@ -10,7 +10,7 @@
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
     <p>{{ exercise.exercise_name }}</p>
-        {% for set in exercise.set.all() %}
+        {% for set in exercise.set|sort(attribute='id') %}
         <p><span>{{ set.reps }} reps</span><span> | </span><span>{{ set.weight }} lbs</span></p>
         {% endfor %}
     {% endfor %}
