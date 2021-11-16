@@ -14,8 +14,9 @@ views = Blueprint('views', __name__)
 def home_page():
     workouts = Workout.query.filter_by(
         user_id=current_user.id).order_by(Workout.id.desc()).all()
+    names = [workout.workout_name for workout in workouts]
 
-    return render_template('home.html', user=current_user, workouts=workouts)
+    return render_template('home.html', user=current_user, workouts=workouts, names=names)
 
 
 @views.route('/exercise/', methods=['GET', 'POST'])
