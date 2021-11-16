@@ -13,7 +13,7 @@ views = Blueprint('views', __name__)
 @login_required
 def home_page():
     workouts = Workout.query.filter_by(
-        user_id=current_user.id).order_by(Workout.id.desc()).all()
+        user_id=current_user.id).order_by(Workout.id.desc()).all().Workout.workout_name
 
     workout_names = [workout.workout_name for workout in workouts]
 
