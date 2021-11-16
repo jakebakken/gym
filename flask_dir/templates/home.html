@@ -9,6 +9,7 @@
 <div class="workout-contents">
     {% for exercise in workout.exercise.all() %}
     <p>{{ exercise.name }}</p>
+    {% endfor %}
 </div>
 {% endfor %}
 <script src="{{url_for('static', filename='home.js')}}"></script>
