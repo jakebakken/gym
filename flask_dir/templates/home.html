@@ -5,15 +5,11 @@
 <p>Raw Workouts query: {{ workouts }}</p>
 <hr/>
 {% for workout in workouts %}
-    <button type="button" class="collapsible">{{ workout.workout_name }}</button>
-    <div class="workout-contents">
-        <div>
-            <p>{{ workout.exercise.order_by(exercise.id.asc()).first() }}</p>
-            <p><span>10 reps</span><span> </span><span>135 lbs</span></p>
-            <p><span>10 reps</span><span> </span><span>135 lbs</span></p>
-            <p><span>10 reps</span><span> </span><span>135 lbs</span></p>
-        </div>
-    </div>
+<button type="button" class="collapsible">{{ workout.workout_name }}</button>
+<div class="workout-contents">
+    {% for exercise in workout.exercise.all() %}
+    <p>{{ exercise.name }}</p>
+</div>
 {% endfor %}
 <script src="{{url_for('static', filename='home.js')}}"></script>
 {% endblock %}
