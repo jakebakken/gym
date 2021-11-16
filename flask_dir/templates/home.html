@@ -4,10 +4,10 @@
 <hr/>
 <p>{{ workouts }}</p>
 <hr/>
-<p>{{ names }}</p>
+<p>{{ workout_names }}</p>
 <hr/>
-{% for workout in workouts %}
-    <button type="button" class="collapsible">{{ workout }}</button>
+{% for workout_name in workout_names %}
+    <button type="button" class="collapsible">{{ workout_name }}</button>
     <div class="workout-contents">
         <div>
             <p>Exercise 1</p>
