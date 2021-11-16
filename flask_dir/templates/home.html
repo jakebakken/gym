@@ -3,7 +3,9 @@
 <h1 class="page-title">Hey {{ user.first_name }}</h1>
 <br/>
 {% for workout in workouts %}
-<button type="button" class="collapsible">{{ workout.workout_name }}</button>
+<button type="button" class="collapsible">
+    <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date }}</span>
+</button>
 <div class="workout-contents">
     {% for exercise in workout.exercise.all() %}
     <p>{{ exercise.exercise_name }}</p>
