@@ -97,8 +97,10 @@ def sign_up():
                 any(char.islower() for char in password) and \
                 any(char.isnumeric() for char in password) and \
                 any(char in special_chars for char in password):
-            # instantiate new user
+
+            # query for existing user by entered email
             user = Users.query.filter_by(email=email).first()
+
             # if user doesn't exist in database, add new user
             if not user:
                 new_user = Users(
@@ -110,7 +112,7 @@ def sign_up():
                 # add new user to db
                 db.session.add(new_user)
                 db.session.commit()
-                login_user(user, remember=True)
+                login_user(new_user, remember=True)
                 flash("Account Created", category='success')
                 return redirect(url_for('views.home_page'))
             else:
