@@ -245,7 +245,7 @@ function timerOn() {
 
     // keep 2 number for each category format
     if (ms < 100 || ms == 0) {
-        ms = '0' + ms;
+        ms = ms;
     }
     if (sec < 10 || sec == 0) {
         sec = '0' + sec;
