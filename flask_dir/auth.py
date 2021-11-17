@@ -98,7 +98,7 @@ def sign_up():
                 any(char.isnumeric() for char in password) and \
                 any(char in special_chars for char in password):
             # instantiate new user
-            user = Users.query.filter_by(email=email)
+            user = Users.query.filter_by(email=email).first()
             # if user doesn't exist in database, add new user
             if not user:
                 new_user = Users(
