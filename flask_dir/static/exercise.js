@@ -257,7 +257,7 @@ function timerOn() {
         hr = '0' + hr;
     }
 
-    timer.innerHTML(hr + ':' + min + ':' + sec + '.' + ms);
+    timer.innerHTML = hr + ':' + min + ':' + sec + '.' + ms;
 
     setTimeout("timerOn()", 10);
 };
