@@ -238,15 +238,12 @@ function timerOn() {
         min += 1;
         sec = 0;
     }
-    if (min = 60) {
+    if (min == 60) {
         hr += 1;
         min = 0;
     }
 
     // keep 2 number for each category format
-    if (ms < 100 || ms == 0) {
-        ms = ms;
-    }
     if (sec < 10 || sec == 0) {
         sec = '0' + sec;
     }
