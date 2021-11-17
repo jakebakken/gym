@@ -307,6 +307,6 @@ function timerOn() {
 
         timer.innerHTML(hr + ':' + min + ':' + sec + '.' + ms);
 
-        setTimeout("startTimer();", 10);
+        setTimeout("startTimer()", 10);
     };
 };
