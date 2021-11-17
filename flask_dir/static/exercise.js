@@ -261,6 +261,7 @@ var sec = 0;
 var ms = 0;
 
 function startTimer() {
+    ms = parseInt(ms);
     sec = parseInt(sec);
     min = parseInt(min);
     hr = parseInt(hr);
