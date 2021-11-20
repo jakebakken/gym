@@ -11,37 +11,41 @@
                 type="button"
         >Start Workout</button>
     </div>
+
+    {% if user.email == 'test@test.net' %}
+    <button type="button" class="collapsible">
+        <span>Cardio</span>
+    </button>
+    <div class="cardio-contents">
+        <input
+            type="text"
+            class="cardio-input"
+            id="cardio-name"
+            name="cardio-name"
+            placeholder="Cardio Name"
+        >
+        <input
+            type="number"
+            class="cardio-input"
+            id="cardio-duration"
+            name="cardio-duration"
+            placeholder="Duration"
+        >
+        <input
+            type="number"
+            class="cardio-input"
+            id="cardio-distance"
+            name="cardio-distance"
+            placeholder="Distance"
+        >
+    </div>
+    {% endif %}
+
     <form id="exercise-form" method="POST">
         <h5 id="page-title" align="center">Exercise</h5>
 
-        {% if user.email == 'jakebakken1@gmail.com' %}
+        {% if user.email == 'jakebakken1@gmail.com' or 'test@test.net' %}
         <h2 id="timer" align="center">00:00:00.00</h2>
-        {% endif %}
-
-        {% if user.email == 'test@test.net' %}
-        <button type="button" class="collapsible">
-            <input
-                type="text"
-                class="cardio-input"
-                id="cardio-name"
-                name="cardio-name"
-                placeholder="Cardio Name"
-            >
-            <input
-                type="number"
-                class="cardio-input"
-                id="cardio-duration"
-                name="cardio-duration"
-                placeholder="Duration"
-            >
-            <input
-                type="number"
-                class="cardio-input"
-                id="cardio-distance"
-                name="cardio-distance"
-                placeholder="Distance"
-            >
-        </button>
         {% endif %}
 
         <table id="exercise-table">
