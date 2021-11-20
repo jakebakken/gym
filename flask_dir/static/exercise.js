@@ -223,6 +223,8 @@ function startWorkout() {
 
     start.done(function() {
         $('#start-workout-button').hide();
+        $('#cardio-button').show();
+        $('#cardio-contents').show();
         $('#exercise-form').show();
         timerOn();
     });

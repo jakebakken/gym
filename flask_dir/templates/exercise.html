@@ -13,31 +13,37 @@
     </div>
 
     {% if user.email == 'test@test.net' %}
-    <button type="button" class="collapsible">
+    <button id="cardio-button" type="button" class="collapsible">
         <span>Cardio</span>
     </button>
-    <div class="cardio-contents">
-        <input
-            type="text"
-            class="cardio-input"
-            id="cardio-name"
-            name="cardio-name"
-            placeholder="Cardio Name"
-        >
-        <input
-            type="number"
-            class="cardio-input"
-            id="cardio-duration"
-            name="cardio-duration"
-            placeholder="Duration"
-        >
-        <input
-            type="number"
-            class="cardio-input"
-            id="cardio-distance"
-            name="cardio-distance"
-            placeholder="Distance"
-        >
+    <div id="cardio-contents" class="cardio-contents">
+        <div class="cardio-field">
+            <input
+                type="text"
+                class="cardio-input"
+                id="cardio-name"
+                name="cardio-name"
+                placeholder="Cardio Name"
+            >
+        </div>
+        <div class="cardio-field">
+            <input
+                type="number"
+                class="cardio-input"
+                id="cardio-duration"
+                name="cardio-duration"
+                placeholder="Duration (min)"
+            >
+        </div>
+        <div class="cardio-field">
+            <input
+                type="number"
+                class="cardio-input"
+                id="cardio-distance"
+                name="cardio-distance"
+                placeholder="Distance"
+            >
+        </div>
     </div>
     {% endif %}
 

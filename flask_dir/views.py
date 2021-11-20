@@ -87,8 +87,8 @@ def finish_set():
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
     current_set.set_end_time = set_finish_time
-    current_set.reps = reps_value if not None else 0
-    current_set.weight = weight_value if not None else 0
+    current_set.reps = reps_value if not None or not '' else 0
+    current_set.weight = weight_value if not None or not '' else 0
     db.session.commit()
 
     # start new Set
@@ -124,8 +124,8 @@ def finish_exercise():
 
     # add missing values
     current_set.set_end_time = exercise_finish_time
-    current_set.reps = reps_value if not None else 0
-    current_set.weight = weight_value if not None else 0
+    current_set.reps = reps_value if not None or not '' else 0
+    current_set.weight = weight_value if not None or not '' else 0
     current_exercise.exercise_end_time = exercise_finish_time
     current_exercise.exercise_name = exercise_name  if not None else 'NaN'
     db.session.commit()
@@ -183,13 +183,13 @@ def finish_workout():
 
     # add all missing values
     current_set.set_end_time = workout_finish_time
-    current_set.reps = reps_value if not None else 0
-    current_set.weight = weight_value if not None else 0
+    current_set.reps = reps_value if not None or not '' else 0
+    current_set.weight = weight_value if not None or not '' else 0
     current_exercise.exercise_end_time = workout_finish_time
     current_exercise.exercise_name = exercise_name if not None else 'NaN'
     current_workout.workout_name = workout_name if not None else 'NaN'
     current_workout.workout_end_time = workout_end_time
-    current_workout.rating = rating if not None else 0
+    current_workout.rating = rating if not None or not '' else 0
 
     # commit all to finish Workout
     db.session.commit()
