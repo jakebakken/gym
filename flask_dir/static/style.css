@@ -72,7 +72,7 @@
 .cardio-contents {
     display: inline
 }
-.cardio-input {
+.cardio-field {
     display: block;
 }
 #cardio-button, #cardio-contents, #exercise-form {
