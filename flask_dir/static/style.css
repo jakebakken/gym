@@ -70,6 +70,7 @@
     text-align: center;
 }
 .cardio-field {
+    display: inline-block;
     max-width: 30%;
 }
 .cardio-input {
