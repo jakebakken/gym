@@ -68,12 +68,14 @@ addSetButton.onclick = function addSet() {
     header.setAttribute("colspan", 2);
 
     repsInput.type = "number";
+    repsInput.pattern = "[0-9]*";
     repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
     repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
     repsInput.setAttribute("class", "form-exercise");
     repsInput.placeholder = "Reps";
 
     weightInput.type = "number";
+    weightInput.pattern = "[0-9]*";
     weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
     weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
     weightInput.setAttribute("class", "form-exercise");
@@ -163,12 +165,14 @@ addExerciseButton.onclick = function addExercise() {
     set1Header.setAttribute("colspan", 2);
 
     set1RepsInput.type = "number";
+    set1RepsInput.pattern = "[0-9]*";
     set1RepsInput.id = "exercise" + exerciseNumber + "-set1-reps";
     set1RepsInput.name = "exercise" + exerciseNumber + "-set1-reps";
     set1RepsInput.setAttribute("class", "form-exercise");
     set1RepsInput.placeholder = "Reps";
 
     set1WeightInput.type = "number";
+    set1WeightInput.pattern = "[0-9]*";
     set1WeightInput.id = "exercise" + exerciseNumber + "-set1-weight";
     set1WeightInput.name = "exercise" + exerciseNumber + "-set1-weight";
     set1WeightInput.setAttribute("class", "form-exercise");
