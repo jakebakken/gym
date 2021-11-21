@@ -75,7 +75,7 @@ addSetButton.onclick = function addSet() {
     repsInput.placeholder = "Reps";
 
     weightInput.type = "number";
-    weightInput.pattern = "[0-9]*";
+    weightInput.pattern = "[0-9]*(.?[0-9])?";
     weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
     weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
     weightInput.setAttribute("class", "form-exercise");
@@ -172,7 +172,7 @@ addExerciseButton.onclick = function addExercise() {
     set1RepsInput.placeholder = "Reps";
 
     set1WeightInput.type = "number";
-    set1WeightInput.pattern = "[0-9]*";
+    set1WeightInput.pattern = "[0-9]*(.?[0-9])?";
     set1WeightInput.id = "exercise" + exerciseNumber + "-set1-weight";
     set1WeightInput.name = "exercise" + exerciseNumber + "-set1-weight";
     set1WeightInput.setAttribute("class", "form-exercise");
