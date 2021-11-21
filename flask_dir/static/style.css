@@ -72,11 +72,11 @@
 }
 .cardio-field {
     display: inline-block;
-    max-width: 30%;
+    max-width: 33%;
     text-align: center;
 }
 .cardio-input {
-    max-width: 90%;
+    max-width: 97%;
 }
 #exercise-page-title, #cardio-button, #cardio-contents, #exercise-form {
     display: none;
