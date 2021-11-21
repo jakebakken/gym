@@ -57,9 +57,10 @@
   background-color: #ccc;
 }
 /* Style the collapsible content. Note: hidden by default */
-.workout-contents, #cardio-contents{
+#cardio-contents{
   padding: 0 18px;
   display: none;
+  text-align: center;
   overflow: hidden;
   background-color: #f1f1f1;
 }
@@ -72,11 +73,12 @@
 .cardio-field {
     display: inline-block;
     max-width: 30%;
+    text-align: center;
 }
 .cardio-input {
     max-width: 90%;
 }
-#cardio-button, #cardio-contents, #exercise-form {
+#exercise-page-title, #cardio-button, #cardio-contents, #exercise-form {
     display: none;
 }
 #exercise-table {
