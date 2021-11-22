@@ -79,10 +79,7 @@ function checkInfo() {
                 passwordVal: passwordVal,
             },
             success: function() {
-                console.log("user signed up");
-            },
-            error: function() {
-                console.log("user already exists")
+                console.log("signup ajax success");
             },
         });
 

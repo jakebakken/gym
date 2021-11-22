@@ -41,7 +41,7 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-@auth.route('/signup_user', methods=['POST'])
+@auth.route('/signup_user', methods=['GET', 'POST'])
 def sign_up_new_user():
     first_name = request.form['firstVal']
     last_name = request.form['lastVal']
@@ -65,8 +65,7 @@ def sign_up_new_user():
         db.session.commit()
         login_user(new_user, remember=True)
         flash("Account Created", category='success')
-        redirect(url_for('views.home_page'))
-        return jsonify({'result': 'success'})
+        return redirect(url_for('views.home_page'))
 
     else:
         flash("An account with this email already exists", category='error')
