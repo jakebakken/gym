@@ -8,20 +8,20 @@ const passwordConfirm = document.getElementById("password_confirm");
 
 
 function checkInfo() {
-    let firstValid = false;
-    let lastValid = false;
-    let usernameValid = false;
-    let emailValid = false;
-    let passwordValid = false;
-    let passwordConfirmValid = false;
-    let passwordMatch = false;
+    var firstValid = false;
+    var lastValid = false;
+    var usernameValid = false;
+    var emailValid = false;
+    var passwordValid = false;
+    var passwordConfirmValid = false;
+    var passwordMatch = false;
 
-    let firstVal = firstName.value;
-    let lastVal = lastName.value;
-    let usernameVal = username.value;
-    let emailVal = email.value;
-    let passwordVal = password.value;
-    let passwordConfirmVal = passwordConfirm.value;
+    var firstVal = firstName.value;
+    var lastVal = lastName.value;
+    var usernameVal = username.value;
+    var emailVal = email.value;
+    var passwordVal = password.value;
+    var passwordConfirmVal = passwordConfirm.value;
 
     if (firstVal.length > 1 && firstVal.length <= 50) {
         firstValid = true;
