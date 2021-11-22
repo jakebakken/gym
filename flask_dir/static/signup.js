@@ -81,7 +81,7 @@ function checkInfo() {
             success: function() {
                 console.log("user signed up");
             },
-            failure: function() {
+            error: function() {
                 console.log("user already exists")
             },
         });

@@ -70,7 +70,7 @@ def sign_up_new_user():
 
     else:
         flash("An account with this email already exists", category='error')
-        return jsonify({'result': 'failure'})
+        return jsonify({'result': 'error'})
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
