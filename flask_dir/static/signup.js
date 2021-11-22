@@ -79,9 +79,13 @@ signupButton.onclick = function checkInfo() {
                 passwordVal: passwordVal,
             },
             success: function() {
-                console.log("user signed up")
+                console.log("user signed up");
             }
-        })
+        });
+
+        signup.done(function() {
+            alert("Signup Successful");
+        });
     }
     // for each false input value, show respective p tag tip
 };
