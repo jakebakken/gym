@@ -26,43 +26,43 @@ signupButton.onclick = function checkInfo() {
     if (firstVal.length > 1 && firstVal.length <= 50) {
         firstValid = true;
     } else {
-        let firstMessage = "First name has to be between 1 - 50 letters"
+        let firstMessage = "First name has to be between 1 - 50 letters";
     }
 
     if (lastVal.length > 1 && lastVal.length <= 50) {
         lastValid = true;
     } else {
-        let lastMessage = "Last name has to be between 1 - 50 letters"
+        let lastMessage = "Last name has to be between 1 - 50 letters";
     }
 
     if (usernameVal.length > 1 && usernameVal.length <= 50) {
         usernameValid = true;
     } else {
-        let usernameMessage = "Username has to be between 1 - 50 letters"
+        let usernameMessage = "Username has to be between 1 - 50 letters";
     }
 
     if (emailVal.length > 5) {
         emailValid = true;
     } else {
-        let emailMessage = "Email is too short"
+        let emailMessage = "Email is too short";
     }
 
     if (passwordVal.length > 8) {
         passwordValid = true;
     } else {
-        let passwordMessage = "Password is too short"
+        let passwordMessage = "Password is too short";
     }
 
     if (passwordConfirmVal.length > 8) {
         passwordConfirmValid = true;
     } else {
-        let passwordConfirmMessage = "Password is too short"
+        let passwordConfirmMessage = "Password is too short";
     }
 
     if (passwordVal === passwordConfirmVal) {
         passwordMatch = true;
     } else {
-        let passwordMatchMessage = "Passwords must match"
+        let passwordMatchMessage = "Passwords must match";
     }
 
     if (firstValid==true && lastValid==true && usernameValid==true &&
