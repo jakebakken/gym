@@ -65,11 +65,12 @@ def sign_up_new_user():
         db.session.commit()
         login_user(new_user, remember=True)
         flash("Account Created", category='success')
-        return redirect(url_for('views.home_page'))
+        redirect(url_for('views.home_page'))
+        return jsonify({'result': 'success'})
+
     else:
         flash("An account with this email already exists", category='error')
-
-    return jsonify({'result': 'success'})
+        return jsonify({'result': 'failure'})
 
 
 @auth.route('/signup', methods=['GET', 'POST'])

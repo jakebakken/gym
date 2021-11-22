@@ -80,7 +80,10 @@ function checkInfo() {
             },
             success: function() {
                 console.log("user signed up");
-            }
+            },
+            failure: function() {
+                console.log("user already exists")
+            },
         });
 
         signup.done(function() {
