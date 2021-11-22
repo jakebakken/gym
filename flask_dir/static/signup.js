@@ -26,19 +26,19 @@ function checkInfo() {
     if (firstVal.length >= 1 && firstVal.length <= 50) {
         firstValid = true;
     } else {
-        var firstMessage = "First name has to be between 1 - 50 letters";
+        var firstMessage = "First name must be between 1 - 50 letters";
     }
 
     if (lastVal.length >= 1 && lastVal.length <= 50) {
         lastValid = true;
     } else {
-        var lastMessage = "Last name has to be between 1 - 50 letters";
+        var lastMessage = "Last name must be between 1 - 50 letters";
     }
 
     if (usernameVal.length >= 1 && usernameVal.length <= 50) {
         usernameValid = true;
     } else {
-        var usernameMessage = "Username has to be between 1 - 50 letters";
+        var usernameMessage = "Username must be between 1 - 50 letters";
     }
 
     if (emailVal.length >= 5) {
@@ -53,12 +53,6 @@ function checkInfo() {
         var passwordMessage = "Password is too short";
     }
 
-    if (passwordConfirmVal.length > 8) {
-        passwordConfirmValid = true;
-    } else {
-        var passwordConfirmMessage = "Password is too short";
-    }
-
     if (passwordVal === passwordConfirmVal) {
         passwordMatch = true;
     } else {
@@ -66,8 +60,7 @@ function checkInfo() {
     }
 
     if (firstValid==true && lastValid==true && usernameValid==true &&
-    emailValid==true && passwordValid==true && passwordConfirmValid==true
-    && passwordMatch==true) {
+    emailValid==true && passwordValid==true && passwordMatch==true) {
         signup = $.ajax({
             type: 'POST',
             url: '/signup_user',

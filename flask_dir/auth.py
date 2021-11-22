@@ -64,7 +64,7 @@ def sign_up_new_user():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user, remember=True)
-        return redirect(url_for('views.home_page'))
+        return render_template('home.html', user=current_user)
 
     else:
         flash("An account with this email already exists", category='error')
@@ -73,4 +73,4 @@ def sign_up_new_user():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
-    return render_template('signup.html', user=current_user)
+    pass
