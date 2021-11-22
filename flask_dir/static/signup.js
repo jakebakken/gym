@@ -23,46 +23,46 @@ function checkInfo() {
     var passwordVal = password.value;
     var passwordConfirmVal = passwordConfirm.value;
 
-    if (firstVal.length > 1 && firstVal.length <= 50) {
+    if (firstVal.length >= 1 && firstVal.length <= 50) {
         firstValid = true;
     } else {
-        let firstMessage = "First name has to be between 1 - 50 letters";
+        var firstMessage = "First name has to be between 1 - 50 letters";
     }
 
-    if (lastVal.length > 1 && lastVal.length <= 50) {
+    if (lastVal.length >= 1 && lastVal.length <= 50) {
         lastValid = true;
     } else {
-        let lastMessage = "Last name has to be between 1 - 50 letters";
+        var lastMessage = "Last name has to be between 1 - 50 letters";
     }
 
-    if (usernameVal.length > 1 && usernameVal.length <= 50) {
+    if (usernameVal.length >= 1 && usernameVal.length <= 50) {
         usernameValid = true;
     } else {
-        let usernameMessage = "Username has to be between 1 - 50 letters";
+        var usernameMessage = "Username has to be between 1 - 50 letters";
     }
 
-    if (emailVal.length > 5) {
+    if (emailVal.length >= 5) {
         emailValid = true;
     } else {
-        let emailMessage = "Email is too short";
+        var emailMessage = "Email is too short";
     }
 
     if (passwordVal.length > 8) {
         passwordValid = true;
     } else {
-        let passwordMessage = "Password is too short";
+        var passwordMessage = "Password is too short";
     }
 
     if (passwordConfirmVal.length > 8) {
         passwordConfirmValid = true;
     } else {
-        let passwordConfirmMessage = "Password is too short";
+        var passwordConfirmMessage = "Password is too short";
     }
 
     if (passwordVal === passwordConfirmVal) {
         passwordMatch = true;
     } else {
-        let passwordMatchMessage = "Passwords must match";
+        var passwordMatchMessage = "Passwords must match";
     }
 
     if (firstValid==true && lastValid==true && usernameValid==true &&
@@ -84,7 +84,7 @@ function checkInfo() {
         });
 
         signup.done(function() {
-            alert("Signup Successful");
+            alert("Account Created");
         });
     }
     // for each false input value, show respective p tag tip
