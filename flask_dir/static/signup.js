@@ -7,21 +7,21 @@ const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
 
-signupButton.onclick = function checkInfo() {
-    firstValid = false;
-    lastValid = false;
-    usernameValid = false;
-    emailValid = false;
-    passwordValid = false;
-    passwordConfirmValid = false;
-    passwordMatch = false;
+function checkInfo() {
+    let firstValid = false;
+    let lastValid = false;
+    let usernameValid = false;
+    let emailValid = false;
+    let passwordValid = false;
+    let passwordConfirmValid = false;
+    let passwordMatch = false;
 
-    firstVal = firstName.value;
-    lastVal = lastName.value;
-    usernameVal = username.value;
-    emailVal = email.value;
-    passwordVal = password.value;
-    passwordConfirmVal = passwordConfirm.value;
+    let firstVal = firstName.value;
+    let lastVal = lastName.value;
+    let usernameVal = username.value;
+    let emailVal = email.value;
+    let passwordVal = password.value;
+    let passwordConfirmVal = passwordConfirm.value;
 
     if (firstVal.length > 1 && firstVal.length <= 50) {
         firstValid = true;
