@@ -25,7 +25,7 @@ var passwordConfirmVal = passwordConfirm.value;
 
 
 firstName.addEventListener('input', function() {
-    var firstVal = firstName.value;
+    const firstVal = firstName.value;
     var firstValid = false;
 
     if (firstVal.length < 1) {
