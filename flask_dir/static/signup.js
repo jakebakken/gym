@@ -6,7 +6,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
-var firstMessage = document.getElementById("first-name-message");
+const firstMessage = document.getElementById("first-name-message");
 
 var lastVal = lastName.value;
 // const lastMessage = document.getElementById("last-name-message");
