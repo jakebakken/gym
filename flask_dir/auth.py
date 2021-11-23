@@ -68,15 +68,6 @@ def sign_up_new_user():
         result = {'url': url_for('views.home_page')}
         return jsonify(result)
 
-        # todo this is returning from the ajax func, so maybe have to manually
-        #  specify a return GET value for the home page ?? because everything
-        #  works except the redirection to home after new user created
-
     else:
-        flash("An account with this email already exists", category='error')
+        # todo tell frontend a user by this email already exists
         return jsonify({'result': 'error'})
-
-
-@auth.route('/signup', methods=['GET', 'POST'])
-def sign_up():
-    pass

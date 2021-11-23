@@ -6,23 +6,23 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
+var firstValid = false;
+var lastValid = false;
+var usernameValid = false;
+var emailValid = false;
+var passwordValid = false;
+var passwordConfirmValid = false;
+var passwordMatch = false;
+
+var firstVal = firstName.value;
+var lastVal = lastName.value;
+var usernameVal = username.value;
+var emailVal = email.value;
+var passwordVal = password.value;
+var passwordConfirmVal = passwordConfirm.value;
+
 
 function checkInfo() {
-    var firstValid = false;
-    var lastValid = false;
-    var usernameValid = false;
-    var emailValid = false;
-    var passwordValid = false;
-    var passwordConfirmValid = false;
-    var passwordMatch = false;
-
-    var firstVal = firstName.value;
-    var lastVal = lastName.value;
-    var usernameVal = username.value;
-    var emailVal = email.value;
-    var passwordVal = password.value;
-    var passwordConfirmVal = passwordConfirm.value;
-
     if (firstVal.length >= 1 && firstVal.length <= 50) {
         firstValid = true;
     } else {
