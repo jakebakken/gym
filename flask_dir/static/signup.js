@@ -71,14 +71,20 @@ function checkInfo() {
                 emailVal: emailVal,
                 passwordVal: passwordVal,
             },
-            success: function() {
-                console.log("signup ajax success");
+            success: function(data) {
+                console.log("signup ajax called");
+                window.location.href = data['url'];
+            },
+            error: function(response) {
+                alert(response);
             },
         });
 
-        signup.done(function() {
-            alert("Account Created");
-        });
+        // signup.done(function() {
+        //     alert("Account Created");
+        // });
+    } else {
+        // for each false input value, show respective p tag tip
+
     }
-    // for each false input value, show respective p tag tip
 };

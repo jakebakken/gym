@@ -64,7 +64,13 @@ def sign_up_new_user():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user, remember=True)
-        return render_template('home.html', user=current_user)
+
+        result = {'url': url_for('login.html')}
+        return jsonify(result)
+
+        # todo this is returning from the ajax func, so maybe have to manually
+        #  specify a return GET value for the home page ?? because everything
+        #  works except the redirection to home after new user created
 
     else:
         flash("An account with this email already exists", category='error')
