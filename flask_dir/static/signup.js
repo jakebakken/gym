@@ -6,9 +6,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
-var firstVal = firstName.value;
-var firstValid = false;
-const firstMessage = document.getElementById("first-name-message");
+var firstMessage = document.getElementById("first-name-message");
 
 var lastVal = lastName.value;
 // const lastMessage = document.getElementById("last-name-message");
@@ -27,14 +25,15 @@ var passwordConfirmVal = passwordConfirm.value;
 
 
 firstName.addEventListener('input', function() {
+    var firstVal = firstName.value;
+    var firstValid = false;
+
     if (firstVal.length < 1) {
         firstMessage.style.display = "block";
         firstMessage.innerHTML = "First name required";
-        firstValid = false;
     } else if (firstVal.length > 50) {
         firstMessage.style.display = "block";
         firstMessage.innerHTML = "First name is too long";
-        firstValid = false;
     } else {
         firstMessage.style.display = "none";
         firstValid = true;
