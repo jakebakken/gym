@@ -6,23 +6,24 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
-const firstVal = firstName.value;
+var firstVal = firstName.value;
+var firstValid = false;
 const firstMessage = document.getElementById("first-name-message");
 
-const lastVal = lastName.value;
-const lastMessage = document.getElementById("last-name-message");
+// const lastVal = lastName.value;
+// const lastMessage = document.getElementById("last-name-message");
 
-const usernameVal = username.value;
-const usernameMessage = document.getElementById("username-message");
+// const usernameVal = username.value;
+// const usernameMessage = document.getElementById("username-message");
 
-const emailVal = email.value;
-const emailMessage = document.getElementById("email-message");
+// const emailVal = email.value;
+// const emailMessage = document.getElementById("email-message");
 
-const passwordVal = password.value;
-const passwordMessage = document.getElementById("password-message");
+// const passwordVal = password.value;
+// const passwordMessage = document.getElementById("password-message");
 
-const passwordConfirmVal = passwordConfirm.value;
-const passwordConfirmMessage = document.getElementById("password-confirm-message");
+// const passwordConfirmVal = passwordConfirm.value;
+// const passwordConfirmMessage = document.getElementById("password-confirm-message");
 
 
 firstName.addEventListener('input', function() {
