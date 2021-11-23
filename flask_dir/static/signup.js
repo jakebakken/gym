@@ -13,10 +13,18 @@ const emailMessage = document.getElementById("email-message");
 const passwordMessage = document.getElementById("password-message");
 const passwordConfirmMessage = document.getElementById("password-confirm-message");
 
+var firstValid = false;
+var lastValid = false;
+var usernameValid = false;
+var emailValid = false;
+var passwordValid = false;
+var passwordConfirmValid = false;
+var passwordMatch = false;
+
 
 firstName.addEventListener('input', function() {
     const firstVal = firstName.value;
-    var firstValid = false;
+    firstValid = false;
 
     if (firstVal.length < 1) {
         firstMessage.style.display = "block";
@@ -32,7 +40,7 @@ firstName.addEventListener('input', function() {
 
 lastName.addEventListener('input', function() {
     const lastVal = lastName.value;
-    var lastValid = false;
+    lastValid = false;
 
     if (lastVal.length < 1) {
         lastMessage.style.display = "block";
@@ -48,7 +56,7 @@ lastName.addEventListener('input', function() {
 
 username.addEventListener('input', function() {
     const usernameVal = username.value;
-    var usernameValid = false;
+    usernameValid = false;
 
     if (usernameVal.length < 1) {
         usernameMessage.style.display = "block";
@@ -64,7 +72,7 @@ username.addEventListener('input', function() {
 
 email.addEventListener('input', function() {
     const emailVal = email.value;
-    var emailValid = false;
+    emailValid = false;
 
     if (emailVal.length < 1) {
         emailMessage.style.display = "block";
@@ -84,7 +92,7 @@ email.addEventListener('input', function() {
 
 password.addEventListener('input', function() {
     const passwordVal = password.value;
-    var passwordValid = false;
+    passwordValid = false;
 
     if (passwordVal.length < 1) {
         passwordMessage.style.display = "block";
@@ -102,8 +110,8 @@ password.addEventListener('input', function() {
 passwordConfirm.addEventListener('input', function() {
     const passwordVal = password.value;
     const passwordConfirmVal = passwordConfirm.value;
-    var passwordConfirmValid = false;
-    var passwordMatch = false;
+    passwordConfirmValid = false;
+    passwordMatch = false;
 
     if (passwordConfirmVal.length < 1) {
         passwordConfirmMessage.style.display = "block";
