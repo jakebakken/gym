@@ -29,16 +29,16 @@ const firstMessage = document.getElementById("first-name-message");
 firstName.addEventListener('input', function() {
     if (firstVal.length < 1) {
         firstMessage.style.display = "block";
-        firstMessage.innerHTML = "First name is required";
-        var firstValid = false;
+        firstMessage.innerHTML = "First name required";
+        firstValid = false;
     } else if (firstVal.length > 50) {
         firstMessage.style.display = "block";
         firstMessage.innerHTML = "First name is too long";
-        var firstValid = false;
+        firstValid = false;
     } else {
         firstMessage.style.display = "none";
-        var firstValid = true;
-    };
+        firstValid = true;
+    }
 });
 
 
