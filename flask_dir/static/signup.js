@@ -141,4 +141,5 @@ function checkInfo() {
                 alert(response);
             },
         });
+    };
 };
