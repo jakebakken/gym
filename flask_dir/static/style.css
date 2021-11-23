@@ -1,6 +1,9 @@
 #signup-form, #login-form {
     text-align: center;
 }
+.signup-message {
+    font-size: 0.75rem;
+}
 .signup-form-group, .login-form-group {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

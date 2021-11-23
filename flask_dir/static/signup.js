@@ -7,21 +7,11 @@ const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
 const firstMessage = document.getElementById("first-name-message");
-
-var lastVal = lastName.value;
-// const lastMessage = document.getElementById("last-name-message");
-
-var usernameVal = username.value;
-// const usernameMessage = document.getElementById("username-message");
-
-var emailVal = email.value;
-// const emailMessage = document.getElementById("email-message");
-
-var passwordVal = password.value;
-// const passwordMessage = document.getElementById("password-message");
-
-var passwordConfirmVal = passwordConfirm.value;
-// const passwordConfirmMessage = document.getElementById("password-confirm-message");
+const lastMessage = document.getElementById("last-name-message");
+const usernameMessage = document.getElementById("username-message");
+const emailMessage = document.getElementById("email-message");
+const passwordMessage = document.getElementById("password-message");
+const passwordConfirmMessage = document.getElementById("password-confirm-message");
 
 
 firstName.addEventListener('input', function() {
@@ -40,32 +30,63 @@ firstName.addEventListener('input', function() {
     }
 });
 
+lastName.addEventListener('input', function() {
+    const lastVal = lastName.value;
+    var lastValid = false;
+
+    if (lastVal.length < 1) {
+        lastMessage.style.display = "block";
+        lastMessage.innerHTML = "Last name required";
+    } else if (lastVal.length > 50) {
+        lastMessage.style.display = "block";
+        lastMessage.innerHTML = "Last name is too long";
+    } else {
+        lastMessage.style.display = "none";
+        lastValid = true;
+    }
+});
+
+username.addEventListener('input', function() {
+    const usernameVal = username.value;
+    var usernameValid = false;
+
+    if (usernameVal.length < 1) {
+        usernameMessage.style.display = "block";
+        usernameMessage.innerHTML = "Username required";
+    } else if (usernameVal.length > 50) {
+        usernameMessage.style.display = "block";
+        usernameMessage.innerHTML = "Username is too long";
+    } else {
+        usernameMessage.style.display = "none";
+        usernameValid = true;
+    }
+});
+
+email.addEventListener('input', function() {
+    const emailVal = email.value;
+    var emailValid = false;
+
+    if (emailVal.length < 1) {
+        emailMessage.style.display = "block";
+        emailMessage.innerHTML = "Email required";
+    } else if (emailVal.length <= 5) {
+        // this will need to be a more complex function, regex
+        emailMessage.style.display = "block";
+        emailMessage.innerHTML = "Email is invalid";
+    } else if (emailVal.length > 100) {
+        emailMessage.style.display = "block";
+        emailMessage.innerHTML = "Email is too long";
+    } else {
+        emailMessage.style.display = "none";
+        emailValid = true;
+    }
+});
+
 
 function checkInfo() {
-    var lastValid = false;
-    var usernameValid = false;
-    var emailValid = false;
     var passwordValid = false;
     var passwordConfirmValid = false;
     var passwordMatch = false;
-
-    if (lastVal.length >= 1 && lastVal.length <= 50) {
-        lastValid = true;
-    } else {
-        var lastMessage = "Last name must be between 1 - 50 letters";
-    }
-
-    if (usernameVal.length >= 1 && usernameVal.length <= 50) {
-        usernameValid = true;
-    } else {
-        var usernameMessage = "Username must be between 1 - 50 letters";
-    }
-
-    if (emailVal.length >= 5) {
-        emailValid = true;
-    } else {
-        var emailMessage = "Email is too short";
-    }
 
     if (passwordVal.length > 8) {
         passwordValid = true;
