@@ -13,6 +13,14 @@ const emailMessage = document.getElementById("email-message");
 const passwordMessage = document.getElementById("password-message");
 const passwordConfirmMessage = document.getElementById("password-confirm-message");
 
+const firstVal = firstName.value;
+const lastVal = lastName.value;
+const usernameVal = username.value;
+const emailVal = email.value;
+const passwordVal = password.value;
+const passwordVal = password.value;
+const passwordConfirmVal = passwordConfirm.value;
+
 var firstValid = false;
 var lastValid = false;
 var usernameValid = false;
@@ -23,7 +31,7 @@ var passwordMatch = false;
 
 
 firstName.addEventListener('input', function() {
-    const firstVal = firstName.value;
+    // const firstVal = firstName.value;
     firstValid = false;
 
     if (firstVal.length < 1) {
@@ -39,7 +47,7 @@ firstName.addEventListener('input', function() {
 });
 
 lastName.addEventListener('input', function() {
-    const lastVal = lastName.value;
+    // const lastVal = lastName.value;
     lastValid = false;
 
     if (lastVal.length < 1) {
@@ -55,7 +63,7 @@ lastName.addEventListener('input', function() {
 });
 
 username.addEventListener('input', function() {
-    const usernameVal = username.value;
+    // const usernameVal = username.value;
     usernameValid = false;
 
     if (usernameVal.length < 1) {
@@ -71,7 +79,7 @@ username.addEventListener('input', function() {
 });
 
 email.addEventListener('input', function() {
-    const emailVal = email.value;
+    // const emailVal = email.value;
     emailValid = false;
 
     if (emailVal.length < 1) {
@@ -91,7 +99,7 @@ email.addEventListener('input', function() {
 });
 
 password.addEventListener('input', function() {
-    const passwordVal = password.value;
+    // const passwordVal = password.value;
     passwordValid = false;
 
     if (passwordVal.length < 1) {
@@ -108,8 +116,8 @@ password.addEventListener('input', function() {
 });
 
 passwordConfirm.addEventListener('input', function() {
-    const passwordVal = password.value;
-    const passwordConfirmVal = passwordConfirm.value;
+    // const passwordVal = password.value;
+    // const passwordConfirmVal = passwordConfirm.value;
     passwordConfirmValid = false;
     passwordMatch = false;
 
