@@ -66,7 +66,7 @@ def sign_up_new_user():
         login_user(new_user, remember=True)
 
         result = {'url': url_for('login.html')}
-        return jsonify(result)
+        return jsonify({'result': result})
 
         # todo this is returning from the ajax func, so maybe have to manually
         #  specify a return GET value for the home page ?? because everything

@@ -71,9 +71,9 @@ function checkInfo() {
                 emailVal: emailVal,
                 passwordVal: passwordVal,
             },
-            success: function(data) {
+            success: function(result) {
                 console.log("signup ajax called");
-                window.location.href = data['url'];
+                window.location.href = result['url'];
             },
             error: function(response) {
                 alert(response);
