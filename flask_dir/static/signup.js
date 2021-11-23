@@ -10,19 +10,19 @@ var firstVal = firstName.value;
 var firstValid = false;
 const firstMessage = document.getElementById("first-name-message");
 
-// const lastVal = lastName.value;
+var lastVal = lastName.value;
 // const lastMessage = document.getElementById("last-name-message");
 
-// const usernameVal = username.value;
+var usernameVal = username.value;
 // const usernameMessage = document.getElementById("username-message");
 
-// const emailVal = email.value;
+var emailVal = email.value;
 // const emailMessage = document.getElementById("email-message");
 
-// const passwordVal = password.value;
+var passwordVal = password.value;
 // const passwordMessage = document.getElementById("password-message");
 
-// const passwordConfirmVal = passwordConfirm.value;
+var passwordConfirmVal = passwordConfirm.value;
 // const passwordConfirmMessage = document.getElementById("password-confirm-message");
 
 
