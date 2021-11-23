@@ -6,28 +6,48 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("password_confirm");
 
-var firstValid = false;
-var lastValid = false;
-var usernameValid = false;
-var emailValid = false;
-var passwordValid = false;
-var passwordConfirmValid = false;
-var passwordMatch = false;
+const firstVal = firstName.value;
+const firstMessage = document.getElementById("first-name-message");
 
-var firstVal = firstName.value;
-var lastVal = lastName.value;
-var usernameVal = username.value;
-var emailVal = email.value;
-var passwordVal = password.value;
-var passwordConfirmVal = passwordConfirm.value;
+const lastVal = lastName.value;
+const lastMessage = document.getElementById("last-name-message");
+
+const usernameVal = username.value;
+const usernameMessage = document.getElementById("username-message");
+
+const emailVal = email.value;
+const emailMessage = document.getElementById("email-message");
+
+const passwordVal = password.value;
+const passwordMessage = document.getElementById("password-message");
+
+const passwordConfirmVal = passwordConfirm.value;
+const passwordConfirmMessage = document.getElementById("password-confirm-message");
+
+
+firstName.addEventListener('input', function() {
+    if (firstVal.length < 1) {
+        firstMessage.style.display = "block";
+        firstMessage.innerHTML = "First name is required";
+        var firstValid = false;
+    } else if (firstVal.length > 50) {
+        firstMessage.style.display = "block";
+        firstMessage.innerHTML = "First name is too long";
+        var firstValid = false;
+    } else {
+        firstMessage.style.display = "none";
+        var firstValid = true;
+    };
+});
 
 
 function checkInfo() {
-    if (firstVal.length >= 1 && firstVal.length <= 50) {
-        firstValid = true;
-    } else {
-        var firstMessage = "First name must be between 1 - 50 letters";
-    }
+    var lastValid = false;
+    var usernameValid = false;
+    var emailValid = false;
+    var passwordValid = false;
+    var passwordConfirmValid = false;
+    var passwordMatch = false;
 
     if (lastVal.length >= 1 && lastVal.length <= 50) {
         lastValid = true;
