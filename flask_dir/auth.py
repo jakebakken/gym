@@ -65,7 +65,7 @@ def sign_up_new_user():
         db.session.commit()
         login_user(new_user, remember=True)
 
-        result = {'url': url_for('login.html')}
+        result = {'url': url_for('home.html')}
         return jsonify({'result': result})
 
         # todo this is returning from the ajax func, so maybe have to manually
