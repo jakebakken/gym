@@ -82,24 +82,45 @@ email.addEventListener('input', function() {
     }
 });
 
-
-function checkInfo() {
+password.addEventListener('input', function() {
+    const passwordVal = password.value;
     var passwordValid = false;
+
+    if (passwordVal.length < 1) {
+        passwordMessage.style.display = "block";
+        passwordMessage.innerHTML = "Password required";
+    } else if (passwordVal.length < 8) {
+        // this will need to be a more complex function, regex
+        passwordMessage.style.display = "block";
+        passwordMessage.innerHTML = "Password must be at least 8 characters";
+    } else {
+        passwordMessage.style.display = "none";
+        passwordValid = true;
+    }
+});
+
+passwordConfirm.addEventListener('input', function() {
+    const passwordVal = password.value;
+    const passwordConfirmVal = passwordConfirm.value;
     var passwordConfirmValid = false;
     var passwordMatch = false;
 
-    if (passwordVal.length > 8) {
-        passwordValid = true;
+    if (passwordConfirmVal.length < 1) {
+        passwordConfirmMessage.style.display = "block";
+        passwordConfirmMessage.innerHTML = "Password confirmation required";
+    } else if (passwordConfirmVal !== passwordVal) {
+        // this will need to be a more complex function, regex
+        passwordConfirmMessage.style.display = "block";
+        passwordConfirmMessage.innerHTML = "Passwords must match";
     } else {
-        var passwordMessage = "Password is too short";
-    }
-
-    if (passwordVal === passwordConfirmVal) {
+        passwordConfirmMessage.style.display = "none";
+        passwordConfirmValid = true;
         passwordMatch = true;
-    } else {
-        var passwordMatchMessage = "Passwords must match";
     }
+});
 
+
+function checkInfo() {
     if (firstValid==true && lastValid==true && usernameValid==true &&
     emailValid==true && passwordValid==true && passwordMatch==true) {
         signup = $.ajax({
@@ -120,12 +141,4 @@ function checkInfo() {
                 alert(response);
             },
         });
-
-        // signup.done(function() {
-        //     alert("Account Created");
-        // });
-    } else {
-        // for each false input value, show respective p tag tip
-
-    }
 };
