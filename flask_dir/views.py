@@ -66,9 +66,10 @@ def start_workout():
     db.session.add(start_of_set)
     db.session.commit()
 
-    return jsonify({
-        'result': 'success',
-    })
+    return jsonify({'result': 'success'})
+
+
+# todo route for cardio
 
 
 @views.route('/finish-set', methods=['POST'])
