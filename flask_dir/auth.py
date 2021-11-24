@@ -23,12 +23,12 @@ def login():
     if user:
         if check_password_hash(user.password, password):
             login_user(user, remember=True)
-            result = {'result': 'success', 'url': url_for('views.home_page')}
+            result = {'status': 'success', 'url': url_for('views.home_page')}
         else:
-            result = {'result': 'error', 'message': "Incorrect password, try again"}
+            result = {'status': 'error', 'message': "Incorrect password, try again"}
 
     else:
-        result = {'result': 'error', 'message': "Account with this email was not found"}
+        result = {'status': 'error', 'message': "Account with this email was not found"}
 
     return jsonify(result)
 
