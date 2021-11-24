@@ -24,9 +24,18 @@
         />
     </div>
     <br/>
-    <button type="submit" class="btn btn-primary" style="margin-bottom: 30px;">Login</button>
+    <button
+            id="login-button"
+            name="login-button"
+            value="login-button"
+            type="button"
+            class="btn btn-primary"
+            style="margin-bottom: 30px;"
+            onclick="loginUser();"
+    >Login</button>
     <p>
         Don't have an account? <a style="color: #0095f6;" href="/signup"><span>Sign Up</span></a>
     </p>
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
 </form>
 {% endblock %}

@@ -18,7 +18,6 @@ var lastVal = lastName.value;
 var usernameVal = username.value;
 var emailVal = email.value;
 var passwordVal = password.value;
-var passwordVal = password.value;
 var passwordConfirmVal = passwordConfirm.value;
 
 var firstValid = false;
@@ -156,7 +155,7 @@ function checkInfo() {
                 } else if (result['status'] == 'error') {
                     alert(result['message']);
                 } else {
-                    console.log("ajax success handler error");
+                    console.log("signup ajax success handler error");
                 }
             },
             error: function(response) {

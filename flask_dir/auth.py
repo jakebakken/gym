@@ -13,25 +13,24 @@ auth = Blueprint('auth', __name__)
 DATABASE_URL = os.environ['DATABASE_URL']
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login_user', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+    email = request.form['emailVal']
+    password = request.form['passwordVal']
 
-        # query database to see if user exists
-        user = Users.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                login_user(user, remember=True)
-                return redirect(url_for('views.home_page'))
-            else:
-                flash("Incorrect password, try again", category='error')
+    # query database to see if user exists
+    user = Users.query.filter_by(email=email).first()
+    if user:
+        if check_password_hash(user.password, password):
+            login_user(user, remember=True)
+            result = ({'result': 'success', 'url': url_for('views.home_page')})
         else:
-            flash("Account with this email was not found", category='error')
-            return redirect(url_for('views.login_page'))
+            result = ({'result': 'error', 'message': "Incorrect password, try again"})
 
-    return render_template('login.html', user=current_user)
+    else:
+        result = ({'result': 'error', 'message': "Account with this email was not found"})
+
+    return jsonify(result)
 
 
 @auth.route('/logout')
@@ -66,9 +65,8 @@ def sign_up_new_user():
         login_user(new_user, remember=True)
 
         result = {'status': 'success', 'url': url_for('views.home_page')}
-        return jsonify(result)
 
     else:
-        # todo tell frontend a user by this email already exists
         result = {'status': 'error', 'message': 'User with this email already exists'}
-        return jsonify(result)
+
+    return jsonify(result)
