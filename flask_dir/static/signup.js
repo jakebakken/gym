@@ -151,7 +151,13 @@ function checkInfo() {
             },
             success: function(result) {
                 console.log("signup ajax called");
-                window.location.href = result['url'];
+                if (result['status'] == 'success') {
+                    window.location.href = result['url'];
+                } else if (result['status'] == 'error') {
+                    alert(result['message']);
+                } else {
+                    console.log("ajax success handler error");
+                }
             },
             error: function(response) {
                 alert(response);

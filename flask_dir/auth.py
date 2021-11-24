@@ -65,9 +65,10 @@ def sign_up_new_user():
         db.session.commit()
         login_user(new_user, remember=True)
 
-        result = {'url': url_for('views.home_page')}
+        result = {'status': 'success', 'url': url_for('views.home_page')}
         return jsonify(result)
 
     else:
         # todo tell frontend a user by this email already exists
-        return jsonify({'result': 'error'})
+        result = {'status': 'error', 'message': 'User with this email already exists'}
+        return jsonify(result)
