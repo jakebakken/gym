@@ -9,7 +9,7 @@ function loginUser() {
 
     login = $.ajax({
         type: 'POST',
-        url: '/login_user',
+        url: '/login',
         data: {
             emailVal: emailVal,
             passwordVal: passwordVal,

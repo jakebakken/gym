@@ -13,7 +13,7 @@ auth = Blueprint('auth', __name__)
 DATABASE_URL = os.environ['DATABASE_URL']
 
 
-@auth.route('/login_user', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     email = request.form['emailVal']
     password = request.form['passwordVal']
