@@ -20,17 +20,18 @@ def login():
 
     # query database to see if user exists
     user = Users.query.filter_by(email=email).first()
+
     if user:
         if check_password_hash(user.password, password):
             login_user(user, remember=True)
             result = {'status': 'success', 'url': url_for('views.home_page')}
+            return jsonify(result)
         else:
-            result = {'status': 'error', 'message': "Incorrect password, try again"}
-
+            result = {'status': 'incorrect_pass', 'message': "Incorrect password, try again"}
+            return jsonify(result)
     else:
-        result = {'status': 'error', 'message': "Account with this email was not found"}
-
-    return jsonify(result)
+        result = {'status': 'email_not_found', 'message': "Account with this email was not found"}
+        return jsonify(result)
 
 
 @auth.route('/logout')

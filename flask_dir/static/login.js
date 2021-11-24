@@ -18,7 +18,9 @@ function loginUser() {
             console.log("login ajax called");
             if (result['status'] == 'success') {
                 window.location.href = result['url'];
-            } else if (result['status'] == 'error') {
+            } else if (result['status'] == 'incorrect_pass') {
+                alert(result['message']);
+            } else if (result['status'] == 'email_not_found') {
                 alert(result['message']);
             } else {
                 console.log("login ajax success handler error");
