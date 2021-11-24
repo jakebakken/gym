@@ -2,11 +2,11 @@ const loginButton = document.getElementById("login-button");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 
-var emailVal = email.value;
-var passwordVal = password.value;
-
 
 function loginUser() {
+    var emailVal = email.value;
+    var passwordVal = password.value;
+
     login = $.ajax({
         type: 'POST',
         url: '/login_user',
