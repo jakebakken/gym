@@ -47,9 +47,6 @@
 #workout-name {
     padding: 0.5rem 0.5rem;
 }
-.workout-rating {
-    text-align: left;
-}
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
   background-color: #eee;
@@ -74,7 +71,10 @@
   overflow: hidden;
   background-color: #f1f1f1;
 }
-.reps-val {
+.exercise-data {
+    text-align: left;
+}
+.workout-table {
     text-align: center;
 }
 #start-workout-div {
