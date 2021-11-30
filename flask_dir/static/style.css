@@ -67,12 +67,9 @@
 #cardio-contents, .workout-contents{
   padding: 1.5rem 1.5rem;
   display: none;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
   background-color: #f1f1f1;
-}
-.exercise-data {
-    text-align: left;
 }
 .workout-table {
     text-align: center;

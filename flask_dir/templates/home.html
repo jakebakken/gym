@@ -8,7 +8,6 @@
     <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span>
 </button>
 <div class="workout-contents">
-    <p class="workout-rating">Workout Rating: {{ workout.rating }}</p>
     {% for exercise in workout.exercise|sort(attribute='id') %}
     <table>
       <thead>
@@ -19,14 +18,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>reps</td></tr>
+        <tr><th colspan="1">reps</th></tr>
         {% for set in exercise.set|sort(attribute='id') %}
-        <tr><td class="exercise-data">
-            {{ set.reps }}<span> | </span>{{ set.weight }} lbs
-        </td></tr>
+        <tr>
+            <td class="exercise-data">{{ set.reps }}</td>
+            <td><span> | </span></td>
+            <td>{{ set.weight }} lbs</td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>
+    <p class="workout-rating">Workout Rating: {{ workout.rating }}</p>
     {% endfor %}
 </div>
 {% endfor %}
