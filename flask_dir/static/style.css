@@ -91,6 +91,9 @@
 #exercise-page-title, #cardio-button, #cardio-contents, #exercise-form {
     display: none;
 }
+#exercise-form {
+    margin: 1.5rem 1rem;
+}
 #exercise-table {
     text-align: center;
     max-width: 100%;
