@@ -71,8 +71,10 @@
   overflow: hidden;
   background-color: #f1f1f1;
 }
-.exercise-header {
-    border: 1px solid lightgrey;
+.exercise-display-table {
+    margin: auto;
+}
+.reps-header, .weight-header {
     padding: 0.5rem 1rem;
 }
 .exercise-name {

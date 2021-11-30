@@ -10,11 +10,11 @@
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
     <p class="exercise-name">{{ exercise.exercise_name }}</p>
-    <table>
+    <table class="exercise-display-table">
       <thead>
         <tr>
-            <th class="exercise-header" scope="col">reps</th>
-            <th class="exercise-header" scope="col">weight</th>
+            <th class="reps-header" scope="col">reps</th>
+            <th class="weight-header" scope="col">weight</th>
         </tr>
       </thead>
       <tbody>
