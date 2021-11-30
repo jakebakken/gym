@@ -5,7 +5,7 @@
 <hr/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span>
+    <span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span><span>&#8212;</span><span>{{ workout.workout_name }}</span>
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}

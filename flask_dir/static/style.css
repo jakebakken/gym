@@ -65,7 +65,7 @@
 }
 /* Style the collapsible content. Note: hidden by default */
 #cardio-contents, .workout-contents{
-  padding: 1.5rem 1.5rem;
+  padding: 0.65rem 0.65rem;
   display: none;
   text-align: center;
   overflow: hidden;
