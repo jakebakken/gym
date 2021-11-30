@@ -75,13 +75,18 @@
     margin: auto;
 }
 .reps-header, .weight-header {
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 2rem;
+    font-weight: normal;
 }
 .exercise-name {
     font-weight: bold;
+    margin-bottom: 0;
 }
 .reps-weight {
     text-align: center;
+}
+.exercise-divider {
+    margin: 0.5rem 0;
 }
 .workout-table {
     text-align: center;
