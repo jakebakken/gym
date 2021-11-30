@@ -238,57 +238,6 @@ function startWorkout() {
 };
 
 
-// exercise page timer
-const timer = document.getElementById('timer');
-
-var hr = 0;
-var min = 0;
-var sec = 0;
-var ms = 0;
-
-
-function timerOn() {
-    ms = parseInt(ms);
-    sec = parseInt(sec);
-    min = parseInt(min);
-    hr = parseInt(hr);
-
-    ms += 1;
-
-    // rollover clock values
-    if (ms == 100) {
-        sec += 1;
-        ms = 0;
-    }
-    if (sec == 60) {
-        min += 1;
-        sec = 0;
-    }
-    if (min == 60) {
-        hr += 1;
-        min = 0;
-    }
-
-    // keep 2 number for each category format
-    if (ms < 10 || ms == 0) {
-        ms = '0' + ms;
-    }
-    if (sec < 10 || sec == 0) {
-        sec = '0' + sec;
-    }
-    if (min < 10 || min == 0) {
-        min = '0' + min;
-    }
-    if (hr < 10 || hr == 0) {
-        hr = '0' + hr;
-    }
-
-    timer.innerHTML = hr + ':' + min + ':' + sec + '.' + ms;
-
-    setTimeout("timerOn()", 10);
-};
-
-
 // AJAX finish workout
 function finishWorkout() {
     var workoutName = $("#workout-name").val();
