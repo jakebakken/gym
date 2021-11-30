@@ -8,8 +8,8 @@
     <span>{{ workout.workout_name }}</span><span> - </span><span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span>
 </button>
 <div class="workout-contents">
-    {% for exercise in workout.exercise|sort(attribute='id') %}
     <p class="workout-rating">Workout Rating: {{ workout.rating }}</p>
+    {% for exercise in workout.exercise|sort(attribute='id') %}
     <table>
       <thead>
         <tr>
