@@ -75,7 +75,6 @@ addSetButton.onclick = function addSet() {
     repsInput.placeholder = "Reps";
 
     weightInput.type = "number";
-    weightInput.pattern = "[0-9]*(.?[0-9])?";
     weightInput.inputmode = "decimal";
     weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
     weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
