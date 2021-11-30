@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}Home{% endblock %}
+{% extends 'base.html' %}{% block title %}Home{% endblock %}
 {% block content %}
 <h2 class="page-title">Hey {{ user.first_name }}</h2>
 <h5>Workouts</h5>
@@ -9,6 +9,7 @@
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
+    <p class="workout-rating">Workout Rating: {{ workout.rating }}</p>
     <table>
       <thead>
         <tr>
@@ -20,7 +21,9 @@
       <tbody>
         <tr><td>reps</td></tr>
         {% for set in exercise.set|sort(attribute='id') %}
-        <tr><td class="reps-val">{{ set.reps }}</td><td><span> | </span></td><td>{{ set.weight }} lbs</td></tr>
+        <tr><td class="reps-val">
+            {{ set.reps }}</td><td><span> | </span></td><td>{{ set.weight }} lbs
+        </td></tr>
         {% endfor %}
       </tbody>
     </table>
