@@ -71,6 +71,16 @@
   overflow: hidden;
   background-color: #f1f1f1;
 }
+.exercise-header {
+    border: 1px solid lightgrey;
+    padding: 0.5rem 1rem;
+}
+.exercise-name {
+    font-weight: bold;
+}
+.reps-weight {
+    text-align: center;
+}
 .workout-table {
     text-align: center;
 }

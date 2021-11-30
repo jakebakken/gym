@@ -13,13 +13,13 @@
     <table>
       <thead>
         <tr>
-            <th scope="col">reps</th>
-            <th scope="col">weight</th>
+            <th class="exercise-header" scope="col">reps</th>
+            <th class="exercise-header" scope="col">weight</th>
         </tr>
       </thead>
       <tbody>
         {% for set in exercise.set|sort(attribute='id') %}
-        <tr>
+        <tr class="reps-weight">
             <td>{{ set.reps }}</td>
             <td>{{ set.weight }} lbs</td>
         </tr>
