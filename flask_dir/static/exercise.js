@@ -24,6 +24,11 @@ slider.oninput = function () {
     output.innerHTML = this.value;
 };
 
+const startWorkoutButton = document.getElementById("start-workout-button");
+const exercisePageTitle = document.getElementById("exercise-page-title");
+const cardioButton = document.getElementById("cardio-button");
+const cardioContents = document.getElementById("cardio-contents");
+const exerciseForm = document.getElementById("exercise-form");
 
 // AJAX start workout
 function startWorkout() {
@@ -36,11 +41,11 @@ function startWorkout() {
     });
 
     start.done(function() {
-        $('#start-workout-button').hide();
-        $('#exercise-page-title').show();
-        $('#cardio-button').show();
-        $('#cardio-contents').show();
-        $('#exercise-form').show();
+        startWorkoutButton.style.display = "none";
+        exercisePageTitle.style.display = '';
+        cardioButton.style.display = '';
+        cardioContents.style.display = "none";
+        exerciseForm.style.display = '';
     });
 };
 
@@ -48,7 +53,6 @@ function startWorkout() {
 // starting exercise / set counts
 var exerciseNumber = 1;
 var setNumber = 1;
-
 
 // set buttons
 const addExerciseButton = document.getElementById("add-exercise-button");
@@ -60,37 +64,6 @@ var repsInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
 var weightInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
 var exerciseNameId = 'exercise' + exerciseNumber + '-name';
 
-// derive input elements from ids
-const exerciseTableBody = document.getElementById("exercise-table-body");
-const repsInputElem = document.getElementById(repsInputId);
-const weightInputElem = document.getElementById(weightInputId);
-const exerciseNameInputElem = document.getElementById(exerciseNameId);
-const workoutNameElem = document.getElementById("workout-name");
-const ratingElem = document.getElementById("workout-rating");
-
-// set table attrs
-const headerRow = document.createElement("tr");
-const header = document.createElement("th");
-const set1HeaderRow = document.createElement("tr");
-const set1Header = document.createElement("th");
-
-const exerciseInputRow = document.createElement("tr");
-
-const dataRow = document.createElement("tr");
-const set1DataRow = document.createElement("tr");
-
-const repsData = document.createElement("td");
-const weightData = document.createElement("td");
-const exerciseInputData = document.createElement("td");
-const set1RepsData = document.createElement("td");
-const set1WeightData = document.createElement("td");
-
-const repsInput = document.createElement("input");
-const weightInput = document.createElement("input");
-const exerciseInput = document.createElement("input");
-const set1RepsInput = document.createElement("input");
-const set1WeightInput = document.createElement("input");
-
 
 // listeners for valid input fields
 var repsValid = false;
@@ -98,6 +71,8 @@ var weightValid = false;
 
 repsInputElem.addEventListener('input', function() {
     repsValid = false;
+
+    const repsInputElem = document.getElementById(repsInputId);
     var repsVal = repsInputElem.value;
 
     if (1 <= repsVal <= 169) {
@@ -111,6 +86,8 @@ repsInputElem.addEventListener('input', function() {
 
 weightInputElem.addEventListener('input', function() {
     weightValid = false;
+
+    const weightInputElem = document.getElementById(weightInputId);
     var weightVal = weightInputElem.value;
 
     if (0.5 <= weightVal <= 6699) {
@@ -126,6 +103,8 @@ weightInputElem.addEventListener('input', function() {
 addSetButton.onclick = function addSet() {
 // initialize AJAX function
 // add new set every click, max 10 sets
+    const repsInputElem = document.getElementById(repsInputId);
+    const weightInputElem = document.getElementById(weightInputId);
     var repsVal = repsInputElem.value;
     var weightVal = weightInputElem.value;
 
@@ -154,11 +133,12 @@ addSetButton.onclick = function addSet() {
 
         const headerRow = document.createElement("tr");
         const header = document.createElement("th");
-        const dataRow = document.createElement("tr");
         const repsData = document.createElement("td");
-        const weightData = document.createElement("td");
         const repsInput = document.createElement("input");
+        const weightData = document.createElement("td");
         const weightInput = document.createElement("input");
+        const dataRow = document.createElement("tr");
+        const exerciseTableBody = document.getElementById("exercise-table-body");
 
         header.innerText = "Set " + setNumber;
         header.setAttribute("colspan", 2);
@@ -202,7 +182,9 @@ addSetButton.onclick = function addSet() {
 
 addExerciseButton.onclick = function addExercise() {
 // add new exercise every click, max 15 exercises
-    var exerciseNameId = 'exercise' + exerciseNumber + '-name';
+    const exerciseNameInputElem = document.getElementById(exerciseNameId);
+    const repsInputElem = document.getElementById(repsInputId);
+    const weightInputElem = document.getElementById(weightInputId);
     var exerciseName = exerciseNameInputElem.value;
     var repsVal = repsInputElem.value;
     var weightVal = weightInputElem.value;
@@ -230,6 +212,19 @@ addExerciseButton.onclick = function addExercise() {
     // increment exercise count
     exerciseNumber += 1;
 
+    const headerRow = document.createElement("tr");
+    const header = document.createElement("th");
+    const set1HeaderRow = document.createElement("tr");
+    const set1Header = document.createElement("th");
+    const exerciseInputData = document.createElement("td");
+    const exerciseInput = document.createElement("input");
+    const exerciseInputRow = document.createElement("tr");
+    const set1RepsData = document.createElement("td");
+    const set1RepsInput = document.createElement("input");
+    const set1WeightData = document.createElement("td");
+    const set1WeightInput = document.createElement("input");
+    const set1DataRow = document.createElement("tr");
+    const exerciseTableBody = document.getElementById("exercise-table-body");
 
     header.innerText = "Exercise " + exerciseNumber;
     header.setAttribute("colspan", 2);
@@ -288,6 +283,11 @@ addExerciseButton.onclick = function addExercise() {
 
 // AJAX finish workout
 function finishWorkout() {
+    const exerciseNameInputElem = document.getElementById(exerciseNameId);
+    const repsInputElem = document.getElementById(repsInputId);
+    const weightInputElem = document.getElementById(weightInputId);
+    const workoutNameElem = document.getElementById("workout-name");
+    const ratingElem = document.getElementById("workout-rating");
     var repsVal = repsInputElem.value;
     var weightVal = weightInputElem.value;
     var exerciseName = exerciseNameInputElem.value;
