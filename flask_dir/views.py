@@ -77,8 +77,8 @@ def start_workout():
 def finish_set():
     # finish current Set
     set_finish_time = dt.datetime.now()
-    reps_value = request.form['repsVal']
-    weight_value = request.form['weightVal']
+    reps_value = request.form['repsValue']
+    weight_value = request.form['weightValue']
 
     current_set = Set.query.filter_by(
         user_id=current_user.id).order_by(Set.id.desc()).first()
@@ -113,8 +113,8 @@ def finish_exercise():
     #  a new Exercise
     exercise_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
-    reps_value = request.form['repsVal']
-    weight_value = request.form['weightVal']
+    reps_value = request.form['repsValue']
+    weight_value = request.form['weightValue']
 
     # query current Set
     current_set = Set.query.filter_by(
@@ -167,8 +167,8 @@ def finish_workout():
     rating = request.form['rating']
     workout_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
-    reps_value = request.form['repsVal']
-    weight_value = request.form['weightVal']
+    reps_value = request.form['repsValue']
+    weight_value = request.form['weightValue']
 
     # query current Set, Exercise, Workout
 

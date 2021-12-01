@@ -12,190 +12,114 @@ for (i = 0; i < coll.length; i++) {
       content.style.display = "block";
     }
   });
-};
+}
 
 
-// slider functionality
-const slider = document.getElementById("workout-rating");
-const output = document.getElementById("workout-rating-value");
-output.innerHTML = slider.value;
-
-slider.oninput = function () {
-    output.innerHTML = this.value;
-};
-
-const startWorkoutButton = document.getElementById("start-workout-button");
-const exercisePageTitle = document.getElementById("exercise-page-title");
-const cardioButton = document.getElementById("cardio-button");
-const cardioContents = document.getElementById("cardio-contents");
-const exerciseForm = document.getElementById("exercise-form");
-
-// AJAX start workout
-function startWorkout() {
-    start = $.ajax({
-        type: 'POST',
-        url: '/start-workout',
-        success: function() {
-            console.log("workout started");
-        }
-    });
-
-    start.done(function() {
-        startWorkoutButton.hide();
-        exercisePageTitle.show();
-        cardioButton.show();
-        cardioContents.show();
-        exerciseForm.show();
-    });
-};
-
-
-// starting exercise / set counts
 var exerciseNumber = 1;
 var setNumber = 1;
 
-// set buttons
 const addExerciseButton = document.getElementById("add-exercise-button");
 const addSetButton = document.getElementById("add-set-button");
-const finishWorkoutButton = document.getElementById("finish-workout-button");
-
-// set input ids
-var repsInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-var weightInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-var exerciseNameId = 'exercise' + exerciseNumber + '-name';
-
-
-// listeners for valid input fields
-var repsValid = false;
-var weightValid = false;
-
-repsInputElem.addEventListener('input', function() {
-    repsValid = false;
-
-    const repsInputElem = document.getElementById(repsInputId);
-    var repsVal = repsInputElem.value;
-
-    if (1 <= repsVal <= 169) {
-        repsValid = true;
-    } else {
-        repsValid = false;
-        repsInputElem.style.border = "2px solid red";
-        // todo repsInputElem.style.borderRadius = "3px";
-    }
-});
-
-weightInputElem.addEventListener('input', function() {
-    weightValid = false;
-
-    const weightInputElem = document.getElementById(weightInputId);
-    var weightVal = weightInputElem.value;
-
-    if (0.5 <= weightVal <= 6699) {
-        weightValid = true;
-    } else {
-        weightValid = false;
-        weightInputElem.style.border = "2px solid red";
-        // todo weightInputElem.style.borderRadius = "3px";
-    }
-});
-
+const exerciseTableBody = document.getElementById("exercise-table-body");
 
 addSetButton.onclick = function addSet() {
 // initialize AJAX function
 // add new set every click, max 10 sets
-    const repsInputElem = document.getElementById(repsInputId);
-    const weightInputElem = document.getElementById(weightInputId);
-    var repsVal = repsInputElem.value;
-    var weightVal = weightInputElem.value;
 
-    // if reps & weight values are valid save set / start new set
-    if (repsValid === true && weightValid === true) {
-        finishSet = $.ajax ({
-            type: 'POST',
-            url: '/finish-set',
-            data: {
-                repsVal: repsVal,
-                weightVal: weightVal,
-            },
-            success: function () {
-                console.log("set saved");
-            }
-        });
-
-        finishSet.done(function() {
-            repsInputId.disabled = true;
-            weightInputId.disabled = true;
-        });
+    // AJAX finish set
+    //  changing elements is necessary for disabling input fields incrementally
+    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsValue = $(repsInputElem).val();
+    var weightValue = $(weightInputElem).val();
 
 
-        // increment set count when set added successfully
-        setNumber += 1;
+    finishSet = $.ajax ({
+        type: 'POST',
+        url: '/finish-set',
+        data: {
+            repsValue: repsValue,
+            weightValue: weightValue,
+        },
+        success: function () {
+            console.log("set saved");
+        }
+    });
 
-        const headerRow = document.createElement("tr");
-        const header = document.createElement("th");
-        const repsData = document.createElement("td");
-        const repsInput = document.createElement("input");
-        const weightData = document.createElement("td");
-        const weightInput = document.createElement("input");
-        const dataRow = document.createElement("tr");
-        const exerciseTableBody = document.getElementById("exercise-table-body");
+    finishSet.done(function() {
+        $(repsInputElem).attr('disabled', true);
+        $(weightInputElem).attr('disabled', true);
+    });
 
-        header.innerText = "Set " + setNumber;
-        header.setAttribute("colspan", 2);
 
-        // repsInput attrs
-        repsInput.type = "number";
-        repsInput.pattern = "[0-9]*";
-        repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-        repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-        repsInput.setAttribute("class", "form-exercise");
-        repsInput.placeholder = "Reps";
+    // increment set count
+    setNumber += 1;
 
-        // weightInput attrs
-        weightInput.type = "number";
-        weightInput.pattern = "[0-9]*(.?[0-9])?";
-        weightInput.setAttribute("inputmode", "decimal")
-        weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-        weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-        weightInput.setAttribute("class", "form-exercise");
-        weightInput.placeholder = "Weight";
 
-        if (setNumber <= 10) {
-            // add set header
-            headerRow.append(header);
+    const headerRow = document.createElement("tr");
+    const header = document.createElement("th");
+    const dataRow = document.createElement("tr");
+    const repsData = document.createElement("td");
+    const weightData = document.createElement("td");
+    const repsInput = document.createElement("input");
+    const weightInput = document.createElement("input");
 
-            // add input areas to respective table data tags
-            repsData.append(repsInput);
-            weightData.append(weightInput);
+    header.innerText = "Set " + setNumber;
+    header.setAttribute("colspan", 2);
 
-            // add data tags to single table row
-            dataRow.append(repsData);
-            dataRow.append(weightData);
+    repsInput.type = "number";
+    repsInput.pattern = "[0-9]*";
+    repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+    repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+    repsInput.setAttribute("class", "form-exercise");
+    repsInput.placeholder = "Reps";
 
-            // add header row & data row to exercise table
-            exerciseTableBody.append(headerRow);
-            exerciseTableBody.append(dataRow);
-        };
+    weightInput.type = "number";
+    weightInput.pattern = "[0-9]*(.?[0-9])?";
+    weightInput.setAttribute("inputmode", "decimal")
+    weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+    weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+    weightInput.setAttribute("class", "form-exercise");
+    weightInput.placeholder = "Weight";
+
+    if (setNumber <= 10) {
+        // add set header
+        headerRow.append(header);
+
+        // add input areas to respective table data tags
+        repsData.append(repsInput);
+        weightData.append(weightInput);
+
+        // add data tags to single table row
+        dataRow.append(repsData);
+        dataRow.append(weightData);
+
+        // add header row & data row to exercise table
+        exerciseTableBody.append(headerRow);
+        exerciseTableBody.append(dataRow);
     };
 };
 
 
 addExerciseButton.onclick = function addExercise() {
 // add new exercise every click, max 15 exercises
-    const exerciseNameInputElem = document.getElementById(exerciseNameId);
-    const repsInputElem = document.getElementById(repsInputId);
-    const weightInputElem = document.getElementById(weightInputId);
-    var exerciseName = exerciseNameInputElem.value;
-    var repsVal = repsInputElem.value;
-    var weightVal = weightInputElem.value;
+
+    // AJAX finish exercise
+    var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+    var exerciseName = $(exerciseNameInput).val();
+    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsValue = $(repsInputElem).val();
+    var weightValue = $(weightInputElem).val();
+
 
     finishExercise = $.ajax ({
         type: 'POST',
         url: '/finish-exercise',
         data: {
             exerciseName: exerciseName,
-            repsVal: repsVal,
-            weightVal: weightVal,
+            repsValue: repsValue,
+            weightValue: weightValue,
         },
         success: function () {
             console.log("exercise saved");
@@ -203,28 +127,30 @@ addExerciseButton.onclick = function addExercise() {
     });
 
     finishExercise.done(function() {
-        repsInputId.disabled = true;
-        weightInputElem.disabled = true;
-        exerciseNameInputElem.disabled = true;
+        $(repsInputElem).attr('disabled', true);
+        $(weightInputElem).attr('disabled', true);
+        $(exerciseNameInput).attr('disabled', true);
     });
 
 
     // increment exercise count
     exerciseNumber += 1;
 
+
     const headerRow = document.createElement("tr");
     const header = document.createElement("th");
-    const set1HeaderRow = document.createElement("tr");
-    const set1Header = document.createElement("th");
+    const exerciseInputRow = document.createElement("tr");
     const exerciseInputData = document.createElement("td");
     const exerciseInput = document.createElement("input");
-    const exerciseInputRow = document.createElement("tr");
-    const set1RepsData = document.createElement("td");
-    const set1RepsInput = document.createElement("input");
-    const set1WeightData = document.createElement("td");
-    const set1WeightInput = document.createElement("input");
+
+    const set1HeaderRow = document.createElement("tr");
+    const set1Header = document.createElement("th");
+
     const set1DataRow = document.createElement("tr");
-    const exerciseTableBody = document.getElementById("exercise-table-body");
+    const set1RepsData = document.createElement("td");
+    const set1WeightData = document.createElement("td");
+    const set1RepsInput = document.createElement("input");
+    const set1WeightInput = document.createElement("input");
 
     header.innerText = "Exercise " + exerciseNumber;
     header.setAttribute("colspan", 2);
@@ -281,18 +207,47 @@ addExerciseButton.onclick = function addExercise() {
 };
 
 
+// slider functionality
+var slider = document.getElementById("workout-rating");
+var output = document.getElementById("workout-rating-value");
+output.innerHTML = slider.value;
+
+slider.oninput = function () {
+    output.innerHTML = this.value;
+};
+
+
+// AJAX start workout
+function startWorkout() {
+    start = $.ajax({
+        type: 'POST',
+        url: '/start-workout',
+        success: function() {
+            console.log("workout started");
+        }
+    });
+
+    start.done(function() {
+        $('#start-workout-button').hide();
+        $('#exercise-page-title').show();
+        $('#cardio-button').show();
+        $('#cardio-contents').show();
+        $('#exercise-form').show();
+        timerOn();
+    });
+};
+
+
 // AJAX finish workout
 function finishWorkout() {
-    const exerciseNameInputElem = document.getElementById(exerciseNameId);
-    const repsInputElem = document.getElementById(repsInputId);
-    const weightInputElem = document.getElementById(weightInputId);
-    const workoutNameElem = document.getElementById("workout-name");
-    const ratingElem = document.getElementById("workout-rating");
-    var repsVal = repsInputElem.value;
-    var weightVal = weightInputElem.value;
-    var exerciseName = exerciseNameInputElem.value;
-    var workoutName = workoutNameElem.value;
-    var rating = ratingElem.value;
+    var workoutName = $("#workout-name").val();
+    var rating = $("#workout-rating").val();
+    var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+    var exerciseName = $(exerciseNameInput).val();
+    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsValue = $(repsInputElem).val();
+    var weightValue = $(weightInputElem).val();
 
     finish = $.ajax({
         type: 'POST',
@@ -301,8 +256,8 @@ function finishWorkout() {
             workoutName: workoutName,  // info to send to backend
             rating: rating,
             exerciseName: exerciseName,
-            repsVal: repsVal,
-            weightVal: weightVal,
+            repsValue: repsValue,
+            weightValue: weightValue,
         },
         success: function() {
             console.log("workout saved");
@@ -311,14 +266,14 @@ function finishWorkout() {
 
     // disable elements when finished
     finish.done(function(data) {
-        workoutName.text = data.workout_name;
-        workoutName.disabled = true;
-        exerciseNameInputElem.disabled = true;
-        repsInputElem.disabled = true;
-        weightInputElem.disabled = true;
-        finishWorkoutButton.disabled = true;
-        addExerciseButton.disabled = true;
-        addSetButton.disabled = true;
-        finishWorkoutButton.html = "Workout Finished";
+        $('#workout-name').text(data.workout_name);
+        $('#workout-name').attr('disabled', true);
+        $(exerciseNameInput).attr('disabled', true);
+        $(repsInputElem).attr('disabled', true);
+        $(weightInputElem).attr('disabled', true);
+        $('#finish-workout-button').attr('disabled', true);
+        $('#add-exercise-button').attr('disabled', true);
+        $('#add-set-button').attr('disabled', true);
+        $('#finish-workout-button').html('Workout Finished');
     });
 };
