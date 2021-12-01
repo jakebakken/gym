@@ -55,9 +55,20 @@ const addExerciseButton = document.getElementById("add-exercise-button");
 const addSetButton = document.getElementById("add-set-button");
 const finishWorkoutButton = document.getElementById("finish-workout-button");
 
+// set input ids
+var repsInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+var weightInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+var exerciseNameId = 'exercise' + exerciseNumber + '-name';
+
+// derive input elements from ids
+const exerciseTableBody = document.getElementById("exercise-table-body");
+const repsInputElem = document.getElementById(repsInputId);
+const weightInputElem = document.getElementById(weightInputId);
+const exerciseNameInputElem = document.getElementById(exerciseNameId);
+const workoutNameElem = document.getElementById("workout-name");
+const ratingElem = document.getElementById("workout-rating");
 
 // set table attrs
-const exerciseTableBody = document.getElementById("exercise-table-body");
 const headerRow = document.createElement("tr");
 const header = document.createElement("th");
 const set1HeaderRow = document.createElement("tr");
@@ -81,24 +92,14 @@ const set1RepsInput = document.createElement("input");
 const set1WeightInput = document.createElement("input");
 
 
-// set input vars
-var repsInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-var weightInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-var exerciseNameId = 'exercise' + exerciseNumber + '-name';
-const workoutNameId = document.getElementById("workout-name");
-const ratingId = document.getElementById("workout-rating");
-
-const repsInputElem = document.getElementById(repsInputId);
-const weightInputElem = document.getElementById(weightInputId);
-const exerciseNameInputElem = document.getElementById(exerciseNameId);
-
-
 // listeners for valid input fields
 var repsValid = false;
 var weightValid = false;
 
 repsInputElem.addEventListener('input', function() {
     repsValid = false;
+    var repsVal = repsInputElem.value;
+
     if (1 <= repsVal <= 169) {
         repsValid = true;
     } else {
@@ -110,6 +111,8 @@ repsInputElem.addEventListener('input', function() {
 
 weightInputElem.addEventListener('input', function() {
     weightValid = false;
+    var weightVal = weightInputElem.value;
+
     if (0.5 <= weightVal <= 6699) {
         weightValid = true;
     } else {
@@ -288,8 +291,8 @@ function finishWorkout() {
     var repsVal = repsInputElem.value;
     var weightVal = weightInputElem.value;
     var exerciseName = exerciseNameInputElem.value;
-    var workoutName = workoutNameId.value;
-    var rating = ratingId.value;
+    var workoutName = workoutNameElem.value;
+    var rating = ratingElem.value;
 
     finish = $.ajax({
         type: 'POST',
