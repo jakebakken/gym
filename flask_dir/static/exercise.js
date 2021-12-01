@@ -84,19 +84,13 @@ const set1WeightInput = document.createElement("input");
 // set input vars
 var repsInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
 var weightInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-var exerciseNameInput = 'exercise' + exerciseNumber + '-name';
+var exerciseNameId = 'exercise' + exerciseNumber + '-name';
 const workoutNameId = document.getElementById("workout-name");
 const ratingId = document.getElementById("workout-rating");
 
-var repsVal = repsInputElem.value;
-var weightVal = weightInputElem.value;
-var exerciseName = exerciseNameInput.value;
-var workoutName = workoutNameId.value;
-var rating = ratingId.value;
-
 const repsInputElem = document.getElementById(repsInputId);
 const weightInputElem = document.getElementById(weightInputId);
-const exerciseNameInputElem = document.getElementById(exerciseNameInput);
+const exerciseNameInputElem = document.getElementById(exerciseNameId);
 
 
 // listeners for valid input fields
@@ -110,7 +104,7 @@ repsInputElem.addEventListener('input', function() {
     } else {
         repsValid = false;
         repsInputElem.style.border = "2px solid red";
-        repsInputElem.style.borderRadius = "3px";
+        // todo repsInputElem.style.borderRadius = "3px";
     }
 });
 
@@ -121,7 +115,7 @@ weightInputElem.addEventListener('input', function() {
     } else {
         weightValid = false;
         weightInputElem.style.border = "2px solid red";
-        weightInputElem.style.borderRadius = "3px";
+        // todo weightInputElem.style.borderRadius = "3px";
     }
 });
 
@@ -129,7 +123,6 @@ weightInputElem.addEventListener('input', function() {
 addSetButton.onclick = function addSet() {
 // initialize AJAX function
 // add new set every click, max 10 sets
-
     var repsVal = repsInputElem.value;
     var weightVal = weightInputElem.value;
 
@@ -206,9 +199,8 @@ addSetButton.onclick = function addSet() {
 
 addExerciseButton.onclick = function addExercise() {
 // add new exercise every click, max 15 exercises
-
-    var exerciseNameInput = 'exercise' + exerciseNumber + '-name';
-    var exerciseName = exerciseNameInput.value;
+    var exerciseNameId = 'exercise' + exerciseNumber + '-name';
+    var exerciseName = exerciseNameInputElem.value;
     var repsVal = repsInputElem.value;
     var weightVal = weightInputElem.value;
 
@@ -228,7 +220,7 @@ addExerciseButton.onclick = function addExercise() {
     finishExercise.done(function() {
         repsInputId.disabled = true;
         weightInputElem.disabled = true;
-        exerciseNameInput.disabled = true;
+        exerciseNameInputElem.disabled = true;
     });
 
 
@@ -293,6 +285,12 @@ addExerciseButton.onclick = function addExercise() {
 
 // AJAX finish workout
 function finishWorkout() {
+    var repsVal = repsInputElem.value;
+    var weightVal = weightInputElem.value;
+    var exerciseName = exerciseNameInputElem.value;
+    var workoutName = workoutNameId.value;
+    var rating = ratingId.value;
+
     finish = $.ajax({
         type: 'POST',
         url: '/finish-workout',
@@ -312,7 +310,7 @@ function finishWorkout() {
     finish.done(function(data) {
         workoutName.text = data.workout_name;
         workoutName.disabled = true;
-        exerciseNameInput.disabled = true;
+        exerciseNameInputElem.disabled = true;
         repsInputElem.disabled = true;
         weightInputElem.disabled = true;
         finishWorkoutButton.disabled = true;
