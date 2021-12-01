@@ -44,7 +44,7 @@ function startWorkout() {
         startWorkoutButton.style.display = "none";
         exercisePageTitle.style.display = '';
         cardioButton.style.display = '';
-        cardioContents.style.display = "none";
+        cardioContents.style.display = '';
         exerciseForm.style.display = '';
     });
 };
