@@ -77,8 +77,8 @@ def start_workout():
 def finish_set():
     # finish current Set
     set_finish_time = dt.datetime.now()
-    reps_value = request.form['repsValue']
-    weight_value = request.form['weightValue']
+    reps_value = request.form['repsVal']
+    weight_value = request.form['weightVal']
 
     current_set = Set.query.filter_by(
         user_id=current_user.id).order_by(Set.id.desc()).first()
@@ -88,8 +88,8 @@ def finish_set():
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
     current_set.set_end_time = set_finish_time
-    current_set.reps = reps_value if not None or not '' else 0
-    current_set.weight = weight_value if not None or not '' else 0
+    current_set.reps = reps_value
+    current_set.weight = weight_value
     db.session.commit()
 
     # start new Set
@@ -113,8 +113,8 @@ def finish_exercise():
     #  a new Exercise
     exercise_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
-    reps_value = request.form['repsValue']
-    weight_value = request.form['weightValue']
+    reps_value = request.form['repsVal']
+    weight_value = request.form['weightVal']
 
     # query current Set
     current_set = Set.query.filter_by(
@@ -125,10 +125,10 @@ def finish_exercise():
 
     # add missing values
     current_set.set_end_time = exercise_finish_time
-    current_set.reps = reps_value if not None or not '' else 0
-    current_set.weight = weight_value if not None or not '' else 0
+    current_set.reps = reps_value
+    current_set.weight = weight_value
     current_exercise.exercise_end_time = exercise_finish_time
-    current_exercise.exercise_name = exercise_name  if not None else 'NaN'
+    current_exercise.exercise_name = exercise_name
     db.session.commit()
 
     # start new Exercise
@@ -167,8 +167,8 @@ def finish_workout():
     rating = request.form['rating']
     workout_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
-    reps_value = request.form['repsValue']
-    weight_value = request.form['weightValue']
+    reps_value = request.form['repsVal']
+    weight_value = request.form['weightVal']
 
     # query current Set, Exercise, Workout
 
@@ -184,13 +184,13 @@ def finish_workout():
 
     # add all missing values
     current_set.set_end_time = workout_finish_time
-    current_set.reps = reps_value if not None or not '' else 0
-    current_set.weight = weight_value if not None or not '' else 0
+    current_set.reps = reps_value
+    current_set.weight = weight_value
     current_exercise.exercise_end_time = workout_finish_time
-    current_exercise.exercise_name = exercise_name if not None else 'NaN'
-    current_workout.workout_name = workout_name if not None else 'NaN'
+    current_exercise.exercise_name = exercise_name
+    current_workout.workout_name = workout_name
     current_workout.workout_end_time = workout_end_time
-    current_workout.rating = rating if not None or not '' else 0
+    current_workout.rating = rating
 
     # commit all to finish Workout
     db.session.commit()
