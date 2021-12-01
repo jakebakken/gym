@@ -49,8 +49,8 @@ addSetButton.onclick = function addSet() {
     // AJAX finish set
     //  changing elements is necessary for disabling input fields incrementally
     var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    var repsInputElem = document.getElementById(``'\\"' + exercise + ${exerciseNumber} + -set + ${setNumber} + -reps + '\\"'`);
-    console.log(repsInputElem)
+    var repsInputElem = document.getElementById(`exercise + ${exerciseNumber} + -set + ${setNumber} + -reps`);
+    console.log(repsInputElem);
 
     var repsValid = false;
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
