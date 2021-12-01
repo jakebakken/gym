@@ -50,13 +50,14 @@ addSetButton.onclick = function addSet() {
     //  changing elements is necessary for disabling input fields incrementally
     var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
     var repsInputElem = document.getElementById('exercise' + exerciseNumber + '-set' + setNumber + '-reps');
+    var repsValid = false;
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
     var repsValue = $(repsInputId).val();  // todo change to elem.value;
     var weightValue = $(weightInputElem).val();
 
     // listeners for valid reps/weight input values
     repsInputElem.addEventListener('input', function() {
-        var repsValid = false;
+        repsValid = false;
 
         if (1 <= repsValue <= 169) {
             repsValid = true;
