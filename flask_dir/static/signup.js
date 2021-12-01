@@ -136,8 +136,8 @@ passwordConfirm.addEventListener('input', function() {
 
 
 function checkInfo() {
-    if (firstValid==true && lastValid==true && usernameValid==true &&
-    emailValid==true && passwordValid==true && passwordMatch==true) {
+    if (firstValid === true && lastValid === true && usernameValid === true &&
+    emailValid === true && passwordValid === true && passwordMatch === true) {
         signup = $.ajax({
             type: 'POST',
             url: '/signup_user',
@@ -150,9 +150,9 @@ function checkInfo() {
             },
             success: function(result) {
                 console.log("signup ajax called");
-                if (result['status'] == 'success') {
+                if (result['status'] === 'success') {
                     window.location.href = result['url'];
-                } else if (result['status'] == 'error') {
+                } else if (result['status'] === 'error') {
                     alert(result['message']);
                 } else {
                     console.log("signup ajax success handler error");

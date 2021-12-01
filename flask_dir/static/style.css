@@ -102,6 +102,7 @@
 }
 .cardio-input {
     max-width: 97%;
+    text-align: center;
 }
 #exercise-page-title, #cardio-button, #cardio-contents, #exercise-form {
     display: none;
