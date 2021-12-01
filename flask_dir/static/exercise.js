@@ -45,9 +45,13 @@ const exerciseTableBody = document.getElementById("exercise-table-body");
 
 // reps listener vars
 var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+var repsValue = $(repsInputId).val();  // todo change to elem.value;
 var repsValid = false;
+
+// this works for instantiating listener
 var repsInputElemStr = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
 const repsInputElem = document.getElementById(repsInputElemStr);
+
 console.log(repsInputElem);
 
 // listeners for valid reps input values
@@ -68,9 +72,7 @@ addSetButton.onclick = function addSet() {
 // add new set every click, max 10 sets
 
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputId).val();  // todo change to elem.value;
     var weightValue = $(weightInputElem).val();
-
     var weightValid = true;
 
     // AJAX finish set
