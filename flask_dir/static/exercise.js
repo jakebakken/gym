@@ -14,7 +14,6 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
-
 var exerciseNumber = 1;
 var setNumber = 1;
 
@@ -260,7 +259,6 @@ function startWorkout() {
         $('#cardio-button').show();
         $('#cardio-contents').show();
         $('#exercise-form').show();
-        timerOn();
     });
 };
 
