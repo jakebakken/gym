@@ -88,8 +88,8 @@ var exerciseNameInput = 'exercise' + exerciseNumber + '-name';
 const workoutNameId = document.getElementById("workout-name");
 const ratingId = document.getElementById("workout-rating");
 
-var repsVal = repsInputId.value;
-var weightVal = weightInputId.value;
+var repsVal = repsInputElem.value;
+var weightVal = weightInputElem.value;
 var exerciseName = exerciseNameInput.value;
 var workoutName = workoutNameId.value;
 var rating = ratingId.value;
@@ -130,8 +130,8 @@ addSetButton.onclick = function addSet() {
 // initialize AJAX function
 // add new set every click, max 10 sets
 
-    var repsVal = repsInputId.value;
-    var weightVal = weightInputId.value;
+    var repsVal = repsInputElem.value;
+    var weightVal = weightInputElem.value;
 
     // if reps & weight values are valid save set / start new set
     if (repsValid === true && weightValid === true) {
@@ -209,10 +209,8 @@ addExerciseButton.onclick = function addExercise() {
 
     var exerciseNameInput = 'exercise' + exerciseNumber + '-name';
     var exerciseName = exerciseNameInput.value;
-    var repsInputId = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    const weightInputElem = document.getElementById(weightInputId);
-    var repsVal = repsInputId.value;
-    var weightVal = weightInputId.value;
+    var repsVal = repsInputElem.value;
+    var weightVal = weightInputElem.value;
 
     finishExercise = $.ajax ({
         type: 'POST',
