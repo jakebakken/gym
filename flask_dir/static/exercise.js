@@ -48,8 +48,8 @@ addSetButton.onclick = function addSet() {
 
     // AJAX finish set
     //  changing elements is necessary for disabling input fields incrementally
-    const repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    const weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
     var repsValue = $(repsInputElem).val();
     var weightValue = $(weightInputElem).val();
 
@@ -61,7 +61,7 @@ addSetButton.onclick = function addSet() {
             repsValid = true;
         } else {
             repsInputElem.style.border = "2px solid red";
-            repsInputElem.style.borderRadius = "3px";  // todo error is here, dash is messing it up
+            repsInputElem.style.borderRadius = "3px";
         }
     });
 
