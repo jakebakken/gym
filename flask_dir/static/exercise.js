@@ -34,7 +34,7 @@ function startWorkout() {
     });
 };
 
-
+// starting exercise / set counts
 var exerciseNumber = 1;
 var setNumber = 1;
 
@@ -48,9 +48,10 @@ addSetButton.onclick = function addSet() {
 
     // AJAX finish set
     //  changing elements is necessary for disabling input fields incrementally
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var repsInputElem = document.getElementById('exercise' + exerciseNumber + '-set' + setNumber + '-reps');
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
+    var repsValue = $(repsInputId).val();  // todo change to elem.value;
     var weightValue = $(weightInputElem).val();
 
     // listeners for valid reps/weight input values
@@ -60,6 +61,7 @@ addSetButton.onclick = function addSet() {
         if (1 <= repsValue <= 169) {
             repsValid = true;
         } else {
+            repsValid = false;
             repsInputElem.style.border = "2px solid red";
             repsInputElem.style.borderRadius = "3px";
         }
@@ -90,7 +92,7 @@ addSetButton.onclick = function addSet() {
         });
 
         finishSet.done(function() {
-            $(repsInputElem).attr('disabled', true);
+            $(repsInputId).attr('disabled', true);
             $(weightInputElem).attr('disabled', true);
         });
 
@@ -154,9 +156,9 @@ addExerciseButton.onclick = function addExercise() {
     // AJAX finish exercise
     var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
     var exerciseName = $(exerciseNameInput).val();
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
+    var repsValue = $(repsInputId).val();
     var weightValue = $(weightInputElem).val();
 
 
@@ -174,7 +176,7 @@ addExerciseButton.onclick = function addExercise() {
     });
 
     finishExercise.done(function() {
-        $(repsInputElem).attr('disabled', true);
+        $(repsInputId).attr('disabled', true);
         $(weightInputElem).attr('disabled', true);
         $(exerciseNameInput).attr('disabled', true);
     });
@@ -270,9 +272,9 @@ function finishWorkout() {
     var rating = $("#workout-rating").val();
     var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
     var exerciseName = $(exerciseNameInput).val();
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
+    var repsValue = $(repsInputId).val();
     var weightValue = $(weightInputElem).val();
 
     finish = $.ajax({
@@ -295,7 +297,7 @@ function finishWorkout() {
         $('#workout-name').text(data.workout_name);
         $('#workout-name').attr('disabled', true);
         $(exerciseNameInput).attr('disabled', true);
-        $(repsInputElem).attr('disabled', true);
+        $(repsInputId).attr('disabled', true);
         $(weightInputElem).attr('disabled', true);
         $('#finish-workout-button').attr('disabled', true);
         $('#add-exercise-button').attr('disabled', true);
