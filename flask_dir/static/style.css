@@ -92,7 +92,9 @@
     text-align: center;
 }
 #start-workout-div {
-    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    padding: 15rem 1rem;
 }
 .cardio-field {
     display: inline-block;
@@ -130,7 +132,10 @@
     margin-top: 2.5rem;
     margin-bottom: 2rem;
 }
-#start-workout-button, #add-exercise-button, #add-set-button {
+#start-workout-button {
+    padding: 3rem 4rem;
+}
+#add-exercise-button, #add-set-button {
     padding: 1rem 2rem;
 }
 .slider-container {
