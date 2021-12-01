@@ -41,11 +41,11 @@ function startWorkout() {
     });
 
     start.done(function() {
-        startWorkoutButton.style.display = "none";
-        exercisePageTitle.style.display = '';
-        cardioButton.style.display = '';
-        cardioContents.style.display = '';
-        exerciseForm.style.display = '';
+        startWorkoutButton.hide();
+        exercisePageTitle.show();
+        cardioButton.show();
+        cardioContents.show();
+        exerciseForm.show();
     });
 };
 
