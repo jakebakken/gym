@@ -61,7 +61,7 @@ addSetButton.onclick = function addSet() {
             repsValid = true;
         } else {
             repsInputElem.style.border = "2px solid red";
-            repsInputElem.style.border-radius = "3px";
+            repsInputElem.style.borderRadius = "3px";  // todo error is here, dash is messing it up
         }
     });
 
@@ -76,7 +76,7 @@ addSetButton.onclick = function addSet() {
     var weightValid = true;
 
     // if reps & weight values are valid save set / start new set
-    if (repsValid == true && weightValid == true) {
+    if (repsValid === true && weightValid === true) {
         finishSet = $.ajax ({
             type: 'POST',
             url: '/finish-set',
