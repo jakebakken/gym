@@ -42,44 +42,38 @@ const addExerciseButton = document.getElementById("add-exercise-button");
 const addSetButton = document.getElementById("add-set-button");
 const exerciseTableBody = document.getElementById("exercise-table-body");
 
+
+// reps listener vars
+var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+var repsValid = false;
+var repsInputElemStr = 'exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+const repsInputElem = document.getElementById(repsInputElemStr);
+console.log(repsInputElem);
+
+// listeners for valid reps input values
+repsInputElem.addEventListener('input', function() {
+    repsValid = false;
+    if (1 <= repsValue <= 169) {
+        repsValid = true;
+    } else {
+        repsValid = false;
+        repsInputElem.style.border = "2px solid red";
+        repsInputElem.style.borderRadius = "3px";
+    }
+});
+
+
 addSetButton.onclick = function addSet() {
 // initialize AJAX function
 // add new set every click, max 10 sets
 
-    // AJAX finish set
-    //  changing elements is necessary for disabling input fields incrementally
-    var repsInputId = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    var repsInputElem = document.getElementById(`exercise + ${exerciseNumber} + -set + ${setNumber} + -reps`);
-    console.log(repsInputElem);
-
-    var repsValid = false;
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
     var repsValue = $(repsInputId).val();  // todo change to elem.value;
     var weightValue = $(weightInputElem).val();
 
-    // listeners for valid reps/weight input values
-    repsInputElem.addEventListener('input', function() {
-        repsValid = false;
-
-        if (1 <= repsValue <= 169) {
-            repsValid = true;
-        } else {
-            repsValid = false;
-            repsInputElem.style.border = "2px solid red";
-            repsInputElem.style.borderRadius = "3px";
-        }
-    });
-
-    // weightInputElem.addEventListener('input', function() {
-    //     var weightValid = false;
-
-    //     if (0.5 <= weightValue <= 6699) {
-    //         weightValid = true;
-    //     }
-    // });
-
     var weightValid = true;
 
+    // AJAX finish set
     // if reps & weight values are valid save set / start new set
     if (repsValid === true && weightValid === true) {
         finishSet = $.ajax ({
