@@ -41,8 +41,8 @@ addSetButton.onclick = function addSet() {
     // check if reps input is valid
     if ((1 <= repsValue) && (repsValue <= 169)) {
         repsValid = true;
-        $(repsInputElem).removeAttr('border');
-        $(repsInputElem).removeAttr('border-radius');
+        $(repsInputElem).css('border', '');
+        $(repsInputElem).css('border-radius', '');
     } else {
         repsValid = false;
         $(repsInputElem).css('border', '2px solid red');
@@ -52,8 +52,8 @@ addSetButton.onclick = function addSet() {
     // check if weight input is valid
     if ((0.5 <= weightValue) && (weightValue <= 6699)) {
         weightValid = true;
-        $(weightInputElem).removeAttr('border');
-        $(weightInputElem).removeAttr('border-radius');
+        $(weightInputElem).css('border', '');
+        $(weightInputElem).css('border-radius', '');
     } else {
         weightValid = false;
         $(weightInputElem).css('border', '2px solid red');
