@@ -28,10 +28,10 @@ addSetButton.onclick = function addSet() {
 
     // AJAX finish set
     //  changing elements is necessary for disabling input fields incrementally
-    const repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    const weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    const repsValue = $(repsInputElem).val();
-    const weightValue = $(weightInputElem).val();
+    let repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    let weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    let repsValue = $(repsInputElem).val();
+    let weightValue = $(weightInputElem).val();
     var repsValid = false;
     var weightValid = false;
 
@@ -134,17 +134,17 @@ addExerciseButton.onclick = function addExercise() {
 // add new exercise every click, max 15 exercises
 
     // AJAX finish exercise
-    const exerciseNameInput = '#exercise' + exerciseNumber + '-name';
-    const repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    const weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    const exerciseName = $(exerciseNameInput).val();
-    const repsValue = $(repsInputElem).val();
-    const weightValue = $(weightInputElem).val();
+    let exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+    let repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    let weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    let exerciseName = $(exerciseNameInput).val();
+    let repsValue = $(repsInputElem).val();
+    let weightValue = $(weightInputElem).val();
     var repsValid = false;
     var weightValid = false;
     var exerciseNameValid = false;
 
-    if (1 < exerciseName.length) && (exerciseName.length <= 50) {
+    if ((1 < exerciseName.length) && (exerciseName.length <= 50)) {
         exerciseNameValid = true;
         $(exerciseNameInput).css('border', '');
         $(exerciseNameInput).css('border-radius', '');
@@ -233,6 +233,7 @@ addExerciseButton.onclick = function addExercise() {
 
         set1RepsInput.type = "number";
         set1RepsInput.pattern = "[0-9]*";
+        set1RepsInput.setAttribute("inputmode", "decimal");
         set1RepsInput.id = "exercise" + exerciseNumber + "-set1-reps";
         set1RepsInput.name = "exercise" + exerciseNumber + "-set1-reps";
         set1RepsInput.setAttribute("class", "form-exercise");
@@ -240,7 +241,7 @@ addExerciseButton.onclick = function addExercise() {
 
         set1WeightInput.type = "number";
         set1WeightInput.pattern = "[0-9]*(.?[0-9])?";
-        set1WeightInput.inputmode = "decimal";
+        set1WeightInput.setAttribute("inputmode", "decimal");
         set1WeightInput.id = "exercise" + exerciseNumber + "-set1-weight";
         set1WeightInput.name = "exercise" + exerciseNumber + "-set1-weight";
         set1WeightInput.setAttribute("class", "form-exercise");
