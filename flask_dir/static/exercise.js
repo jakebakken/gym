@@ -32,71 +32,90 @@ addSetButton.onclick = function addSet() {
     var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
     var repsValue = $(repsInputElem).val();
     var weightValue = $(weightInputElem).val();
+    var repsValid = false;
+    var weightValid = false;
+
+    if (1 <= repsValue <= 169) {
+        repsValid = true;
+    } else {
+        repsValid = false;
+        repsInputElem.style.border = "2px solid red";
+        repsInputElem.style.borderRadius = "3px";
+    };
+
+    if (0.5 <= weightValue <= 6699) {
+        weightValid = true;
+    } else {
+        weightValid = false;
+        weightInputElem.style.border = "2px solid red";
+        weightInputElem.style.borderRadius = "3px";
+    };
+
+    if (repsValid && weightValid) {
+        finishSet = $.ajax ({
+            type: 'POST',
+            url: '/finish-set',
+            data: {
+                repsValue: repsValue,
+                weightValue: weightValue,
+            },
+            success: function () {
+                console.log("set saved");
+            }
+        });
+
+        finishSet.done(function() {
+            $(repsInputElem).attr('disabled', true);
+            $(weightInputElem).attr('disabled', true);
+        });
 
 
-    finishSet = $.ajax ({
-        type: 'POST',
-        url: '/finish-set',
-        data: {
-            repsValue: repsValue,
-            weightValue: weightValue,
-        },
-        success: function () {
-            console.log("set saved");
-        }
-    });
-
-    finishSet.done(function() {
-        $(repsInputElem).attr('disabled', true);
-        $(weightInputElem).attr('disabled', true);
-    });
+        // increment set count
+        setNumber += 1;
 
 
-    // increment set count
-    setNumber += 1;
+        const headerRow = document.createElement("tr");
+        const header = document.createElement("th");
+        const dataRow = document.createElement("tr");
+        const repsData = document.createElement("td");
+        const weightData = document.createElement("td");
+        const repsInput = document.createElement("input");
+        const weightInput = document.createElement("input");
 
+        header.innerText = "Set " + setNumber;
+        header.setAttribute("colspan", 2);
 
-    const headerRow = document.createElement("tr");
-    const header = document.createElement("th");
-    const dataRow = document.createElement("tr");
-    const repsData = document.createElement("td");
-    const weightData = document.createElement("td");
-    const repsInput = document.createElement("input");
-    const weightInput = document.createElement("input");
+        repsInput.type = "number";
+        repsInput.pattern = "[0-9]*";
+        repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+        repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
+        repsInput.setAttribute("class", "form-exercise");
+        repsInput.placeholder = "Reps";
 
-    header.innerText = "Set " + setNumber;
-    header.setAttribute("colspan", 2);
+        weightInput.type = "number";
+        weightInput.pattern = "[0-9]*(.?[0-9])?";
+        weightInput.setAttribute("inputmode", "decimal")
+        weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+        weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
+        weightInput.setAttribute("class", "form-exercise");
+        weightInput.placeholder = "Weight";
 
-    repsInput.type = "number";
-    repsInput.pattern = "[0-9]*";
-    repsInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-    repsInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-reps";
-    repsInput.setAttribute("class", "form-exercise");
-    repsInput.placeholder = "Reps";
+        if (setNumber <= 10) {
+            // add set header
+            headerRow.append(header);
 
-    weightInput.type = "number";
-    weightInput.pattern = "[0-9]*(.?[0-9])?";
-    weightInput.setAttribute("inputmode", "decimal")
-    weightInput.id = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-    weightInput.name = "exercise" + exerciseNumber + "-set" + setNumber + "-weight";
-    weightInput.setAttribute("class", "form-exercise");
-    weightInput.placeholder = "Weight";
+            // add input areas to respective table data tags
+            repsData.append(repsInput);
+            weightData.append(weightInput);
 
-    if (setNumber <= 10) {
-        // add set header
-        headerRow.append(header);
+            // add data tags to single table row
+            dataRow.append(repsData);
+            dataRow.append(weightData);
 
-        // add input areas to respective table data tags
-        repsData.append(repsInput);
-        weightData.append(weightInput);
-
-        // add data tags to single table row
-        dataRow.append(repsData);
-        dataRow.append(weightData);
-
-        // add header row & data row to exercise table
-        exerciseTableBody.append(headerRow);
-        exerciseTableBody.append(dataRow);
+            // add header row & data row to exercise table
+            exerciseTableBody.append(headerRow);
+            exerciseTableBody.append(dataRow);
+        };
     };
 };
 
@@ -233,7 +252,6 @@ function startWorkout() {
         $('#cardio-button').show();
         $('#cardio-contents').show();
         $('#exercise-form').show();
-        timerOn();
     });
 };
 
