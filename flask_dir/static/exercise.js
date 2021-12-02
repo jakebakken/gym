@@ -38,16 +38,22 @@ addSetButton.onclick = function addSet() {
     console.log({'reps val': repsValue, 'reps type': typeof(repsValue),
                  'weight type': typeof(weightValue), 'weight val': weightValue});
 
+    // check if reps input is valid
     if ((1 <= repsValue) && (repsValue <= 169)) {
         repsValid = true;
+        $(repsInputElem).removeAttr('border');
+        $(repsInputElem).removeAttr('border-radius');
     } else {
         repsValid = false;
         $(repsInputElem).css('border', '2px solid red');
         $(repsInputElem).css('border-radius', '3px');
     };
 
+    // check if weight input is valid
     if ((0.5 <= weightValue) && (weightValue <= 6699)) {
         weightValid = true;
+        $(weightInputElem).removeAttr('border');
+        $(weightInputElem).removeAttr('border-radius');
     } else {
         weightValid = false;
         $(weightInputElem).css('border', '2px solid red');
