@@ -233,7 +233,6 @@ addExerciseButton.onclick = function addExercise() {
 
         set1RepsInput.type = "number";
         set1RepsInput.pattern = "[0-9]*";
-        set1RepsInput.setAttribute("inputmode", "decimal");
         set1RepsInput.id = "exercise" + exerciseNumber + "-set1-reps";
         set1RepsInput.name = "exercise" + exerciseNumber + "-set1-reps";
         set1RepsInput.setAttribute("class", "form-exercise");
