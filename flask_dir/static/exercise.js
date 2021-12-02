@@ -36,7 +36,7 @@ addSetButton.onclick = function addSet() {
     var weightValid = false;
 
     console.log({'reps val': repsValue, 'reps type': typeof(repsValue),
-                 'weight type': typeof(weightValue), 'weight val': weightValue})
+                 'weight type': typeof(weightValue), 'weight val': weightValue});
 
     if (1 <= repsValue <= 169) {
         repsValid = true;
@@ -53,6 +53,8 @@ addSetButton.onclick = function addSet() {
         weightInputElem.style.border = "2px solid red";
         weightInputElem.style.borderRadius = "3px";
     };
+
+    console.log("validity", {'repsValid': repsValid, 'weightValid': weightValid});
 
     if (repsValid === true && weightValid === true) {
         finishSet = $.ajax ({
