@@ -38,7 +38,7 @@ addSetButton.onclick = function addSet() {
     console.log({'reps val': repsValue, 'reps type': typeof(repsValue),
                  'weight type': typeof(weightValue), 'weight val': weightValue});
 
-    if (1 <= repsValue <= 169) {
+    if ((1 <= repsValue) && (repsValue <= 169)) {
         repsValid = true;
     } else {
         repsValid = false;
@@ -46,7 +46,7 @@ addSetButton.onclick = function addSet() {
         repsInputElem.style.borderRadius = "3px";
     };
 
-    if (0.5 <= weightValue <= 6699) {
+    if ((0.5 <= weightValue) && (weightValue <= 6699)) {
         weightValid = true;
     } else {
         weightValid = false;
