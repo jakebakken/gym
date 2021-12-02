@@ -42,16 +42,16 @@ addSetButton.onclick = function addSet() {
         repsValid = true;
     } else {
         repsValid = false;
-        repsInputElem.style.border = "2px solid red";
-        repsInputElem.style.borderRadius = "3px";
+        $(repsInputElem).css('border', '2px solid red');
+        $(repsInputElem).css('border-radius', '3px');
     };
 
     if ((0.5 <= weightValue) && (weightValue <= 6699)) {
         weightValid = true;
     } else {
         weightValid = false;
-        weightInputElem.style.border = "2px solid red";
-        weightInputElem.style.borderRadius = "3px";
+        $(weightInputElem).css('border', '2px solid red');
+        $(weightInputElem).css('border-radius', '3px');
     };
 
     console.log("validity", {'repsValid': repsValid, 'weightValid': weightValid});
