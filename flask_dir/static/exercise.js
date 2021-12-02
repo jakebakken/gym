@@ -144,12 +144,13 @@ addExerciseButton.onclick = function addExercise() {
     var weightValid = false;
     var exerciseNameValid = false;
 
+    // check if exerciseName is valid
     if ((1 < exerciseName.length) && (exerciseName.length <= 50)) {
         exerciseNameValid = true;
         $(exerciseNameInput).css('border', '');
         $(exerciseNameInput).css('border-radius', '');
     } else {
-        repsValid = false;
+        exerciseNameValid = false;
         $(exerciseNameInput).css('border', '2px solid red');
         $(exerciseNameInput).css('border-radius', '3px');
     };
@@ -275,7 +276,7 @@ addExerciseButton.onclick = function addExercise() {
 
 
 // slider functionality
-var slider = document.getElementById("workout-rating");
+const slider = document.getElementById("workout-rating");
 var output = document.getElementById("workout-rating-value");
 output.innerHTML = slider.value;
 
@@ -306,40 +307,91 @@ function startWorkout() {
 
 // AJAX finish workout
 function finishWorkout() {
-    var workoutName = $("#workout-name").val();
-    var rating = $("#workout-rating").val();
-    var exerciseNameInput = '#exercise' + exerciseNumber + '-name';
-    var exerciseName = $(exerciseNameInput).val();
-    var repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
-    var weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
-    var repsValue = $(repsInputElem).val();
-    var weightValue = $(weightInputElem).val();
+    let workoutNameInput = '#workout-name';
+    let exerciseNameInput = '#exercise' + exerciseNumber + '-name';
+    let repsInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-reps';
+    let weightInputElem = '#exercise' + exerciseNumber + '-set' + setNumber + '-weight';
+    let workoutName = $(workoutNameInput).val();
+    let exerciseName = $(exerciseNameInput).val();
+    let repsValue = $(repsInputElem).val();
+    let weightValue = $(weightInputElem).val();
+    let rating = $("#workout-rating").val();
+    var workoutNameValid = false;
+    var repsValid = false;
+    var weightValid = false;
+    var exerciseNameValid = false;
 
-    finish = $.ajax({
-        type: 'POST',
-        url: '/finish-workout',
-        data: {
-            workoutName: workoutName,  // info to send to backend
-            rating: rating,
-            exerciseName: exerciseName,
-            repsValue: repsValue,
-            weightValue: weightValue,
-        },
-        success: function() {
-            console.log("workout saved");
-        }
-    });
+    // check if workoutName is valid
+    if ((1 <= workoutName.length) && (workoutName.length <= 50)) {
+        workoutNameValid = true;
+        $(workoutNameInput).css('border', '');
+        $(workoutNameInput).css('border-radius', '');
+    } else {
+        workoutNameValid = false;
+        $(workoutNameInput).css('border', '2px solid red');
+        $(workoutNameInput).css('border-radius', '3px');
+    };
 
-    // disable elements when finished
-    finish.done(function(data) {
-        $('#workout-name').text(data.workout_name);
-        $('#workout-name').attr('disabled', true);
-        $(exerciseNameInput).attr('disabled', true);
-        $(repsInputElem).attr('disabled', true);
-        $(weightInputElem).attr('disabled', true);
-        $('#finish-workout-button').attr('disabled', true);
-        $('#add-exercise-button').attr('disabled', true);
-        $('#add-set-button').attr('disabled', true);
-        $('#finish-workout-button').html('Workout Finished');
-    });
+    // check if exerciseName is valid
+    if ((1 <= exerciseName.length) && (exerciseName.length <= 50)) {
+        exerciseNameValid = true;
+        $(exerciseNameInput).css('border', '');
+        $(exerciseNameInput).css('border-radius', '');
+    } else {
+        exerciseNameValid = false;
+        $(exerciseNameInput).css('border', '2px solid red');
+        $(exerciseNameInput).css('border-radius', '3px');
+    };
+
+    // check if reps input is valid
+    if ((1 <= repsValue) && (repsValue <= 169)) {
+        repsValid = true;
+        $(repsInputElem).css('border', '');
+        $(repsInputElem).css('border-radius', '');
+    } else {
+        repsValid = false;
+        $(repsInputElem).css('border', '2px solid red');
+        $(repsInputElem).css('border-radius', '3px');
+    };
+
+    // check if weight input is valid
+    if ((0.5 <= weightValue) && (weightValue <= 6699)) {
+        weightValid = true;
+        $(weightInputElem).css('border', '');
+        $(weightInputElem).css('border-radius', '');
+    } else {
+        weightValid = false;
+        $(weightInputElem).css('border', '2px solid red');
+        $(weightInputElem).css('border-radius', '3px');
+    };
+
+    if (workoutNameValid && exerciseNameValid && repsValid && weightValid) {
+        finish = $.ajax({
+            type: 'POST',
+            url: '/finish-workout',
+            data: {
+                workoutName: workoutName,
+                rating: rating,
+                exerciseName: exerciseName,
+                repsValue: repsValue,
+                weightValue: weightValue,
+            },
+            success: function() {
+                console.log("workout saved");
+            }
+        });
+
+        // disable elements when finished
+        finish.done(function(data) {
+            $(workoutNameInput).text(data.workout_name);
+            $(workoutNameInput).attr('disabled', true);
+            $(exerciseNameInput).attr('disabled', true);
+            $(repsInputElem).attr('disabled', true);
+            $(weightInputElem).attr('disabled', true);
+            $('#finish-workout-button').attr('disabled', true);
+            $('#add-exercise-button').attr('disabled', true);
+            $('#add-set-button').attr('disabled', true);
+            $('#finish-workout-button').html('Workout Finished');
+        });
+    };
 };
