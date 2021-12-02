@@ -51,7 +51,7 @@ addSetButton.onclick = function addSet() {
         weightInputElem.style.borderRadius = "3px";
     };
 
-    if (repsValid && weightValid) {
+    if (repsValid === true && weightValid === true) {
         finishSet = $.ajax ({
             type: 'POST',
             url: '/finish-set',
