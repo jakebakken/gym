@@ -35,6 +35,9 @@ addSetButton.onclick = function addSet() {
     var repsValid = false;
     var weightValid = false;
 
+    console.log({'reps val': repsValue, 'reps type': typeof(repsValue),
+                 'weight type': typeof(weightValue), 'weight val': weightValue})
+
     if (1 <= repsValue <= 169) {
         repsValid = true;
     } else {
