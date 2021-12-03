@@ -42,6 +42,7 @@ def create_app():
 
     # add function to change UTC Date -> local Date in jinja
     def utc_to_local_date(utc_date_object):
+        print(utc_date_object)
         # change utc Date to str
         dt_str = utc_date_object.strftime("%Y-%m-%d")
         # define date format
@@ -50,7 +51,7 @@ def create_app():
         local_tz = tz.tzlocal()
         local = utc.astimezone(local_tz)
         local_date = local.strftime("%d-%b-%Y")
-        return print(local_date)
+        return local_date
 
     app.jinja_env.globals.update(utc_to_local_date=utc_to_local_date)
 
