@@ -5,7 +5,7 @@
 <hr/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    {% set dt_str = {workout.workout_date.strftime(%Y-%m-%d)} %}
+    {% set dt_str = {workout.workout_date.strftime("%Y-%m-%d")} %}
     {% set format = "Y%-%m-%d" %}
     {% set utc = dt.datetime.strptime(dt_str, format).replace(tzinfo=pytz.UTC) %}
     {% set local_tz = tz.tzlocal() %}
