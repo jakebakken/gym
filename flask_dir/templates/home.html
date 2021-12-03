@@ -7,8 +7,8 @@
 <button type="button" class="collapsible">
     <span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span><span> &#8212; </span>
     <span>{{ workout.workout_name }}</span><span> &#8212; </span>
-    <span>{{ Date TZ: workout.workout_date.astimezone() }}</span><span> &#8212; </span>
-    <span>{{ Start TZ: workout.workout_start_time.astimezone() }}</span>
+    <span>Date TZ: {{ workout.workout_date.astimezone() }}</span><span> &#8212; </span>
+    <span>Start TZ: {{ workout.workout_start_time.astimezone() }}</span>
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
