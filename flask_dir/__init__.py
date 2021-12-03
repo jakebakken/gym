@@ -3,6 +3,9 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 import os
 from os import path
+import datetime as dt
+from dateutil import tz
+import pytz
 
 
 db = SQLAlchemy()
@@ -33,9 +36,22 @@ def create_app():
     login_manager.init_app(app)
 
     @login_manager.user_loader
-    def load_user(id):
+    def load_user(user_id):
         # reference user by pk (works like FILTER BY id)
-        return Users.query.get(int(id))
+        return Users.query.get(int(user_id))
+
+    def utc_to_local_date(date_object):
+        dt_str = date_object.strftime("%Y-%m-%d")
+        date_format = "%Y-%m-%d"
+        utc = dt.datetime.strptime(dt_str, date_format).replace(tzinfo=pytz.UTC)
+
+        local_tz = tz.tzlocal()
+        local = utc.astimezone(local_tz)
+
+        local_date = local.strftime("%m-%b-%Y")
+        return local_date
+
+    app.jinja_env.globals.update(utc_to_local_date=utc_to_local_date)
 
     return app
 

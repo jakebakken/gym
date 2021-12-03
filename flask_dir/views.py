@@ -3,8 +3,6 @@ from flask_login import login_required, current_user
 from .models import Workout, Exercise, Set
 from . import db
 import datetime as dt
-from dateutil import tz
-import pytz
 
 
 # blueprint for Flask application
@@ -17,8 +15,7 @@ def home_page():
     workouts = Workout.query.filter_by(
         user_id=current_user.id).order_by(Workout.id.desc()).all()
 
-    return render_template('home.html', user=current_user, workouts=workouts,
-                           dt=dt, tz=tz, pytz=pytz)
+    return render_template('home.html', user=current_user, workouts=workouts)
 
 
 @views.route('/exercise/', methods=['GET', 'POST'])
