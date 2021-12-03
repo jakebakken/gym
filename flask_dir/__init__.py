@@ -48,7 +48,7 @@ def create_app():
         local_tz = tz.tzlocal()
         local = utc.astimezone(local_tz)
 
-        local_date = local.strftime("%m-%b-%Y")
+        local_date = local.strftime("%d-%b-%Y")
         return local_date
 
     app.jinja_env.globals.update(utc_to_local_date=utc_to_local_date)
