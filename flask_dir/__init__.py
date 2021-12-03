@@ -43,11 +43,11 @@ def create_app():
     # add function to change UTC Date -> local Date in jinja
     def utc_to_local_date(input_date):  # this is in fact dt.date object
         # change utc Date to str
-        dt_str = input_date.strftime("%Y-%m-%d")
-        print(dt_str)
+        # dt_str = input_date.strftime("%Y-%m-%d")
+        # print(dt_str)
         format = "%Y-%m-%d"
-        print(format)
-        utc = dt.datetime.strptime(dt_str, format)
+        # print(format)
+        utc = dt.datetime.strptime(input_date, format)
         print(utc)
         utc = utc.replace(tzinfo=pytz.UTC)
         print(utc)
