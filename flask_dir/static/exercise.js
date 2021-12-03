@@ -14,6 +14,21 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
+// AJAX start workout
+function startWorkout() {
+    start = $.ajax({
+        type: 'POST',
+        url: '/start-workout',
+    });
+
+    start.done(function() {
+        $('#start-workout-button').hide();
+        $('#exercise-page-title').show();
+        $('#cardio-button').show();
+        $('#cardio-contents').show();
+        $('#exercise-form').show();
+    });
+};
 
 var exerciseNumber = 1;
 var setNumber = 1;
@@ -67,9 +82,6 @@ addSetButton.onclick = function addSet() {
                 repsValue: repsValue,
                 weightValue: weightValue,
             },
-            success: function () {
-                console.log("set saved");
-            }
         });
 
         finishSet.done(function() {
@@ -186,9 +198,6 @@ addExerciseButton.onclick = function addExercise() {
                 repsValue: repsValue,
                 weightValue: weightValue,
             },
-            success: function () {
-                console.log("exercise saved");
-            }
         });
 
         finishExercise.done(function() {
@@ -285,26 +294,6 @@ slider.oninput = function () {
 };
 
 
-// AJAX start workout
-function startWorkout() {
-    start = $.ajax({
-        type: 'POST',
-        url: '/start-workout',
-        success: function() {
-            console.log("workout started");
-        }
-    });
-
-    start.done(function() {
-        $('#start-workout-button').hide();
-        $('#exercise-page-title').show();
-        $('#cardio-button').show();
-        $('#cardio-contents').show();
-        $('#exercise-form').show();
-    });
-};
-
-
 // AJAX finish workout
 function finishWorkout() {
     let workoutNameInput = '#workout-name';
@@ -376,9 +365,6 @@ function finishWorkout() {
                 repsValue: repsValue,
                 weightValue: weightValue,
             },
-            success: function() {
-                console.log("workout saved");
-            }
         });
 
         // disable elements when finished
