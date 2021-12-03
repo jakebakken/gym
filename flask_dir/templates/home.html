@@ -5,10 +5,13 @@
 <hr/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    <span>{{ workout.workout_date.strftime("%d-%b-%Y") }}</span><span> &#8212; </span>
-    <span>{{ workout.workout_name }}</span><span> &#8212; </span>
-    <span>Date TZ: {{ workout.workout_date.astimezone() }}</span><span> &#8212; </span>
-    <span>Start TZ: {{ workout.workout_start_time.astimezone() }}</span>
+    {% dt_str = f"{workout.workout_date.strftime(%Y-%m-%d)}" %}
+    {% format = "Y%-%m-%d" %}
+    {% utc = dt.datetime.strptime(dt_str, format).replace(tzinfo=pytz.UTC) %}
+    {% local_tz = tz.tzlocal() %}
+    {% local = utc.astimezone(local_tz) %}
+    <span>local.strftime("%m-%b-%Y")</span>
+    <span> &#8212; </span><span>{{ workout.workout_name }}</span>
 </button>
 <div class="workout-contents">
     {% for exercise in workout.exercise|sort(attribute='id') %}
