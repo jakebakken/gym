@@ -5,8 +5,7 @@
 <hr/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    {% set local_date = utc_to_local_date(workout.workout_date) %}
-    <span>{{ local_date }}</span>
+    <span>{{ utc_to_local_date(workout.workout_date) }}</span>
     <span> &#8212; </span><span>{{ workout.workout_name }}</span>
 </button>
 <div class="workout-contents">
