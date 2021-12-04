@@ -45,6 +45,9 @@ def create_app():
     @app.context_processor
     def utility_processor():
         def local_date(date_object):
+            print(f"date_object: {date_object}")
+            print(f"date_object type: {type(date_object)}")
+
             dt_str = date_object.strftime("%Y-%m-%d")
             print(f"dt_str: {dt_str}")
 
@@ -58,7 +61,7 @@ def create_app():
             print(f"local: {local}")
 
             loc_date = local.strftime("%d-%b-%Y")
-            print(f"loc_date: {loc_date}")
+            print(f"loc_date: {loc_date}\n")
 
             return loc_date
         return dict(local_date=local_date)
