@@ -57,7 +57,7 @@ def create_app():
             utc = dt.datetime.strptime(dt_str, date_format).replace(tzinfo=pytz.UTC)
             print(f"utc: {utc}")
 
-            local = utc.astimezone(tz.tzlocal())
+            local = utc.astimezone(tz.gettz())
             print(f"local: {local}")
 
             loc_date = local.strftime("%d-%b-%Y")
