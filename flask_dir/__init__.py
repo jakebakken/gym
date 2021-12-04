@@ -12,6 +12,19 @@ db = SQLAlchemy()
 SQLALCHEMY_URL = os.environ['SQLALCHEMY_URL']
 
 
+# add function to change UTC Date -> local Date in jinja
+def utc_to_local_date(utc_date_object):
+    # change utc Date to str
+    dt_str = utc_date_object.strftime("%Y-%m-%d")
+    # define date format
+    date_format = "%Y-%m-%d"
+    utc = dt.datetime.strptime(dt_str, date_format).replace(tzinfo=pytz.UTC)
+    local_tz = tz.tzlocal()
+    local = utc.astimezone(local_tz)
+    local_date = local.strftime("%d-%b-%Y")
+    return local_date
+
+
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
 
@@ -20,18 +33,6 @@ def create_app():
     # db key
     app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_URL
     db.init_app(app)
-
-    # add function to change UTC Date -> local Date in jinja
-    def utc_to_local_date(utc_date_object):
-        # change utc Date to str
-        dt_str = utc_date_object.strftime("%Y-%m-%d")
-        # define date format
-        date_format = "%Y-%m-%d"
-        utc = dt.datetime.strptime(dt_str, date_format).replace(tzinfo=pytz.UTC)
-        local_tz = tz.tzlocal()
-        local = utc.astimezone(local_tz)
-        local_date = local.strftime("%d-%b-%Y")
-        return local_date
 
     app.jinja_env.globals.update(utc_to_local_date=utc_to_local_date)
 
