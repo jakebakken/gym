@@ -44,27 +44,28 @@ def create_app():
     # add function to change UTC Date -> local Date in jinja
     @app.context_processor
     def utility_processor():
-        def local_date(date_object):
-            print(f"date_object: {date_object}")
-            print(f"date_object type: {type(date_object)}")
+        def local_dt(date_object, time_object):
+            date_str = date_object.strftime("%Y-%m-%d")
+            time_str = time_object.strftime("%H:%M:%S.%f")
+            dt_str = f"{date_str} {time_str}"
+            format = f"%Y-%m-%d %H:%M:%S.%f"
+            utc = dt.datetime.strptime(dt_str, format).replace(tzinfo=pytz.UTC)
 
-            dt_str = date_object.strftime("%Y-%m-%d")
-            print(f"dt_str: {dt_str}")
-
-            date_format = "%Y-%m-%d"
-            print(f"date_format: {date_format}")
-
-            utc = dt.datetime.strptime(dt_str, date_format).replace(tzinfo=pytz.UTC)
             print(f"utc: {utc}")
+            print(f"type: {type(utc)}\n")
 
-            local = utc.astimezone(tz.gettz('Pacific Standard Time'))
+            local = utc.astimezone(tz.gettz('US/Pacific'))
+
             print(f"local: {local}")
+            print(f"type: {type(local)}\n")
 
-            loc_date = local.strftime("%d-%b-%Y")
-            print(f"loc_date: {loc_date}\n")
+            loc_dt = local.strftime("%d-%b-%Y %H:%M:%S.%f")
 
-            return loc_date
-        return dict(local_date=local_date)
+            print(f"loc_date: {loc_dt}")
+            print(f"type: {type(loc_dt)}\n")
+
+            return loc_dt
+        return dict(local_date=local_dt)
 
     return app
 
