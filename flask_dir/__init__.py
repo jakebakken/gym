@@ -6,6 +6,7 @@ from os import path
 import datetime as dt
 from dateutil import tz
 import pytz
+import time
 
 
 db = SQLAlchemy()
@@ -40,30 +41,50 @@ def create_app():
         # reference user by pk (works like FILTER BY id)
         return Users.query.get(int(user_id))
 
-    # add function to change UTC Date -> local Date in jinja
     @app.context_processor
     def utility_processor():
-        def local_dt(date_object, time_object):
+        def local_date(date_object):
+            date_str = date_object.strftime("%Y-%m-%d")
+            format="%Y-%m-%d"
+            utc = dt.datetime.strptime(date_str, format).replace(tzinfo=pytz.UTC)
+            local = utc.astimezone(tz.gettz('US/Pacific'))
+            loc_date = local.strftime("%d-%b-%Y")
+            return loc_date
+        return dict(local_date=local_date)
+
+    @app.context_processor
+    def utility_processor():
+        def local_dt(date_object, time_object, return_val='dt'):
             date_str = date_object.strftime("%Y-%m-%d")
             time_str = time_object.strftime("%H:%M:%S.%f")
             dt_str = f"{date_str} {time_str}"
-            format = f"%Y-%m-%d %H:%M:%S.%f"
-            utc = dt.datetime.strptime(dt_str, format).replace(tzinfo=pytz.UTC)
+            dt_format = f"%Y-%m-%d %H:%M:%S.%f"
 
+            # declare UTC object
+            utc = dt.datetime.strptime(dt_str, dt_format).replace(tzinfo=pytz.UTC)
             print(f"utc: {utc}")
             print(f"type: {type(utc)}\n")
 
+            # change UTC object to US/Pacific TZ
             local = utc.astimezone(tz.gettz('US/Pacific'))
-
             print(f"local: {local}")
             print(f"type: {type(local)}\n")
 
-            loc_dt = local.strftime("%d-%b-%Y %H:%M:%S.%f")
+            if return_val == 'dt':
+                return local.strftime("%d-%b-%Y %H:%M:%S.%f")
 
-            print(f"loc_date: {loc_dt}")
-            print(f"type: {type(loc_dt)}\n")
+            elif return_val == 'time':
+                t = local.strftime("%H:%M:%S.%f")
+                tt = time.strptime(t, '%H:%M:%S.%f')
+                time_12h = time.strftime("%I:%M%p", tt)
+                return time_12h
 
-            return loc_dt
+            elif return_val == 'date':
+                return local.strftime("%d-%b-%Y")
+
+            else:
+                ValueError("Invalid Parameter passed for return_val")
+                return "local_dt() error"
         return dict(local_dt=local_dt)
 
     return app

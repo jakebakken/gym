@@ -5,10 +5,11 @@
 <hr/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    <span>{{ local_dt(workout.workout_date, workout.workout_start_time) }}</span>
+    <span>{{ local_dt(workout.workout_date, workout.workout_start_time, 'date') }}</span>
     <span> &#8212; </span><span>{{ workout.workout_name }}</span>
 </button>
 <div class="workout-contents">
+    <p>Workout Start: <span>{{ local_dt(workout.workout_date, workout.workout_start_time, 'time') }}</span></p>
     {% for exercise in workout.exercise|sort(attribute='id') %}
     <p class="exercise-name">{{ exercise.exercise_name }}</p>
     <table class="exercise-display-table">
@@ -29,6 +30,7 @@
     </table>
     <hr class="exercise-divider"/>
     {% endfor %}
+    <p>Workout End: <span>{{ local_dt(workout.workout_date, workout.workout_end_time, 'time') }}</span></p>
     <p class="workout-rating">Workout Rating: {{ workout.rating }}</p>
 </div>
 {% endfor %}
