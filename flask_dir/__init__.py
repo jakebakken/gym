@@ -3,6 +3,9 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 import os
 from os import path
+import datetime as dt
+from dateutil import tz
+import pytz
 
 
 db = SQLAlchemy()
@@ -37,10 +40,6 @@ def create_app():
         # reference user by pk (works like FILTER BY id)
         return Users.query.get(int(user_id))
 
-    import datetime as dt
-    from dateutil import tz
-    import pytz
-
     # add function to change UTC Date -> local Date in jinja
     @app.context_processor
     def utility_processor():
@@ -65,7 +64,7 @@ def create_app():
             print(f"type: {type(loc_dt)}\n")
 
             return loc_dt
-        return dict(local_date=local_dt)
+        return dict(local_dt=local_dt)
 
     return app
 
