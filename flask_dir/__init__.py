@@ -62,13 +62,8 @@ def create_app():
 
             # declare UTC object
             utc = dt.datetime.strptime(dt_str, dt_format).replace(tzinfo=pytz.UTC)
-            print(f"utc: {utc}")
-            print(f"type: {type(utc)}\n")
-
             # change UTC object to US/Pacific TZ
             local = utc.astimezone(tz.gettz('US/Pacific'))
-            print(f"local: {local}")
-            print(f"type: {type(local)}\n")
 
             if return_val == 'dt':
                 return local.strftime("%d-%b-%Y %H:%M:%S.%f")
