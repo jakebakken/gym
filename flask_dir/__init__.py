@@ -55,31 +55,35 @@ def create_app():
     @app.context_processor
     def utility_processor():
         def local_dt(date_object, time_object, return_val='dt'):
-            date_str = date_object.strftime("%Y-%m-%d")
-            time_str = time_object.strftime("%H:%M:%S.%f")
-            dt_str = f"{date_str} {time_str}"
-            dt_format = f"%Y-%m-%d %H:%M:%S.%f"
+            try:
+                date_str = date_object.strftime("%Y-%m-%d")
+                time_str = time_object.strftime("%H:%M:%S.%f")
+                dt_str = f"{date_str} {time_str}"
+                dt_format = f"%Y-%m-%d %H:%M:%S.%f"
 
-            # declare UTC object
-            utc = dt.datetime.strptime(dt_str, dt_format).replace(tzinfo=pytz.UTC)
-            # change UTC object to US/Pacific TZ
-            local = utc.astimezone(tz.gettz('US/Pacific'))
+                # declare UTC object
+                utc = dt.datetime.strptime(dt_str, dt_format).replace(tzinfo=pytz.UTC)
+                # change UTC object to US/Pacific TZ
+                local = utc.astimezone(tz.gettz('US/Pacific'))
 
-            if return_val == 'dt':
-                return local.strftime("%d-%b-%Y %H:%M:%S.%f")
+                if return_val == 'dt':
+                    return local.strftime("%d-%b-%Y %H:%M:%S.%f")
 
-            elif return_val == 'time':
-                t = local.strftime("%H:%M:%S.%f")
-                tt = time.strptime(t, '%H:%M:%S.%f')
-                time_12h = time.strftime("%I:%M%p", tt)
-                return time_12h
+                elif return_val == 'time':
+                    t = local.strftime("%H:%M:%S.%f")
+                    tt = time.strptime(t, '%H:%M:%S.%f')
+                    time_12h = time.strftime("%I:%M%p", tt)
+                    return time_12h
 
-            elif return_val == 'date':
-                return local.strftime("%d-%b-%Y")
+                elif return_val == 'date':
+                    return local.strftime("%d-%b-%Y")
 
-            else:
-                ValueError("Invalid Parameter passed for return_val")
-                return "local_dt() error"
+                else:
+                    ValueError("Invalid Parameter passed for return_val")
+                    return "local_dt() param error"
+            except Exception as e:
+                return f"Error: {e}"
+
         return dict(local_dt=local_dt)
 
     return app
