@@ -389,7 +389,7 @@ function finishWorkout() {
 const workoutNamePie = document.getElementById("workout-name");
 var pieTitle = "* add workout name *";
 // temporary title initialized
-var pieLayout = {title: pieTitle, width: '75%'};
+var pieLayout = {title: pieTitle, width: 400, height: 400};
 // xArray is Exercise Names
 var xArray = ["Italy", "France", "Spain", "USA"];
 // yArray is Exercise duration / Workout duration (update every 10ms)
@@ -402,6 +402,9 @@ Plotly.newPlot("pie", pieData, pieLayout);
 // title adjusts as user enters workout name
 workoutNamePie.addEventListener('input', function() {
     pieTitle = workoutNamePie.value;
-    pieLayout = {title: pieTitle};
+    if (pieTitle === '') {
+        pieTitle = "* add workout name*";
+    }
+    pieLayout = {title: pieTitle, width: 400, height: 400};
     Plotly.newPlot("pie", pieData, pieLayout);
 });

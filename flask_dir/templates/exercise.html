@@ -127,6 +127,11 @@
                     onclick="addSet();"
             >Add Set</button>
         </div>
+
+        {% if user.email == 'jakebakken1@gmail.com' or 'test@test.net' %}
+        <div id="pie"></div>
+        {% endif %}
+
         <div class="slider-container">
             <p>Workout Rating: <span id="workout-rating-value"></span></p>
             <input type="range" min="1" max="10" value="5" class="slider" id="workout-rating" name="workout-rating">
@@ -142,9 +147,6 @@
             >Finish Workout</button>
         </div>
     </form>
-    {% if user.email == 'jakebakken1@gmail.com' or 'test@test.net' %}
-    <div id="pie"></div>
-    {% endif %}
     <script src='https://cdn.plot.ly/plotly-2.6.3.min.js'></script>
     <script src="{{ url_for('static', filename='exercise.js') }}"></script>
 
