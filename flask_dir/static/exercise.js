@@ -389,7 +389,7 @@ function finishWorkout() {
 const workoutNamePie = document.getElementById("workout-name");
 var pieTitle = "* add workout name *";
 // temporary title initialized
-var pieLayout = {title: pieTitle};
+var pieLayout = {title: pieTitle, width: calc(var(--containerWidth) * .75)};
 // xArray is Exercise Names
 var xArray = ["Italy", "France", "Spain", "USA"];
 // yArray is Exercise duration / Workout duration (update every 10ms)
