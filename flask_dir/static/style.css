@@ -176,5 +176,6 @@
     margin-bottom: 0.75rem;
 }
 #pie {
-    width: 95%;
+    width: calc(var(--containerWidth) * .75);
+    display: none;
 }

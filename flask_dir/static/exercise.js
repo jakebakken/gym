@@ -27,6 +27,7 @@ function startWorkout() {
         $('#cardio-button').show();
         $('#cardio-contents').show();
         $('#exercise-form').show();
+        $('#pie').show();
     });
 };
 
