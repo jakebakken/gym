@@ -381,3 +381,26 @@ function finishWorkout() {
         });
     };
 };
+
+
+// responsive pie chart to show % of time spent on each portion of workout
+
+const workoutNamePie = document.getElementById("workout-name");
+var pieTitle = "* add workout name *";
+// temporary title initialized
+var pieLayout = {title: pieTitle};
+// xArray is Exercise Names
+var xArray = ["Italy", "France", "Spain", "USA"];
+// yArray is Exercise duration / Workout duration (update every 10ms)
+var yArray = [23, 23, 38, 56];
+
+var pieData = [{labels:xArray, values:yArray, type:"pie"}];
+
+Plotly.newPlot("pie", pieData, pieLayout);
+
+// title adjusts as user enters workout name
+workoutNamePie.addEventListener('input', function() {
+    pieTitle = workoutNamePie.value;
+    pieLayout = {title: pieTitle};
+    Plotly.newPlot("pie", pieData, pieLayout);
+});
