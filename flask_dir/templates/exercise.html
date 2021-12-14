@@ -142,8 +142,8 @@
             >Finish Workout</button>
         </div>
     </form>
-    <script src="{{ url_for('static', filename='exercise.js') }}"></script>
     <script src='https://cdn.plot.ly/plotly-2.6.3.min.js'></script>
+    <script src="{{ url_for('static', filename='exercise.js') }}"></script>
 
     {% if user.email == 'jakebakken1@gmail.com' or 'test@test.net' %}
     <div id="pie"></div>
