@@ -5,14 +5,14 @@
 <hr/>
 {% for workout in workouts %}
 <button type="button" class="collapsible">
-    <span>{{ local_dt(workout.workout_date, workout.workout_start_time, 'date') }}</span>
-    <span> &#8212; </span><span>{{ workout.workout_name }}</span>
+    <span>{{ local_dt(workout.date, workout.start_time, 'date') }}</span>
+    <span> &#8212; </span><span>{{ workout.name }}</span>
 
 </button>
 <div class="workout-contents">
     <p>
-        Duration: <span>{{ local_dt(workout.workout_date, workout.workout_start_time, 'time') }}</span>
-        <span>&#8212; </span><span>{{ local_dt(workout.workout_date, workout.workout_end_time, 'time') }}</span>
+        Duration: <span>{{ local_dt(workout.date, workout.start_time, 'time') }}</span>
+        <span>&#8212; </span><span>{{ local_dt(workout.date, workout.end_time, 'time') }}</span>
     </p>
     {% for exercise in workout.exercise|sort(attribute='id') %}
     <p class="exercise-name">{{ exercise.exercise_name }}</p>
