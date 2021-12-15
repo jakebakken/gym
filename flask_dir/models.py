@@ -21,7 +21,7 @@ class Workout(db.Model):
     end_time = db.Column(db.Time)
     rating = db.Column(db.Integer)
     exercise = db.relationship('Exercise', backref='workout', lazy='dynamic')
-    cardio = db.relationship('Cardio', backref='workout', lazy='dynamic')
+    # cardio = db.relationship('Cardio', backref='workout', lazy='dynamic')
 
 
 # class Cardio(db.Model):
