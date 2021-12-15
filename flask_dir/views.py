@@ -27,14 +27,14 @@ def exercise_page():
 @views.route('/start-workout', methods=['POST'])
 @login_required
 def start_workout():
-    workout_date = dt.datetime.now().date()
-    workout_start_time = dt.datetime.now()
+    date = dt.datetime.now().date()
+    start_time = dt.datetime.now()
 
     # initialize new workout instance
     start_of_workout = Workout(
         user_id=current_user.id,
-        workout_date=workout_date,
-        workout_start_time=workout_start_time,
+        date=date,
+        start_time=start_time,
     )
     db.session.add(start_of_workout)
     db.session.commit()
@@ -47,7 +47,7 @@ def start_workout():
     start_of_exercise = Exercise(
         user_id=current_user.id,
         workout_id=started_workout.id,
-        exercise_start_time=workout_start_time,
+        exercise_start_time=start_time,
     )
     db.session.add(start_of_exercise)
     db.session.commit()
@@ -61,7 +61,7 @@ def start_workout():
         user_id=current_user.id,
         workout_id=started_workout.id,
         exercise_id=started_exercise.id,
-        set_start_time=workout_start_time,
+        set_start_time=start_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -163,9 +163,8 @@ def finish_workout():
     # finish last Set in current Exercise, finish current Exercise,
     #  finish Workout
     workout_name = request.form['workoutName']
-    workout_end_time = dt.datetime.now()
+    end_time = dt.datetime.now()
     rating = request.form['rating']
-    workout_finish_time = dt.datetime.now()
     exercise_name = request.form['exerciseName']
     reps_value = request.form['repsValue']
     weight_value = request.form['weightValue']
@@ -183,13 +182,13 @@ def finish_workout():
         user_id=current_user.id).order_by(Workout.id.desc()).first()
 
     # add all missing values
-    current_set.set_end_time = workout_finish_time
+    current_set.set_end_time = end_time
     current_set.reps = reps_value
     current_set.weight = weight_value
-    current_exercise.exercise_end_time = workout_finish_time
+    current_exercise.exercise_end_time = end_time
     current_exercise.exercise_name = exercise_name
-    current_workout.workout_name = workout_name
-    current_workout.workout_end_time = workout_end_time
+    current_workout.name = workout_name
+    current_workout.end_time = end_time
     current_workout.rating = rating
 
     # commit all to finish Workout

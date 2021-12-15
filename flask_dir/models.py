@@ -15,10 +15,10 @@ class Users(db.Model, UserMixin):
 class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # foreign key reference must be lowercase
-    workout_date = db.Column(db.Date)
-    workout_name = db.Column(db.String(50))
-    workout_start_time = db.Column(db.Time)
-    workout_end_time = db.Column(db.Time)
+    date = db.Column(db.Date)
+    name = db.Column(db.String(50))
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
     rating = db.Column(db.Integer)
     exercise = db.relationship('Exercise', backref='workout', lazy='dynamic')
 
