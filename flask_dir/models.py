@@ -21,15 +21,26 @@ class Workout(db.Model):
     end_time = db.Column(db.Time)
     rating = db.Column(db.Integer)
     exercise = db.relationship('Exercise', backref='workout', lazy='dynamic')
+    cardio = db.relationship('Cardio', backref='workout', lazy='dynamic')
+
+
+# class Cardio(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+#     workout_id = db.Columm(db.Integer, db.ForeignKey('workout.id'))
+#     name = db.Column(db.String(50))
+#     duration = db.Column(db.Integer)
+#     distance = db.Column(db.Integer)
+#     distance_unit = db.String(2)  # km / mi options
 
 
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'))
-    exercise_name = db.Column(db.String(50))
-    exercise_start_time = db.Column(db.Time)
-    exercise_end_time = db.Column(db.Time)
+    name = db.Column(db.String(50))
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
     set = db.relationship('Set', backref='exercise', lazy='dynamic')
 
 
@@ -38,7 +49,7 @@ class Set(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'))
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
-    set_start_time = db.Column(db.Time)
-    set_end_time = db.Column(db.Time)
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
     reps = db.Column(db.Integer)
     weight = db.Column(db.Integer)

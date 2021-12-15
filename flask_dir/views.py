@@ -47,7 +47,7 @@ def start_workout():
     start_of_exercise = Exercise(
         user_id=current_user.id,
         workout_id=started_workout.id,
-        exercise_start_time=start_time,
+        start_time=start_time,
     )
     db.session.add(start_of_exercise)
     db.session.commit()
@@ -61,7 +61,7 @@ def start_workout():
         user_id=current_user.id,
         workout_id=started_workout.id,
         exercise_id=started_exercise.id,
-        set_start_time=start_time,
+        start_time=start_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -87,7 +87,7 @@ def finish_set():
     current_exercise = Exercise.query.filter_by(
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
-    current_set.set_end_time = set_finish_time
+    current_set.end_time = set_finish_time
     current_set.reps = reps_value
     current_set.weight = weight_value
     db.session.commit()
@@ -97,7 +97,7 @@ def finish_set():
         user_id=current_user.id,
         workout_id=current_set.workout_id,
         exercise_id=current_exercise.id,
-        set_start_time=set_finish_time,
+        start_time=set_finish_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -124,18 +124,18 @@ def finish_exercise():
         user_id=current_user.id).order_by(Exercise.id.desc()).first()
 
     # add missing values
-    current_set.set_end_time = exercise_finish_time
+    current_set.end_time = exercise_finish_time
     current_set.reps = reps_value
     current_set.weight = weight_value
-    current_exercise.exercise_end_time = exercise_finish_time
-    current_exercise.exercise_name = exercise_name
+    current_exercise.end_time = exercise_finish_time
+    current_exercise.name = exercise_name
     db.session.commit()
 
     # start new Exercise
     start_of_exercise = Exercise(
         user_id=current_user.id,
         workout_id=current_exercise.workout_id,
-        exercise_start_time=exercise_finish_time,
+        start_time=exercise_finish_time,
     )
     db.session.add(start_of_exercise)
     db.session.commit()
@@ -149,7 +149,7 @@ def finish_exercise():
         user_id=current_user.id,
         workout_id=current_set.workout_id,
         exercise_id=new_exercise.id,
-        set_start_time=exercise_finish_time,
+        start_time=exercise_finish_time,
     )
     db.session.add(start_of_set)
     db.session.commit()
@@ -182,11 +182,11 @@ def finish_workout():
         user_id=current_user.id).order_by(Workout.id.desc()).first()
 
     # add all missing values
-    current_set.set_end_time = end_time
+    current_set.end_time = end_time
     current_set.reps = reps_value
     current_set.weight = weight_value
-    current_exercise.exercise_end_time = end_time
-    current_exercise.exercise_name = exercise_name
+    current_exercise.end_time = end_time
+    current_exercise.name = exercise_name
     current_workout.name = workout_name
     current_workout.end_time = end_time
     current_workout.rating = rating
@@ -194,7 +194,7 @@ def finish_workout():
     # commit all to finish Workout
     db.session.commit()
 
-    # value return back to exercise name input
+    # return to AJAX call
     return jsonify({'result': 'success'})
 
 
